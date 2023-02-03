@@ -1,5 +1,6 @@
 import editor.Gates_NodeEditor;
 import editor.Graph;
+import editor.TestFieldsWindow;
 import imgui.*;
 import imgui.app.Application;
 import imgui.app.Configuration;
@@ -64,6 +65,9 @@ public class Main extends Application {
 //            editor.ExampleImNodes.imgui(GRAPH);
 
         ImGui.end();
+
+//        ImGui.showDemoWindow();
+        TestFieldsWindow.imgui();
     }
 
     private void setupDockspace() {

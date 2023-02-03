@@ -51,38 +51,38 @@ public class ExampleImNodes {
                 ImGui.text(node.getName());
                 ImNodes.endNodeTitleBar();
 
-                ImNodes.beginInputAttribute(node.getInputPinId(), ImNodesPinShape.CircleFilled);
-                ImGui.text("In");
-                ImNodes.endInputAttribute();
+//                ImNodes.beginInputAttribute(node.getInputPinId(), ImNodesPinShape.CircleFilled);
+//                ImGui.text("In");
+//                ImNodes.endInputAttribute();
 
                 ImGui.sameLine();
 
-                ImNodes.beginOutputAttribute(node.getOutputPinId());
-                ImGui.text("Out");
-                ImNodes.endOutputAttribute();
+//                ImNodes.beginOutputAttribute(node.getOutputPinId());
+//                ImGui.text("Out");
+//                ImNodes.endOutputAttribute();
 
                 ImNodes.endNode();
             }
 
-            int uniqueLinkId = 1;
-            for (GraphNode node : graph.nodes.values()) {
-                if (graph.nodes.containsKey(node.outputNodeId)) {
-                    ImNodes.link(uniqueLinkId++, node.getOutputPinId(), graph.nodes.get(node.outputNodeId).getInputPinId());
-                }
-            }
+//            int uniqueLinkId = 1;
+//            for (GraphNode node : graph.nodes.values()) {
+//                if (graph.nodes.containsKey(node.outputNodeId)) {
+//                    ImNodes.link(uniqueLinkId++, node.getOutputPinId(), graph.nodes.get(node.outputNodeId).getInputPinId());
+//                }
+//            }
 
             final boolean isEditorHovered = ImNodes.isEditorHovered();
 
             ImNodes.miniMap(0.2f, ImNodesMiniMapLocation.BottomRight);
             ImNodes.endNodeEditor();
 
-            if (ImNodes.isLinkCreated(LINK_A, LINK_B)) {
-                final GraphNode source = graph.findByOutput(LINK_A.get());
-                final GraphNode target = graph.findByInput(LINK_B.get());
-                if (source != null && target != null && source.outputNodeId != target.getId()) {
-                    source.outputNodeId = target.getId();
-                }
-            }
+//            if (ImNodes.isLinkCreated(LINK_A, LINK_B)) {
+//                final GraphNode source = graph.findByOutput(LINK_A.get());
+//                final GraphNode target = graph.findByInput(LINK_B.get());
+//                if (source != null && target != null && source.outputNodeId != target.getId()) {
+//                    source.outputNodeId = target.getId();
+//                }
+//            }
 
             if (ImGui.isMouseClicked(ImGuiMouseButton.Right)) {
                 final int hoveredNode = ImNodes.getHoveredNode();

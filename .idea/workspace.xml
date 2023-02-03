@@ -4,64 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cf11e7bc-f8ac-474d-a996-2f52d6444fdf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Code Bold 700.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Code ExtraLight 200.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Code Light 300.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Code PL Bold 700.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Code PL ExtraLight 200.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Code PL Light 300.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Code PL Regular 400.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Code PL SemiBold 600.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Code PL SemiLight 350.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Code Regular 400.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Code SemiBold 600.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Code SemiLight 350.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Mono Bold 700.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Mono ExtraLight 200.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Mono Light 300.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Mono PL Bold 700.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Mono PL ExtraLight 200.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Mono PL Light 300.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Mono PL Regular 400.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Mono PL SemiBold 600.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Mono PL SemiLight 350.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Mono Regular 400.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Mono SemiBold 600.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Mono SemiLight 350.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/openSans/OpenSans-Bold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/openSans/OpenSans-BoldItalic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/openSans/OpenSans-ExtraBold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/openSans/OpenSans-ExtraBoldItalic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/openSans/OpenSans-Italic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/openSans/OpenSans-Light.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/openSans/OpenSans-LightItalic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/openSans/OpenSans-Medium.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/openSans/OpenSans-MediumItalic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/openSans/OpenSans-Regular.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/openSans/OpenSans-SemiBold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/openSans/OpenSans-SemiBoldItalic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphs/sample.graph" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/editor/ExampleImNodes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/editor/Gates_NodeEditor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/editor/Graph.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/editor/GraphDeserializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/editor/GraphNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/editor/GraphNodeDeserializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/editor/nodes/Gate_Not.java" afterDir="false" />
+    <list default="true" id="cf11e7bc-f8ac-474d-a996-2f52d6444fdf" name="Changes" comment="Initial Commit">
+      <change afterPath="$PROJECT_DIR$/src/main/java/editor/GraphNodePin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/editor/TestFieldsWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/editor/nodes/Gate_And.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/editor/nodes/Gate_Test.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/editor/nodes/Gate_Toggle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/editor/nodes/Test2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graph.ini" beforeDir="false" afterPath="$PROJECT_DIR$/graph.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphs/sample.graph" beforeDir="false" afterPath="$PROJECT_DIR$/graphs/sample.graph" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgui.ini" beforeDir="false" afterPath="$PROJECT_DIR$/imgui.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/editor/ExampleImNodes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/editor/ExampleImNodes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/editor/Gates_NodeEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/editor/Gates_NodeEditor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/editor/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/editor/Graph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/editor/GraphDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/editor/GraphDeserializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/editor/GraphNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/editor/GraphNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/editor/nodes/Gate_Not.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/editor/nodes/Gate_Not.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +47,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2LAmAh5nrEbwrUy6T8qL6aOIscN" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -107,6 +69,7 @@
       <recent name="C:\_Files\Projects\Java\LogicGatesCreator\src\main\java" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="editor.nodes" />
       <recent name="editor" />
       <recent name="testExtensions" />
     </key>
@@ -162,6 +125,14 @@
       <option name="presentableId" value="Default" />
       <updated>1675322121460</updated>
     </task>
+    <task id="LOCAL-00001" summary="Initial Commit">
+      <created>1675410057318</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1675410057318</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -174,5 +145,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial Commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial Commit" />
   </component>
 </project>

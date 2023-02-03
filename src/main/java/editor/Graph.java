@@ -62,7 +62,8 @@ public final class Graph {
 
     public GraphNode copyCreateGraphNode(GraphNode node, ImVec2 position) {
         GraphNode copy = node.copy();
-        copy.init(nextNodeId++, position, nextPinId++, nextPinId++);
+        copy.init(nextNodeId++, position);
+        this.nextPinId = copy.initPins(nextPinId++);
         this.nodes.put(copy.getId(), copy);
         return copy;
     }
@@ -74,22 +75,61 @@ public final class Graph {
         return null;
     }
 
-    public GraphNode findByInput(final long inputPinId) {
-        for (GraphNode node : nodes.values()) {
-            if (node.getInputPinId() == inputPinId) {
-                return node;
-            }
-        }
+    public GraphNode findByInput(long inputPinId) {
+        for (GraphNode node : nodes.values())
+            for (int pinIndex = 0; pinIndex < node.inputPins.size(); pinIndex++)
+                if (node.getInputPinId(pinIndex) == inputPinId)
+                    return node;
+
         return null;
     }
 
-    public GraphNode findByOutput(final long outputPinId) {
-        for (GraphNode node : nodes.values()) {
-            if (node.getOutputPinId() == outputPinId) {
-                return node;
-            }
-        }
+    public GraphNode findByOutput(long outputPinId) {
+        for (GraphNode node : nodes.values())
+            for (int pinIndex = 0; pinIndex < node.outputPins.size(); pinIndex++)
+                if (node.getOutputPinId(pinIndex) == outputPinId)
+                    return node;
+
         return null;
+    }
+
+    public GraphNodePin findInputPin(long inputPinId) {
+        for (GraphNode node : nodes.values())
+            for (GraphNodePin pin : node.inputPins)
+                if (pin.getId() == inputPinId)
+                    return pin;
+
+        return null;
+    }
+
+    public GraphNodePin findOutputPin(long outputPinId) {
+        for (GraphNode node : nodes.values())
+            for (GraphNodePin pin : node.outputPins)
+                if (pin.getId() == outputPinId)
+                    return pin;
+
+        return null;
+    }
+
+    public void deleteNodeById(int nodeId) {
+        GraphNode node = nodes.get(nodeId);
+
+        if (node != null) {
+            for (GraphNodePin inputPin : node.inputPins)
+                if (inputPin.getConnectedPins() != null)
+                    for (GraphNodePin connectedPin : inputPin.getConnectedPins())
+                        connectedPin.removeConnectedPin(inputPin); // Clear output pins of connected nodes
+
+            for (GraphNodePin outputPin : node.outputPins) {
+                if (outputPin.getConnectedPins() != null)
+                    for (GraphNodePin connectedPin : outputPin.getConnectedPins()) {
+                        connectedPin.setValue(false);
+                        connectedPin.removeConnectedPin(outputPin); // Clear input pins of connected nodes
+                    }
+            }
+
+            nodes.remove(nodeId);
+        }
     }
 
     public String getFilepath() { return this.filepath; }

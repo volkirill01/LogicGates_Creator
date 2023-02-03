@@ -24,7 +24,20 @@ public class GraphDeserializer implements JsonSerializer<Graph>, JsonDeserialize
             graph.nodes.put(node.getId(), node);
             NodeEditor.setNodePosition(node.getId(), node.getPosition().x, node.getPosition().y);
             lastNodeId = node.getId();
-            lastPinId = node.getOutputPinId();
+            lastPinId = node.getOutputPinId(node.outputPins.size() - 1);
+        }
+
+        for (GraphNode node : graph.nodes.values()) {
+            for (GraphNodePin inputPin : node.inputPins)
+                for (int i = 0; i < inputPin.getConnectedPinsIds().size(); i++) {
+                    inputPin.addConnectedPin(graph.findOutputPin(inputPin.getConnectedPinsIds().get(i)));
+                    i++;
+                }
+            for (GraphNodePin outputPin : node.outputPins)
+                for (int i = 0; i < outputPin.getConnectedPinsIds().size(); i++) {
+                    outputPin.addConnectedPin(graph.findInputPin(outputPin.getConnectedPinsIds().get(i)));
+                    i++;
+                }
         }
 
         graph.nextNodeId = lastNodeId + 1;

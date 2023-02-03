@@ -3,10 +3,14 @@ package editor.nodes;
 import editor.GraphNode;
 import editor.GraphNodePin;
 
-public class Gate_Not extends GraphNode {
+public class Test2 extends GraphNode {
 
-    public Gate_Not() {
+    public Test2() {
         this.inputPins.add(new GraphNodePin(true, "In", "In"));
+        this.inputPins.add(new GraphNodePin(true, "In", "In"));
+        this.outputPins.add(new GraphNodePin(false, "Out", "Out"));
+        this.outputPins.add(new GraphNodePin(false, "Out", "Out"));
+        this.outputPins.add(new GraphNodePin(false, "Out", "Out"));
         this.outputPins.add(new GraphNodePin(false, "Out", "Out"));
     }
 
@@ -25,5 +29,5 @@ public class Gate_Not extends GraphNode {
     public String getDescription() { return "Description"; }
 
     @Override
-    public GraphNode copy() { return new Gate_Not(); }
+    public GraphNode copy() { return new Test2(); }
 }
