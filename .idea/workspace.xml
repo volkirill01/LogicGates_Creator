@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="cf11e7bc-f8ac-474d-a996-2f52d6444fdf" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Code Bold 700.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Code ExtraLight 200.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Code Light 300.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Code PL Bold 700.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Code PL ExtraLight 200.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Code PL Light 300.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Code PL Regular 400.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Code PL SemiBold 600.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Code PL SemiLight 350.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Code Regular 400.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Code SemiBold 600.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Code SemiLight 350.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Mono Bold 700.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Mono ExtraLight 200.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Mono Light 300.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Mono PL Bold 700.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Mono PL ExtraLight 200.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Mono PL Light 300.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Mono PL Regular 400.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Mono PL SemiBold 600.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Mono PL SemiLight 350.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Mono Regular 400.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Mono SemiBold 600.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/cascadia/Cascadia Mono SemiLight 350.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/openSans/OpenSans-Bold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/openSans/OpenSans-BoldItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/openSans/OpenSans-ExtraBold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/openSans/OpenSans-ExtraBoldItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/openSans/OpenSans-Italic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/openSans/OpenSans-Light.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/openSans/OpenSans-LightItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/openSans/OpenSans-Medium.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/openSans/OpenSans-MediumItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/openSans/OpenSans-Regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/openSans/OpenSans-SemiBold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/engineFiles/fonts/openSans/OpenSans-SemiBoldItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphs/sample.graph" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/editor/ExampleImNodes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/editor/Gates_NodeEditor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/editor/Graph.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/editor/GraphDeserializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/editor/GraphNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/editor/GraphNodeDeserializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/editor/nodes/Gate_Not.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2LAmAh5nrEbwrUy6T8qL6aOIscN" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/_Files/Projects/Java/_GameEngine3"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\_Files\Projects\Java\LogicGatesCreator\src\main\java\testExtensions" />
+      <recent name="C:\_Files\Projects\Java\LogicGatesCreator\engineFiles" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\_Files\Projects\Java\LogicGatesCreator\src\main\java" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="editor" />
+      <recent name="testExtensions" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="LogicGatesCreator.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="testExtensions.Main2" />
+      <module name="LogicGatesCreator.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="testExtensions.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="testExtensions.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="testExtensions.Main" />
+      <module name="LogicGatesCreator.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="testExtensions.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.testExtensions.Main" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main2" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cf11e7bc-f8ac-474d-a996-2f52d6444fdf" name="Changes" comment="" />
+      <created>1675322121460</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1675322121460</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

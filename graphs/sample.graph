@@ -1,0 +1,18 @@
+{
+  "filepath": "graphs/sample.graph",
+  "nodes": [
+    {
+      "type": "editor.nodes.Gate_Not",
+      "properties": {
+        "nodeId": 1,
+        "position": {
+          "x": 680.0,
+          "y": 64.0
+        },
+        "inputPinId": 1000,
+        "outputPinId": 1001,
+        "outputNodeId": -1
+      }
+    }
+  ]
+}
