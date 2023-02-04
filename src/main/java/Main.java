@@ -1,13 +1,20 @@
 import editor.Gates_NodeEditor;
 import editor.Graph;
 import editor.TestFieldsWindow;
+import editor.utils.FileTypeFilter;
+import editor.utils.FileUtil;
+import editor.utils.ImFonts;
 import imgui.*;
 import imgui.app.Application;
 import imgui.app.Configuration;
+import imgui.flag.ImGuiCol;
 import imgui.flag.ImGuiConfigFlags;
 import imgui.flag.ImGuiStyleVar;
 import imgui.flag.ImGuiWindowFlags;
 import imgui.type.ImBoolean;
+
+import javax.swing.*;
+import java.io.File;
 
 public class Main extends Application {
 
@@ -23,6 +30,12 @@ public class Main extends Application {
     protected void initImGui(final Configuration config) {
         super.initImGui(config);
 
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+
         final ImGuiIO io = ImGui.getIO();
         io.setIniFilename("imgui.ini");                         // We don't want to save .ini file
         io.addConfigFlags(ImGuiConfigFlags.NavEnableKeyboard);  // Enable Keyboard Controls
@@ -30,30 +43,53 @@ public class Main extends Application {
         io.addConfigFlags(ImGuiConfigFlags.ViewportsEnable);    // Enable Multi-Viewport / Platform Windows
         io.setConfigViewportsNoTaskBarIcon(true);
 
-        initFonts(io);
+        ImFonts.init(io);
+
+        setTheme();
     }
 
-    private void initFonts(final ImGuiIO io) {
-        io.getFonts().addFontDefault(); // Add default font for latin glyphs
+    private void setTheme() {
+        ImGui.pushStyleColor(ImGuiCol.WindowBg, 0.120f, 0.126f, 0.136f, 1.0f);
+        ImGui.pushStyleColor(ImGuiCol.PopupBg, 0.120f, 0.126f, 0.136f, 0.940f);
+        ImGui.pushStyleColor(ImGuiCol.Border, 1.0f, 1.0f, 1.0f, 0.125f);
+        ImGui.pushStyleColor(ImGuiCol.FrameBg, 0.046f, 0.050f, 0.063f, 0.552f);
+        ImGui.pushStyleColor(ImGuiCol.FrameBgHovered, 0.058f, 0.066f, 0.079f, 0.552f);
+        ImGui.pushStyleColor(ImGuiCol.FrameBgActive, 0.077f, 0.085f, 0.099f, 0.552f);
+        ImGui.pushStyleColor(ImGuiCol.TitleBg, 0.0f, 0.0f, 0.0f, 1.0f);
+        ImGui.pushStyleColor(ImGuiCol.TitleBgActive, 0.0f, 0.0f, 0.0f, 1.0f);
+        ImGui.pushStyleColor(ImGuiCol.TitleBgCollapsed, 0.0f, 0.0f, 0.0f, 1.0f);
+        ImGui.pushStyleColor(ImGuiCol.MenuBarBg, 0.0f, 0.0f, 0.0f, 1.0f);
+        ImGui.pushStyleColor(ImGuiCol.CheckMark, 0.681f, 0.681f, 0.681f, 1.0f);
+        ImGui.pushStyleColor(ImGuiCol.SliderGrab, 0.311f, 0.330f, 0.335f, 1.0f);
+        ImGui.pushStyleColor(ImGuiCol.SliderGrabActive, 0.388f, 0.413f, 0.419f, 1.0f);
+        ImGui.pushStyleColor(ImGuiCol.Button, 0.311f, 0.330f, 0.335f, 1.0f);
+        ImGui.pushStyleColor(ImGuiCol.ButtonHovered, 0.354f, 0.376f, 0.382f, 1.0f);
+        ImGui.pushStyleColor(ImGuiCol.ButtonActive, 0.388f, 0.413f, 0.419f, 1.0f);
+        ImGui.pushStyleColor(ImGuiCol.Header, 0.311f, 0.330f, 0.335f, 1.0f);
+        ImGui.pushStyleColor(ImGuiCol.HeaderHovered, 0.354f, 0.376f, 0.382f, 1.0f);
+        ImGui.pushStyleColor(ImGuiCol.HeaderActive, 0.388f, 0.413f, 0.419f, 1.0f);
+        ImGui.pushStyleColor(ImGuiCol.Separator, 0.0f, 0.0f, 0.0f, 0.4f);
+        ImGui.pushStyleColor(ImGuiCol.SeparatorHovered, 0.455f, 0.455f, 0.455f, 0.780f);
+        ImGui.pushStyleColor(ImGuiCol.SeparatorActive, 0.455f, 0.455f, 0.455f, 0.780f);
+        ImGui.pushStyleColor(ImGuiCol.ResizeGrip, 0.424f, 0.424f, 0.424f, 0.200f);
+        ImGui.pushStyleColor(ImGuiCol.ResizeGripHovered, 0.518f, 0.518f, 0.518f, 0.300f);
+        ImGui.pushStyleColor(ImGuiCol.ResizeGripActive, 0.576f, 0.576f, 0.576f, 0.360f);
+        ImGui.pushStyleColor(ImGuiCol.Tab, 0.311f, 0.330f, 0.335f, 1.0f);
+        ImGui.pushStyleColor(ImGuiCol.TabUnfocused, 0.211f, 0.230f, 0.235f, 1.0f);
+        ImGui.pushStyleColor(ImGuiCol.TabUnfocusedActive, 0.211f, 0.230f, 0.235f, 1.0f);
+        ImGui.pushStyleColor(ImGuiCol.TabHovered, 0.354f, 0.376f, 0.382f, 1.0f);
+        ImGui.pushStyleColor(ImGuiCol.TabActive, 0.388f, 0.413f, 0.419f, 1.0f);
+        ImGui.pushStyleColor(ImGuiCol.DockingPreview, 0.476f, 0.476f, 0.476f, 0.702f);
 
-        // You can use the ImFontGlyphRangesBuilder helper to create glyph ranges based on text input.
-        // For example: for a game where your script is known, if you can feed your entire script to it (using addText) and only build the characters the game needs.
-        // Here we are using it just to combine all required glyphs in one place
-        final ImFontGlyphRangesBuilder rangesBuilder = new ImFontGlyphRangesBuilder(); // Glyphs ranges provide
-        rangesBuilder.addRanges(io.getFonts().getGlyphRangesDefault());
-        rangesBuilder.addRanges(io.getFonts().getGlyphRangesCyrillic());
-        rangesBuilder.addRanges(io.getFonts().getGlyphRangesJapanese());
-
-        // Font config for additional fonts
-        // This is a natively allocated struct so don't forget to call destroy after atlas is built
-        final ImFontConfig fontConfig = new ImFontConfig();
-        fontConfig.setMergeMode(true);  // Enable merge mode to merge cyrillic, japanese and icons with default font
-
-        final short[] glyphRanges = rangesBuilder.buildRanges();
-        io.getFonts().addFontFromFileTTF("engineFiles/fonts/openSans/OpenSans-Medium.ttf", 14, fontConfig, glyphRanges);
-        io.getFonts().build();
-
-        fontConfig.destroy();
+        ImGui.pushStyleVar(ImGuiStyleVar.FramePadding, 8.0f, 4.0f);
+        ImGui.pushStyleVar(ImGuiStyleVar.ItemSpacing, 4.0f, 4.0f);
+        ImGui.pushStyleVar(ImGuiStyleVar.ScrollbarSize, 12.0f);
+        ImGui.pushStyleVar(ImGuiStyleVar.GrabMinSize, 10.0f);
+        ImGui.pushStyleVar(ImGuiStyleVar.GrabRounding, 4.0f);
+        ImGui.pushStyleVar(ImGuiStyleVar.ChildRounding, 4.0f);
+        ImGui.pushStyleVar(ImGuiStyleVar.FrameRounding, 4.0f);
+        ImGui.pushStyleVar(ImGuiStyleVar.PopupRounding, 4.0f);
+        ImGui.getStyle().setWindowMenuButtonPosition(-1);
     }
 
     @Override
@@ -67,7 +103,7 @@ public class Main extends Application {
         ImGui.end();
 
 //        ImGui.showDemoWindow();
-        TestFieldsWindow.imgui();
+//        TestFieldsWindow.imgui();
     }
 
     private void setupDockspace() {
@@ -99,54 +135,62 @@ public class Main extends Application {
         ImGui.pushStyleVar(ImGuiStyleVar.ItemSpacing, 15f, ImGui.getStyle().getItemSpacingY());
 
         if (ImGui.beginMenu("File")) {
-            if (ImGui.menuItem("Test1")) {
+            if (ImGui.menuItem("Save")) {
+                Gates_NodeEditor.getCurrentGraph().save();
             }
 
-            if (ImGui.menuItem("Test2")) {
+            if (ImGui.menuItem("Open")) {
+                File graph = FileUtil.openFile(FileTypeFilter.gateAndGraphFilter, true);
+                if (graph != null)
+                    Gates_NodeEditor.setCurrentGraph(Gates_NodeEditor.getCurrentGraph().load(graph.getPath()));
             }
 
-            ImGui.endMenu();
-        }
-
-        if (ImGui.beginMenu("Edit")) {
-            if (ImGui.menuItem("Test1")) {
-            }
-
-            if (ImGui.menuItem("Test2")) {
-            }
-
-            ImGui.endMenu();
-        }
-
-        if (ImGui.beginMenu("Assets")) {
-            if (ImGui.menuItem("Test1")) {
-            }
-
-            if (ImGui.menuItem("Test2")) {
+            if (ImGui.menuItem("Reload")) {
+                Gates_NodeEditor.setCurrentGraph(Gates_NodeEditor.getCurrentGraph().load(Gates_NodeEditor.getCurrentGraph().getFilepath()));
             }
 
             ImGui.endMenu();
         }
 
-        if (ImGui.beginMenu("Window")) {
-            if (ImGui.menuItem("Test1")) {
-            }
+//        if (ImGui.beginMenu("Edit")) {
+//            if (ImGui.menuItem("Test1")) {
+//            }
+//
+//            if (ImGui.menuItem("Test2")) {
+//            }
+//
+//            ImGui.endMenu();
+//        }
 
-            if (ImGui.menuItem("Test2")) {
-            }
+//        if (ImGui.beginMenu("Assets")) {
+//            if (ImGui.menuItem("Test1")) {
+//            }
+//
+//            if (ImGui.menuItem("Test2")) {
+//            }
+//
+//            ImGui.endMenu();
+//        }
 
-            ImGui.endMenu();
-        }
+//        if (ImGui.beginMenu("Window")) {
+//            if (ImGui.menuItem("Test1")) {
+//            }
+//
+//            if (ImGui.menuItem("Test2")) {
+//            }
+//
+//            ImGui.endMenu();
+//        }
 
-        if (ImGui.beginMenu("Help")) {
-            if (ImGui.menuItem("Test1")) {
-            }
-
-            if (ImGui.menuItem("Test2")) {
-            }
-
-            ImGui.endMenu();
-        }
+//        if (ImGui.beginMenu("Help")) {
+//            if (ImGui.menuItem("Test1")) {
+//            }
+//
+//            if (ImGui.menuItem("Test2")) {
+//            }
+//
+//            ImGui.endMenu();
+//        }
 
         ImGui.popStyleVar();
         ImGui.endMenuBar();

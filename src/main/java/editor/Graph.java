@@ -2,26 +2,51 @@ package editor;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import editor.nodes.GraphNode_Graph;
+import editor.nodes.GraphNode_Input;
+import editor.nodes.GraphNode_Output;
 import imgui.ImVec2;
+import imgui.extension.nodeditor.NodeEditor;
 import org.joml.Vector2f;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public final class Graph {
 
-    private final String filepath;
+    private String filepath;
+    private String gateName;
 
     public int nextNodeId = 1;
     public int nextPinId = 1000;
 
     public final Map<Integer, GraphNode> nodes = new HashMap<>();
 
-    public Graph(String filepath) { this.filepath = filepath; }
+    private GraphNode_Input inputNode;
+    private GraphNode_Output outputNode;
+
+    public Graph(String filepath, String gateName) {
+        this.filepath = filepath;
+        this.gateName = gateName;
+    }
+
+    public void createInputAndOutput() {
+        this.inputNode = new GraphNode_Input();
+        this.inputNode.init(nextNodeId++, new ImVec2(0.0f, 0.0f));
+        this.nextPinId = this.inputNode.initPins(nextPinId++);
+        this.nodes.put(inputNode.getId(), inputNode);
+
+        this.outputNode = new GraphNode_Output();
+        this.outputNode.init(nextNodeId++, new ImVec2(0.0f, 0.0f));
+        this.nextPinId = this.outputNode.initPins(nextPinId++);
+        this.nodes.put(outputNode.getId(), outputNode);
+    }
 
     public void save() {
         try {
@@ -40,7 +65,25 @@ public final class Graph {
         }
     }
 
-    public Graph load() {
+    public void saveAs(String filepath) {
+        try {
+            FileWriter writer = new FileWriter(filepath);
+            Gson gson = new GsonBuilder()
+                    .setPrettyPrinting()
+                    .registerTypeAdapter(Graph.class, new GraphDeserializer())
+                    .registerTypeAdapter(GraphNode.class, new GraphNodeDeserializer())
+                    .create();
+
+            this.filepath = filepath;
+            String json = gson.toJson(this);
+            writer.write(json);
+            writer.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Graph load(String filepath) {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Graph.class, new GraphDeserializer())
                 .registerTypeAdapter(GraphNode.class, new GraphNodeDeserializer())
@@ -48,7 +91,7 @@ public final class Graph {
 
         String inFile = "";
         try {
-            inFile = new String(Files.readAllBytes(Paths.get(this.filepath)));
+            inFile = new String(Files.readAllBytes(Paths.get(filepath)));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -60,12 +103,25 @@ public final class Graph {
         return null;
     }
 
+    public void saveAsGate(String gateName) {
+        this.gateName = gateName;
+        saveAs("projects/sample/gates/" + gateName + ".gate");
+    }
+
     public GraphNode copyCreateGraphNode(GraphNode node, ImVec2 position) {
         GraphNode copy = node.copy();
         copy.init(nextNodeId++, position);
         this.nextPinId = copy.initPins(nextPinId++);
         this.nodes.put(copy.getId(), copy);
         return copy;
+    }
+
+    public GraphNode_Graph loadCreateGate(Graph gate, ImVec2 position) {
+        GraphNode_Graph node = new GraphNode_Graph();
+        node.init(nextNodeId++, gate, position);
+        this.nextPinId = node.initPins(nextPinId++);
+        this.nodes.put(node.getId(), node);
+        return node;
     }
 
     public GraphNode findById(int id) {
@@ -132,5 +188,19 @@ public final class Graph {
         }
     }
 
+    public int getNextNodeId()  { return nextNodeId++; }
+
+    public int getNextPinId() { return nextPinId++; }
+
     public String getFilepath() { return this.filepath; }
+
+    public String getGateName() { return this.gateName; }
+
+    public GraphNode getInputNode() { return this.inputNode; }
+
+    public void setInputNode(GraphNode_Input node) { this.inputNode = node; }
+
+    public GraphNode getOutputNode() { return this.outputNode; }
+
+    public void setOutputNode(GraphNode_Output node) { this.outputNode = node; }
 }

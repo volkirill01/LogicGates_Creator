@@ -1,38 +1,41 @@
 package editor;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import editor.nodes.*;
+import editor.utils.FileTypeFilter;
+import editor.utils.FileUtil;
+import imgui.ImGui;
 import imgui.ImVec2;
 import imgui.extension.nodeditor.NodeEditor;
 import imgui.extension.nodeditor.NodeEditorConfig;
 import imgui.extension.nodeditor.NodeEditorContext;
-import imgui.extension.nodeditor.NodeEditorStyle;
 import imgui.extension.nodeditor.flag.NodeEditorStyleColor;
 import imgui.extension.nodeditor.flag.NodeEditorStyleVar;
+import imgui.flag.ImGuiCol;
 import imgui.flag.ImGuiMouseButton;
-import imgui.internal.ImGui;
 import imgui.type.ImLong;
+import imgui.type.ImString;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
 
 public class Gates_NodeEditor {
 
     private static final NodeEditorContext CONTEXT;
-    private Graph currentGraph = new Graph("graphs/sample.graph");
+    private static Graph currentGraph = new Graph("projects/sample/graphs/sample.graph", "Demo");
 
     private ImVec2 startMousePos;
 
-    private final Map<String, List<GraphNode>> createNodesList = new LinkedHashMap<>(){{
-        put("Simple", new ArrayList<>(){{
-            add(new Gate_Toggle());
-            add(new Gate_Not());
-            add(new Gate_And());
-            add(new Gate_Test());
-            add(new Test2());
-        }});
-    }};
+    private List<Graph> gates = new ArrayList<>();
+    private boolean isStart;
+    private boolean isUpdate;
+
+    private String gateName = "";
 
     static {
         NodeEditorConfig config = new NodeEditorConfig();
@@ -40,18 +43,39 @@ public class Gates_NodeEditor {
         CONTEXT = new NodeEditorContext(config);
     }
 
+    public Gates_NodeEditor() {
+        this.isStart = true;
+        currentGraph.createInputAndOutput();
+    }
+
+    public static Graph getCurrentGraph() { return currentGraph; }
+
+    public static void setCurrentGraph(Graph graph) { currentGraph = graph; }
+
     public void imgui() {
+        loadGates();
+
         drawMenuBar();
 
         NodeEditor.setCurrentEditor(CONTEXT);
         NodeEditor.begin("Node Editor");
         NodeEditor.pushStyleVar(NodeEditorStyleVar.NodePadding, 4.0f, 3.0f, 4.0f, 4.0f);
         NodeEditor.pushStyleVar(NodeEditorStyleVar.NodeRounding, 5.0f);
+        NodeEditor.pushStyleVar(NodeEditorStyleVar.LinkStrength, 400.0f);
         NodeEditor.pushStyleColor(NodeEditorStyleColor.PinRect, 0.0f, 0.0f, 0.0f, 0.0f);
         NodeEditor.pushStyleColor(NodeEditorStyleColor.NodeBg, 0.206f, 0.214f, 0.225f, 1.0f);
-//        NodeEditor.pushStyleColor(NodeEditorStyleColor.PinRect, color[0], color[1], color[2], color[3]);
+        NodeEditor.pushStyleColor(NodeEditorStyleColor.HovNodeBorder, 1.0f, 1.0f, 1.0f, 0.5f);
+        NodeEditor.pushStyleColor(NodeEditorStyleColor.SelNodeBorder, 0.0f, 0.794f, 1.0f, 1.0f);
+        NodeEditor.pushStyleColor(NodeEditorStyleColor.NodeBorder,  0.343f, 0.343f, 0.343f, 1.0f);
+        NodeEditor.pushStyleColor(NodeEditorStyleColor.Bg,  0.104f, 0.099f, 0.132f, 1.0f);
+        NodeEditor.pushStyleColor(NodeEditorStyleColor.Grid,  1.0f, 1.0f, 1.0f, 0.039f);
 
-        for (GraphNode node : this.currentGraph.nodes.values()) {
+        if (isStart) {
+            isStart = false;
+            currentGraph = currentGraph.load(currentGraph.getFilepath());
+        }
+
+        for (GraphNode node : currentGraph.nodes.values()) {
             NodeEditor.beginNode(node.getId());
             ImGui.pushID(node.getId());
 
@@ -62,39 +86,8 @@ public class Gates_NodeEditor {
 
             ImGui.popID();
 
-//            ImGui.text(node.getName());
-//
-//            NodeEditor.beginPin(node.getInputPinId(), NodeEditorPinKind.Input);
-//            ImGui.text("-> In");
-//            NodeEditor.endPin();
-//
-//            ImGui.sameLine();
-//
-//            NodeEditor.beginPin(node.getOutputPinId(), NodeEditorPinKind.Output);
-//            ImGui.text("Out ->");
-//            NodeEditor.endPin();
-
             NodeEditor.endNode();
         }
-
-//        if (ImNodes.isLinkCreated(LINK_A, LINK_B)) {
-//            isLinkDragged = false;
-//
-//            GraphNode sourceNode = currentGraph.findByOutput(LINK_A.get());
-//            GraphNodePin sourcePin = currentGraph.findOutputPin(LINK_A.get());
-//            GraphNode targetNode = currentGraph.findByInput(LINK_B.get());
-//            GraphNodePin targetPin = currentGraph.findInputPin(LINK_B.get());
-//
-//            if (sourceNode != null && sourcePin != null && targetNode != null && targetPin != null) {
-//                if (sourceNode != targetNode) {
-//                    for (GraphNodePin connectedPin : targetPin.getConnectedPins())
-//                        connectedPin.removeConnectedPin(targetPin);
-//
-//                    targetPin.setConnectedPin(sourcePin);
-//                    sourcePin.addConnectedPin(targetPin);
-//                }
-//            }
-//        }
 
         if (NodeEditor.beginCreate()) {
             final ImLong a = new ImLong();
@@ -107,8 +100,9 @@ public class Gates_NodeEditor {
                 if (ImGui.isMouseReleased(ImGuiMouseButton.Left)) {
                     if (sourceNode != null && sourcePin != null && targetNode != null && targetPin != null) {
                         if (sourceNode != targetNode) {
-                            for (GraphNodePin connectedPin : targetPin.getConnectedPins())
-                                connectedPin.removeConnectedPin(targetPin);
+                            if (targetPin.hasConnections())
+                                for (GraphNodePin connectedPin : targetPin.getConnectedPins())
+                                    connectedPin.removeConnectedPin(targetPin);
 
                             targetPin.setConnectedPin(sourcePin);
                             sourcePin.addConnectedPin(targetPin);
@@ -116,34 +110,19 @@ public class Gates_NodeEditor {
                     }
                 }
             }
-//            final ImLong a = new ImLong();
-//            final ImLong b = new ImLong();
-//            if (NodeEditor.queryNewLink(a, b)) {
-//                final GraphNode source = this.currentGraph.findByOutput(a.get());
-//                final GraphNode target = this.currentGraph.findByInput(b.get());
-//                if (source != null && target != null && source.outputNodeId != target.getId() && NodeEditor.acceptNewItem()) {
-//                    source.outputNodeId = target.getId();
-//                }
-//            }
         }
         NodeEditor.endCreate();
 
         int uniqueLinkId = 1;
         for (GraphNode node : currentGraph.nodes.values()) {
             for (GraphNodePin inputPin : node.inputPins)
-                for (GraphNodePin connectedPin : inputPin.getConnectedPins()) {
-                    GraphNode tmpNode = currentGraph.findByOutput(connectedPin.getId());
-                    if (tmpNode != null && currentGraph.nodes.containsKey(tmpNode.getId()))
-                        NodeEditor.link(uniqueLinkId++, connectedPin.getId(), inputPin.getId());
-                }
+                if (inputPin.hasConnections())
+                    for (GraphNodePin connectedPin : inputPin.getConnectedPins()) {
+                        GraphNode tmpNode = currentGraph.findByOutput(connectedPin.getId());
+                        if (tmpNode != null && currentGraph.nodes.containsKey(tmpNode.getId()))
+                            NodeEditor.link(uniqueLinkId++, connectedPin.getId(), inputPin.getId());
+                    }
         }
-
-//        int uniqueLinkId = 1;
-//        for (GraphNode node : this.currentGraph.nodes.values()) {
-//            if (this.currentGraph.nodes.containsKey(node.outputNodeId)) {
-//                NodeEditor.link(uniqueLinkId++, node.getOutputPinId(), this.currentGraph.nodes.get(node.outputNodeId).getInputPinId());
-//            }
-//        }
 
         NodeEditor.suspend();
 
@@ -155,70 +134,183 @@ public class Gates_NodeEditor {
 
         if (ImGui.isPopupOpen("node_context")) {
             final int targetNode = ImGui.getStateStorage().getInt(ImGui.getID("delete_node_id"));
-            if (ImGui.beginPopup("node_context")) {
-                drawNodeContextPopup(targetNode);
-                ImGui.endPopup();
-            }
+            if (targetNode != 1 && targetNode != 2)
+                if (ImGui.beginPopup("node_context")) {
+                    drawNodeContextPopup(targetNode);
+                    ImGui.endPopup();
+                }
         }
 
-        if (NodeEditor.showBackgroundContextMenu())
-            ImGui.openPopup("node_editor_context");
-
-        if (ImGui.beginPopup("node_editor_context")) {
-            drawEditorContextPopup();
-            ImGui.endPopup();
-        }
+//        if (NodeEditor.showBackgroundContextMenu())
+//            ImGui.openPopup("node_editor_context");
+//
+//        if (ImGui.beginPopup("node_editor_context")) {
+//            drawEditorContextPopup();
+//            ImGui.endPopup();
+//        }
 
         NodeEditor.resume();
-//        NodeEditor.popStyleColor(1);
         NodeEditor.end();
+
+        isUpdate = true;
+    }
+
+    private void loadGates() {
+        if (isUpdate) {
+            this.gates.clear();
+            Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(Graph.class, new GraphDeserializer())
+                    .registerTypeAdapter(GraphNode.class, new GraphNodeDeserializer())
+                    .create();
+
+            File gatesFolder = new File("projects/sample/gates");
+
+            List<File> gates = new ArrayList<>(List.of(Objects.requireNonNull(gatesFolder.listFiles())));
+
+            for (File gate : gates) {
+                String inFile = "";
+                try {
+                    inFile = new String(Files.readAllBytes(Paths.get(gate.getPath())));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                if (!inFile.equals("")) {
+                    Graph graph = gson.fromJson(inFile, Graph.class);
+
+                    if (this.gates.size() > 0) {
+                        if (!containsGate(graph.getFilepath()))
+                            this.gates.add(graph);
+                    } else
+                        this.gates.add(graph);
+                }
+            }
+        }
+    }
+
+    private boolean containsGate(String filepath) {
+        if (this.gates.size() > 0)
+            for (Graph gate : this.gates)
+                if (gate.getFilepath().equals(filepath))
+                    return true;
+
+        return false;
     }
 
     private void drawMenuBar() {
         if (ImGui.button("Navigate to content"))
             NodeEditor.navigateToContent(1);
 
-        ImGui.sameLine();
-        if (ImGui.button("Save"))
-            this.currentGraph.save();
+//        ImGui.sameLine();
+//        if (ImGui.button("Save"))
+//            currentGraph.save();
+
+//        ImGui.sameLine();
+//        if (ImGui.button("Open")) {
+//            File graph = FileUtil.openFile(FileTypeFilter.gateAndGraphFilter, true);
+//            if (graph != null)
+//                currentGraph = currentGraph.load(graph.getPath());
+//        }
+
+//        ImGui.sameLine();
+//        if (ImGui.button("Reload"))
+//            currentGraph = currentGraph.load(currentGraph.getFilepath());
 
         ImGui.sameLine();
-        if (ImGui.button("Load"))
-            this.currentGraph = this.currentGraph.load();
-    }
+        if (ImGui.button("Clear Graph")) {
+            this.gateName = "";
+            currentGraph = new Graph(currentGraph.getFilepath(), currentGraph.getGateName());
+            currentGraph.createInputAndOutput();
+        }
 
-    private void drawEditorContextPopup() {
-        if (startMousePos == null)
-                startMousePos = ImGui.getMousePos();
+        ImGui.setCursorPosY(ImGui.getCursorPosY() + 3.0f);
+        ImGui.text("Gate Name");
+        ImGui.sameLine();
+        ImGui.setCursorPosY(ImGui.getCursorPosY() - 3.0f);
+        ImString gateNameTmp = new ImString(this.gateName, 256);
+        if (ImGui.inputText("##GateName", gateNameTmp))
+            this.gateName = gateNameTmp.get();
 
-            if (ImGui.beginMenu("Create Node")) {
-                for (String collectionName : this.createNodesList.keySet()) {
-                    if (ImGui.beginMenu(collectionName)) {
-                        for (GraphNode node : this.createNodesList.get(collectionName)) {
-                            if (ImGui.menuItem(node.getName())) {
-                                GraphNode createdNode = this.currentGraph.copyCreateGraphNode(node, startMousePos);
-                                final float canvasX = NodeEditor.toCanvasX(startMousePos.x);
-                                final float canvasY = NodeEditor.toCanvasY(startMousePos.y);
-                                NodeEditor.setNodePosition(createdNode.getId(), canvasX, canvasY);
-                                startMousePos = null;
-                                ImGui.closeCurrentPopup();
-                            }
-//                            ImGui.sameLine();
-//                            if (EditorImGui.beginHelpMarker()) {
-//                                node.drawTooltip();
-//                                EditorImGui.endHelpMarker();
-//                            }
-                        }
-                        ImGui.endMenu();
-                    }
-                }
-                ImGui.endMenu();
+        ImGui.sameLine();
+        if (ImGui.button("Create Gate")) {
+            if (!gateName.equals("")) {
+                this.gates.clear();
+                currentGraph.saveAsGate(gateName);
+
+                currentGraph = new Graph(currentGraph.getFilepath(), currentGraph.getGateName());
+                currentGraph.createInputAndOutput();
+                this.gateName = "";
+            } else {
+                System.out.println("Empty Gate Name!!!");
             }
+        }
+
+        ImGui.separator();
+        if (ImGui.button("And")) {
+            startMousePos = ImGui.getMousePos();
+            Gate_And createdNode = (Gate_And) currentGraph.copyCreateGraphNode(new Gate_And(), startMousePos);
+            final float canvasX = NodeEditor.toCanvasX(startMousePos.x + 50.0f);
+            final float canvasY = NodeEditor.toCanvasY(startMousePos.y + 40.0f);
+            startMousePos = null;
+            NodeEditor.setNodePosition(createdNode.getId(), canvasX, canvasY);
+        }
+        ImGui.sameLine();
+        if (ImGui.button("Not")) {
+            startMousePos = ImGui.getMousePos();
+            Gate_Not createdNode = (Gate_Not) currentGraph.copyCreateGraphNode(new Gate_Not(), startMousePos);
+            final float canvasX = NodeEditor.toCanvasX(startMousePos.x + 50.0f);
+            final float canvasY = NodeEditor.toCanvasY(startMousePos.y + 40.0f);
+            startMousePos = null;
+            NodeEditor.setNodePosition(createdNode.getId(), canvasX, canvasY);
+        }
+
+        ImGui.separator();
+        for (int i = 0; i < this.gates.size(); i++) {
+            if (ImGui.button(this.gates.get(i).getGateName())) {
+                startMousePos = ImGui.getMousePos();
+                GraphNode_Graph createdNode = currentGraph.loadCreateGate(this.gates.get(i), startMousePos);
+                final float canvasX = NodeEditor.toCanvasX(startMousePos.x + 50.0f);
+                final float canvasY = NodeEditor.toCanvasY(startMousePos.y + 40.0f);
+                startMousePos = null;
+                NodeEditor.setNodePosition(createdNode.getId(), canvasX, canvasY);
+            }
+            if (i < this.gates.size() - 1)
+                ImGui.sameLine();
+        }
     }
+
+//    private void drawEditorContextPopup() {
+//        if (startMousePos == null)
+//            startMousePos = ImGui.getMousePos();
+//
+//        if (ImGui.beginMenu("Create Node")) {
+//            for (String collectionName : this.createNodesList.keySet()) {
+//                if (ImGui.beginMenu(collectionName)) {
+//                    for (GraphNode node : this.createNodesList.get(collectionName)) {
+//                        if (ImGui.menuItem(node.getName())) {
+//                            GraphNode createdNode = this.currentGraph.copyCreateGraphNode(node, startMousePos);
+//                            final float canvasX = NodeEditor.toCanvasX(startMousePos.x);
+//                            final float canvasY = NodeEditor.toCanvasY(startMousePos.y);
+//                            NodeEditor.setNodePosition(createdNode.getId(), canvasX, canvasY);
+//                            startMousePos = null;
+//                            ImGui.closeCurrentPopup();
+//                        }
+////                            ImGui.sameLine();
+////                            if (EditorImGui.beginHelpMarker()) {
+////                                node.drawTooltip();
+////                                EditorImGui.endHelpMarker();
+////                            }
+//                    }
+//                    ImGui.endMenu();
+//                }
+//            }
+//            ImGui.endMenu();
+//        }
+//    }
 
     private void drawNodeContextPopup(int targetNode) {
-        if (ImGui.button("Delete " + this.currentGraph.nodes.get(targetNode).getName())) {
-            this.currentGraph.deleteNodeById(targetNode);
+        if (ImGui.button("Delete " + currentGraph.nodes.get(targetNode).getName())) {
+            currentGraph.deleteNodeById(targetNode);
 //            this.currentGraph.nodes.remove(targetNode);
             ImGui.closeCurrentPopup();
         }

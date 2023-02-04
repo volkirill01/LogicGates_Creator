@@ -51,16 +51,24 @@ public class GraphNodePin {
     public void removeConnectedPin(GraphNodePin pin) { this.connectedPins.remove(pin); }
 
     public void setConnectedPin(GraphNodePin pin) {
-        if (this.connectedPins.size() > 0) {
+        if (this.hasConnections()) {
             this.connectedPins.set(0, pin);
             this.connectedPinsIds.set(0, pin.getId());
         } else {
+            if (this.connectedPins == null)
+                this.connectedPins = new ArrayList<>();
+
             this.connectedPins.add(pin);
             this.connectedPinsIds.add(pin.getId());
         }
     }
 
-    public boolean hasConnections() { return this.connectedPins.size() > 0; }
+    public boolean hasConnections() {
+        if (this.connectedPins != null)
+            return this.connectedPins.size() > 0;
+
+        return false;
+    }
 
     public boolean isInput() { return this.isInput; }
 
@@ -69,4 +77,6 @@ public class GraphNodePin {
     public void setValue(boolean value) { this.value = value; }
 
     public GraphNodePin copy() { return new GraphNodePin(this.isInput, this.label, this.description); }
+
+    public void set(boolean isInput) { this.isInput = isInput; }
 }

@@ -1,0 +1,154 @@
+{
+  "filepath": "projects/sample/gates/NAND.gate",
+  "gateName": "NAND",
+  "nextNodeId": 5,
+  "nextPinId": 1008,
+  "nodes": [
+    {
+      "type": "editor.nodes.GraphNode_Input",
+      "properties": {
+        "nodeId": 1,
+        "inputPins": [],
+        "outputPins": [
+          {
+            "id": 1000,
+            "isInput": false,
+            "label": "Out (1)",
+            "description": "Out",
+            "value": false,
+            "connectedPinsIds": [
+              1004
+            ]
+          },
+          {
+            "id": 1007,
+            "isInput": false,
+            "label": "Out (2)",
+            "description": "Out",
+            "value": false,
+            "connectedPinsIds": [
+              1005
+            ]
+          }
+        ],
+        "position": {
+          "x": 238.0,
+          "y": 283.0
+        },
+        "inputHeight": 0.0,
+        "outputHeight": 44.0,
+        "contentWidth": 15.0
+      }
+    },
+    {
+      "type": "editor.nodes.GraphNode_Output",
+      "properties": {
+        "nodeId": 2,
+        "inputPins": [
+          {
+            "id": 1001,
+            "isInput": true,
+            "label": "In (1)",
+            "description": "In",
+            "value": true,
+            "connectedPinsIds": [
+              1003
+            ]
+          }
+        ],
+        "outputPins": [],
+        "position": {
+          "x": 547.0,
+          "y": 292.0
+        },
+        "inputHeight": 18.0,
+        "outputHeight": 0.0,
+        "contentWidth": 15.0
+      }
+    },
+    {
+      "type": "editor.nodes.Gate_Not",
+      "properties": {
+        "nodeId": 3,
+        "inputPins": [
+          {
+            "id": 1002,
+            "isInput": true,
+            "label": "In",
+            "description": "In",
+            "value": false,
+            "connectedPinsIds": [
+              1006
+            ]
+          }
+        ],
+        "outputPins": [
+          {
+            "id": 1003,
+            "isInput": false,
+            "label": "Out",
+            "description": "Out",
+            "value": true,
+            "connectedPinsIds": [
+              1001
+            ]
+          }
+        ],
+        "position": {
+          "x": 439.0,
+          "y": 292.0
+        },
+        "inputHeight": 18.0,
+        "outputHeight": 18.0,
+        "contentWidth": 0.0
+      }
+    },
+    {
+      "type": "editor.nodes.Gate_And",
+      "properties": {
+        "nodeId": 4,
+        "inputPins": [
+          {
+            "id": 1004,
+            "isInput": true,
+            "label": "In (A)",
+            "description": "A",
+            "value": false,
+            "connectedPinsIds": [
+              1000
+            ]
+          },
+          {
+            "id": 1005,
+            "isInput": true,
+            "label": "In (B)",
+            "description": "B",
+            "value": false,
+            "connectedPinsIds": [
+              1007
+            ]
+          }
+        ],
+        "outputPins": [
+          {
+            "id": 1006,
+            "isInput": false,
+            "label": "Out",
+            "description": "Out",
+            "value": false,
+            "connectedPinsIds": [
+              1002
+            ]
+          }
+        ],
+        "position": {
+          "x": 343.0,
+          "y": 286.0
+        },
+        "inputHeight": 40.0,
+        "outputHeight": 18.0,
+        "contentWidth": 0.0
+      }
+    }
+  ]
+}

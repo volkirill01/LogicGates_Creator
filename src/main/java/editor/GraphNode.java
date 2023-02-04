@@ -1,5 +1,6 @@
 package editor;
 
+import editor.utils.ImFonts;
 import imgui.ImGui;
 import imgui.ImVec2;
 import imgui.extension.nodeditor.NodeEditor;
@@ -50,7 +51,7 @@ public abstract class GraphNode {
         ImVec2 startCursorPos = ImGui.getCursorPos();
 
         if (outputHeight > inputHeight)
-            ImGui.setCursorPosY(startCursorPos.y + outputHeight / 4.0f + 1.0f);
+            ImGui.setCursorPosY(startCursorPos.y + outputHeight / 2.0f - inputHeight / 2.0f);
         ImGui.beginGroup();
         for (GraphNodePin pin : this.inputPins)
             drawPin(pin);
@@ -66,12 +67,20 @@ public abstract class GraphNode {
             ImGui.setCursorPos(ImGui.getItemRectMaxX() + spacing, startCursorPos.y);
             this.contentWidth = ImGui.getItemRectSizeX();
         } else {
+            float lineHeight = ImGui.getFontSize();
+            if (this.inputHeight > this.outputHeight)
+                ImGui.setCursorPosY(startCursorPos.y + this.inputHeight / 2.0f - lineHeight / 2.0f - 4.0f);
+            else
+                ImGui.setCursorPosY(startCursorPos.y + this.outputHeight / 2.0f - lineHeight / 2.0f - 4.0f);
+
+            ImGui.pushFont(ImFonts.regular150);
             ImGui.text(getName());
+            ImGui.popFont();
             ImGui.setCursorPos(ImGui.getItemRectMaxX() + spacing, startCursorPos.y);
         }
 
         if (inputHeight > outputHeight)
-            ImGui.setCursorPosY(startCursorPos.y + inputHeight / 4.0f + 1.0f);
+            ImGui.setCursorPosY(startCursorPos.y + inputHeight / 2.0f - outputHeight / 2.0f);
         ImGui.beginGroup();
         for (GraphNodePin pin : this.outputPins)
             drawPin(pin);
@@ -85,7 +94,7 @@ public abstract class GraphNode {
         else
             NodeEditor.beginPin(pin.getId(), NodeEditorPinKind.Output);
 
-        ImGui.pushStyleVar(ImGuiStyleVar.FramePadding, ImGui.getStyle().getFramePaddingX() + 1.0f, ImGui.getStyle().getFramePaddingX() - 2.0f);
+        ImGui.pushStyleVar(ImGuiStyleVar.FramePadding, ImGui.getStyle().getFramePaddingX(), ImGui.getStyle().getFramePaddingY());
         ImGui.pushStyleColor(ImGuiCol.Button, 0.0f, 0.0f, 0.0f, 0.0f);
         ImGui.pushStyleColor(ImGuiCol.ButtonHovered, 0.0f, 0.0f, 0.0f, 0.0f);
         ImGui.pushStyleColor(ImGuiCol.ButtonActive, 0.0f, 0.0f, 0.0f, 0.0f);
@@ -99,15 +108,16 @@ public abstract class GraphNode {
 
         ImGui.sameLine();
         ImGui.getWindowDrawList().addCircleFilled(
-                ImGui.getCursorScreenPos().x - 17.0f, // X Pos
-                ImGui.getCursorScreenPos().y + 9.0f, // Y Pos
+                ImGui.getCursorScreenPos().x - 16.0f, // X Pos
+                ImGui.getCursorScreenPos().y + 11.0f, // Y Pos
                 9.0f, // Circle size
                 color, // Color
                 12); // Circle segments
 
 //        ImGui.text((pin.isInput() ? "<-" : "->") + "/" + pin.getId() + "/" + pin.getValue());
-//        for (int connectedPinId : pin.getConnectedPinsIds())
-//            ImGui.text("" + connectedPinId);
+//        if (pin.hasConnections())
+//            for (int i = 0; i < pin.getConnectedPins().size(); i++)
+//                ImGui.text("" + pin.getConnectedPin(i).getId() + " " + pin.getConnectedPin(i).getValue());
 
         NodeEditor.endPin();
     }

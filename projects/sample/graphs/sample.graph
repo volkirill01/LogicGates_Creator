@@ -1,0 +1,56 @@
+{
+  "filepath": "projects/sample/graphs/sample.graph",
+  "gateName": "Demo",
+  "nextNodeId": 5,
+  "nextPinId": 1007,
+  "nodes": [
+    {
+      "type": "editor.nodes.GraphNode_Input",
+      "properties": {
+        "nodeId": 1,
+        "inputPins": [],
+        "outputPins": [
+          {
+            "id": 1000,
+            "isInput": false,
+            "label": "Out (1)",
+            "description": "Out",
+            "value": false,
+            "connectedPinsIds": []
+          }
+        ],
+        "position": {
+          "x": 58.0,
+          "y": 306.0
+        },
+        "inputHeight": 0.0,
+        "outputHeight": 22.0,
+        "contentWidth": 82.0
+      }
+    },
+    {
+      "type": "editor.nodes.GraphNode_Output",
+      "properties": {
+        "nodeId": 2,
+        "inputPins": [
+          {
+            "id": 1001,
+            "isInput": true,
+            "label": "In (1)",
+            "description": "In",
+            "value": false,
+            "connectedPinsIds": []
+          }
+        ],
+        "outputPins": [],
+        "position": {
+          "x": 976.0,
+          "y": 322.0
+        },
+        "inputHeight": 22.0,
+        "outputHeight": 0.0,
+        "contentWidth": 93.0
+      }
+    }
+  ]
+}
