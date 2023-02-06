@@ -3,7 +3,6 @@ package editor.nodes;
 import editor.Gates_NodeEditor;
 import editor.GraphNode;
 import editor.GraphNodePin;
-import editor.TestFieldsWindow;
 import editor.utils.ImFonts;
 import imgui.ImGui;
 import imgui.flag.ImGuiCol;
@@ -21,7 +20,7 @@ public class GraphNode_Input extends GraphNode {
     @Override
     public void drawNode() {
         if (ImGui.button("+")) {
-            GraphNodePin newPin = new GraphNodePin(false, "Out (" + (this.outputPins.size() + 1) + ")", "Out");
+            GraphNodePin newPin = new GraphNodePin(false, "Out (" + (this.outputPins.size() + 1) + ")", "");
             newPin.init(Gates_NodeEditor.getCurrentGraph().getNextPinId());
             this.outputPins.add(newPin);
         }

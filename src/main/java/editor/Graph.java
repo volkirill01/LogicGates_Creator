@@ -8,6 +8,7 @@ import editor.nodes.GraphNode_Output;
 import imgui.ImVec2;
 import imgui.extension.nodeditor.NodeEditor;
 import org.joml.Vector2f;
+import org.joml.Vector3f;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -22,6 +23,7 @@ public final class Graph {
 
     private String filepath;
     private String gateName;
+    private Vector3f gateColor = new Vector3f(43.0f, 45.0f, 52.0f);
 
     public int nextNodeId = 1;
     public int nextPinId = 1000;
@@ -195,6 +197,8 @@ public final class Graph {
     public String getFilepath() { return this.filepath; }
 
     public String getGateName() { return this.gateName; }
+
+    public Vector3f getGateColor() { return this.gateColor; }
 
     public GraphNode getInputNode() { return this.inputNode; }
 

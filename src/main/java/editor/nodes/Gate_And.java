@@ -2,6 +2,8 @@ package editor.nodes;
 
 import editor.GraphNode;
 import editor.GraphNodePin;
+import editor.TestFieldsWindow;
+import org.joml.Vector3f;
 
 public class Gate_And extends GraphNode {
 
@@ -13,6 +15,9 @@ public class Gate_And extends GraphNode {
 
     @Override
     public void update() { this.outputPins.get(0).setValue(this.inputPins.get(0).getValue() && this.inputPins.get(1).getValue()); }
+
+    @Override
+    public Vector3f getNodeColor() { return new Vector3f(8.0f, 82.0f, 170.0f); }
 
     @Override
     public void drawNode() { }

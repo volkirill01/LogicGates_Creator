@@ -22,7 +22,7 @@ public class GraphNode_Output extends GraphNode {
         ImGui.popFont();
         ImGui.sameLine();
         if (ImGui.button("+")) {
-            GraphNodePin newPin = new GraphNodePin(true, "In (" + (this.inputPins.size() + 1) + ")", "In");
+            GraphNodePin newPin = new GraphNodePin(true, "In (" + (this.inputPins.size() + 1) + ")", "");
             newPin.init(Gates_NodeEditor.getCurrentGraph().getNextPinId());
             this.inputPins.add(newPin);
         }

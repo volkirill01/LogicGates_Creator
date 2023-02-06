@@ -5,8 +5,10 @@ import editor.nodes.GraphNode_Input;
 import editor.nodes.GraphNode_Output;
 import imgui.ImVec2;
 import imgui.extension.nodeditor.NodeEditor;
+import org.joml.Vector3f;
 
 import java.lang.reflect.Type;
+import java.text.NumberFormat;
 import java.util.List;
 
 public class GraphDeserializer implements JsonSerializer<Graph>, JsonDeserializer<Graph> {
@@ -16,11 +18,18 @@ public class GraphDeserializer implements JsonSerializer<Graph>, JsonDeserialize
         JsonObject jsonObject = json.getAsJsonObject();
         String filepath = jsonObject.get("filepath").getAsString();
         String gateName = jsonObject.get("gateName").getAsString();
+        String gateColorStr = jsonObject.get("gateColor").getAsString().replace(",", ".").replace("(", "").replace(")", "");
+        Vector3f gateColor = new Vector3f(
+                Float.parseFloat(gateColorStr.split(" ")[0]),
+                Float.parseFloat(gateColorStr.split(" ")[1]),
+                Float.parseFloat(gateColorStr.split(" ")[2])
+        );
         int nextNodeId = jsonObject.get("nextNodeId").getAsInt();
         int nextPinId = jsonObject.get("nextPinId").getAsInt();
         JsonArray nodes = jsonObject.getAsJsonArray("nodes");
 
         Graph graph = new Graph(filepath, gateName);
+        graph.getGateColor().set(gateColor);
         graph.nextNodeId = nextNodeId;
         graph.nextPinId = nextPinId;
 
@@ -62,6 +71,7 @@ public class GraphDeserializer implements JsonSerializer<Graph>, JsonDeserialize
         JsonObject result = new JsonObject();
         result.add("filepath", new JsonPrimitive(src.getFilepath()));
         result.add("gateName", new JsonPrimitive(src.getGateName()));
+        result.add("gateColor", new JsonPrimitive(src.getGateColor().toString(NumberFormat.getNumberInstance())));
         result.add("nextNodeId", new JsonPrimitive(src.nextNodeId));
         result.add("nextPinId", new JsonPrimitive(src.nextPinId));
 

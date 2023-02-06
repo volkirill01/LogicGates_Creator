@@ -7,6 +7,7 @@ import imgui.extension.nodeditor.NodeEditor;
 import imgui.extension.nodeditor.flag.NodeEditorPinKind;
 import imgui.flag.ImGuiCol;
 import imgui.flag.ImGuiStyleVar;
+import org.joml.Vector3f;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +18,13 @@ public abstract class GraphNode {
     public List<GraphNodePin> inputPins = new ArrayList<>();
     public List<GraphNodePin> outputPins = new ArrayList<>();
 
+    private Vector3f nodeColor = new Vector3f(43.0f, 45.0f, 52.0f);
+
     private ImVec2 position;
 
-    private float inputHeight = 0.0f;
-    private float outputHeight = 0.0f;
-    private float contentWidth = 1.0f;
+    private transient float inputHeight = 0.0f;
+    private transient float outputHeight = 0.0f;
+    private transient float contentWidth = 1.0f;
 
     public void init(final int nodeId, ImVec2 position) {
         this.nodeId = nodeId;
@@ -29,11 +32,11 @@ public abstract class GraphNode {
     }
 
     public int initPins(int pinId) {
-        for (GraphNodePin pin : this.inputPins)
-            pin.init(pinId++);
+        for (GraphNodePin inputPin : this.inputPins)
+            inputPin.init(pinId++);
 
-        for (GraphNodePin pin : this.outputPins)
-            pin.init(pinId++);
+        for (GraphNodePin outputPin : this.outputPins)
+            outputPin.init(pinId++);
 
         return pinId;
     }
@@ -138,7 +141,9 @@ public abstract class GraphNode {
 
     public int getOutputPinId(int index) { return outputPins.get(index).getId(); }
 
-    public void drawTooltip() { ImGui.text(getDescription()); }
+    public Vector3f getNodeColor() { return this.nodeColor; }
+
+    public void drawDescription() { ImGui.text(getDescription()); }
 
     public ImVec2 getPosition() { return this.position; }
 

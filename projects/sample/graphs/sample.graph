@@ -1,8 +1,9 @@
 {
   "filepath": "projects/sample/graphs/sample.graph",
   "gateName": "Demo",
-  "nextNodeId": 5,
-  "nextPinId": 1007,
+  "gateColor": "(43 45 52)",
+  "nextNodeId": 3,
+  "nextPinId": 1002,
   "nodes": [
     {
       "type": "editor.nodes.GraphNode_Input",
@@ -19,13 +20,15 @@
             "connectedPinsIds": []
           }
         ],
-        "position": {
-          "x": 58.0,
-          "y": 306.0
+        "nodeColor": {
+          "x": 43.0,
+          "y": 45.0,
+          "z": 52.0
         },
-        "inputHeight": 0.0,
-        "outputHeight": 22.0,
-        "contentWidth": 82.0
+        "position": {
+          "x": 410.0,
+          "y": 338.0
+        }
       }
     },
     {
@@ -43,13 +46,15 @@
           }
         ],
         "outputPins": [],
-        "position": {
-          "x": 976.0,
-          "y": 322.0
+        "nodeColor": {
+          "x": 43.0,
+          "y": 45.0,
+          "z": 52.0
         },
-        "inputHeight": 22.0,
-        "outputHeight": 0.0,
-        "contentWidth": 93.0
+        "position": {
+          "x": 656.0,
+          "y": 338.0
+        }
       }
     }
   ]

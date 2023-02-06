@@ -13,6 +13,7 @@ import imgui.extension.nodeditor.NodeEditorContext;
 import imgui.extension.nodeditor.flag.NodeEditorStyleColor;
 import imgui.extension.nodeditor.flag.NodeEditorStyleVar;
 import imgui.flag.ImGuiCol;
+import imgui.flag.ImGuiColorEditFlags;
 import imgui.flag.ImGuiMouseButton;
 import imgui.type.ImLong;
 import imgui.type.ImString;
@@ -76,6 +77,7 @@ public class Gates_NodeEditor {
         }
 
         for (GraphNode node : currentGraph.nodes.values()) {
+            NodeEditor.pushStyleColor(NodeEditorStyleColor.NodeBg, node.getNodeColor().x / 255.0f, node.getNodeColor().y / 255.0f, node.getNodeColor().z / 255.0f, 1.0f);
             NodeEditor.beginNode(node.getId());
             ImGui.pushID(node.getId());
 
@@ -87,6 +89,26 @@ public class Gates_NodeEditor {
             ImGui.popID();
 
             NodeEditor.endNode();
+            NodeEditor.popStyleColor(1);
+
+            for (int i = 0; i < node.inputPins.size(); i++) {
+                final ImVec2 descriptionSize = new ImVec2();
+                ImGui.calcTextSize(descriptionSize, node.inputPins.get(i).getDescription());
+
+                final float canvasX = NodeEditor.getNodePositionX(node.getId());
+                final float canvasY = NodeEditor.getNodePositionY(node.getId());
+                ImGui.setCursorPos(canvasX - descriptionSize.x - 7.0f, canvasY + 6.0f + (26.0f * i));
+                ImGui.text(node.inputPins.get(i).getDescription());
+            }
+            for (int i = 0; i < node.outputPins.size(); i++) {
+                final ImVec2 descriptionSize = new ImVec2();
+                ImGui.calcTextSize(descriptionSize, node.outputPins.get(i).getDescription());
+
+                final float canvasX = NodeEditor.getNodePositionX(node.getId());
+                final float canvasY = NodeEditor.getNodePositionY(node.getId());
+                ImGui.setCursorPos(canvasX + NodeEditor.getNodeSizeX(node.getId()) + 7.0f, canvasY + 6.0f + (26.0f * i));
+                ImGui.text(node.outputPins.get(i).getDescription());
+            }
         }
 
         if (NodeEditor.beginCreate()) {
@@ -221,6 +243,7 @@ public class Gates_NodeEditor {
             this.gateName = "";
             currentGraph = new Graph(currentGraph.getFilepath(), currentGraph.getGateName());
             currentGraph.createInputAndOutput();
+            currentGraph.getGateColor().set(43.0f, 45.0f, 52.0f);
         }
 
         ImGui.setCursorPosY(ImGui.getCursorPosY() + 3.0f);
@@ -232,6 +255,17 @@ public class Gates_NodeEditor {
             this.gateName = gateNameTmp.get();
 
         ImGui.sameLine();
+        ImGui.text("Gate Color");
+        ImGui.sameLine();
+        float[] tmpColor = new float[]{
+                currentGraph.getGateColor().x / 255.0f,
+                currentGraph.getGateColor().y / 255.0f,
+                currentGraph.getGateColor().z / 255.0f
+        };
+        if (ImGui.colorEdit3("##GateColor", tmpColor, ImGuiColorEditFlags.NoInputs))
+            currentGraph.getGateColor().set(tmpColor[0] * 255.0f, tmpColor[1] * 255.0f, tmpColor[2] * 255.0f);
+
+        ImGui.sameLine();
         if (ImGui.button("Create Gate")) {
             if (!gateName.equals("")) {
                 this.gates.clear();
@@ -239,6 +273,7 @@ public class Gates_NodeEditor {
 
                 currentGraph = new Graph(currentGraph.getFilepath(), currentGraph.getGateName());
                 currentGraph.createInputAndOutput();
+                currentGraph.getGateColor().set(43.0f, 45.0f, 52.0f);
                 this.gateName = "";
             } else {
                 System.out.println("Empty Gate Name!!!");
