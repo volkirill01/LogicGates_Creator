@@ -7,14 +7,12 @@ import org.joml.Vector3f;
 public class Gate_Not extends GraphNode {
 
     public Gate_Not() {
-        this.inputPins.add(new GraphNodePin(true, "In", ""));
-        this.outputPins.add(new GraphNodePin(false, "Out", ""));
+        this.inputPins.add(new GraphNodePin(true, "In"));
+        this.outputPins.add(new GraphNodePin(false, "Out"));
     }
 
     @Override
-    public void update() {
-        this.outputPins.get(0).setValue(!this.inputPins.get(0).getValue());
-    }
+    public void update() { this.outputPins.get(0).setValue(!this.inputPins.get(0).getValue()); }
 
     @Override
     public Vector3f getNodeColor() { return new Vector3f(202.0f, 16.0f, 6.0f); }

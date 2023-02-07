@@ -17,11 +17,11 @@ public class GraphNode_Graph extends GraphNode {
 
         for (GraphNodePin pin : this.gate.findById(1).outputPins) {
             pin.setValue(false);
-            this.inputPins.add(new GraphNodePin(true, pin.getLabel(), pin.getDescription().replace("Out", "In")));
+            this.inputPins.add(new GraphNodePin(true, pin.getLabel()));
         }
         for (GraphNodePin pin : this.gate.findById(2).inputPins) {
             pin.setValue(false);
-            this.outputPins.add(new GraphNodePin(false, pin.getLabel(), pin.getDescription().replace("In", "Out")));
+            this.outputPins.add(new GraphNodePin(false, pin.getLabel()));
         }
     }
 

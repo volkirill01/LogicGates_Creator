@@ -7,9 +7,9 @@ import org.joml.Vector3f;
 public class Gate_And extends GraphNode {
 
     public Gate_And() {
-        this.inputPins.add(new GraphNodePin(true, "A", ""));
-        this.inputPins.add(new GraphNodePin(true, "B", ""));
-        this.outputPins.add(new GraphNodePin(false, "Out", ""));
+        this.inputPins.add(new GraphNodePin(true, "A"));
+        this.inputPins.add(new GraphNodePin(true, "B"));
+        this.outputPins.add(new GraphNodePin(false, "Out"));
     }
 
     @Override

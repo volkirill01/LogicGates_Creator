@@ -8,15 +8,15 @@ public class GraphNodePin {
     private int id;
     private boolean isInput;
     private String label;
-    private String description;
+
     private boolean value = false;
+
     private transient List<GraphNodePin> connectedPins = new ArrayList<>();
     private List<Integer> connectedPinsIds = new ArrayList<>();
 
-    public GraphNodePin(boolean isInput, String label, String description) {
+    public GraphNodePin(boolean isInput, String label) {
         this.isInput = isInput;
         this.label = label;
-        this.description = description;
     }
 
     public void init(final int pinId) { this.id = pinId; }
@@ -29,8 +29,6 @@ public class GraphNodePin {
     public String getLabel() { return this.label; }
 
     public void setLabel(String label) { this.label = label; }
-
-    public String getDescription() { return this.description; }
 
     public int getId() { return this.id; }
 
@@ -78,7 +76,7 @@ public class GraphNodePin {
 
     public void setValue(boolean value) { this.value = value; }
 
-    public GraphNodePin copy() { return new GraphNodePin(this.isInput, this.label, this.description); }
+    public GraphNodePin copy() { return new GraphNodePin(this.isInput, this.label); }
 
     public void set(boolean isInput) { this.isInput = isInput; }
 }

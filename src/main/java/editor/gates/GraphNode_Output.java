@@ -9,7 +9,7 @@ import imgui.type.ImString;
 
 public class GraphNode_Output extends GraphNode {
 
-    public GraphNode_Output() { this.inputPins.add(new GraphNodePin(true, "Out (1)", "")); }
+    public GraphNode_Output() { this.inputPins.add(new GraphNodePin(true, "Out (1)")); }
 
     @Override
     public void update() { }
@@ -21,7 +21,7 @@ public class GraphNode_Output extends GraphNode {
         ImGui.popFont();
         ImGui.sameLine();
         if (ImGui.button("+")) {
-            GraphNodePin newPin = new GraphNodePin(true, "Out (" + (this.inputPins.size() + 1) + ")", "");
+            GraphNodePin newPin = new GraphNodePin(true, "Out (" + (this.inputPins.size() + 1) + ")");
             newPin.init(Gates_NodeEditor.getCurrentGraph().getNextPinId());
             this.inputPins.add(newPin);
         }
