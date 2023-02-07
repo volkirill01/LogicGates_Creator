@@ -1,15 +1,14 @@
-package editor.nodes;
+package editor.gates;
 
-import editor.GraphNode;
-import editor.GraphNodePin;
-import editor.TestFieldsWindow;
+import editor.node.GraphNode;
+import editor.node.GraphNodePin;
 import org.joml.Vector3f;
 
 public class Gate_Not extends GraphNode {
 
     public Gate_Not() {
-        this.inputPins.add(new GraphNodePin(true, "In", "In"));
-        this.outputPins.add(new GraphNodePin(false, "Out", "Out"));
+        this.inputPins.add(new GraphNodePin(true, "In", ""));
+        this.outputPins.add(new GraphNodePin(false, "Out", ""));
     }
 
     @Override

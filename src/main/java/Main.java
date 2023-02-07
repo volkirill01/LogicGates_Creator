@@ -1,6 +1,5 @@
-import editor.Gates_NodeEditor;
-import editor.Graph;
 import editor.TestFieldsWindow;
+import editor.node.Gates_NodeEditor;
 import editor.utils.FileTypeFilter;
 import editor.utils.FileUtil;
 import editor.utils.ImFonts;
@@ -96,14 +95,11 @@ public class Main extends Application {
     public void process() {
         setupDockspace();
 
-        if (ImGui.begin("Editor"))
             editor.imgui();
 //            editor.ExampleImNodes.imgui(GRAPH);
 
-        ImGui.end();
-
 //        ImGui.showDemoWindow();
-//        TestFieldsWindow.imgui();
+        TestFieldsWindow.imgui();
     }
 
     private void setupDockspace() {

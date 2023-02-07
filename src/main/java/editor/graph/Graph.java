@@ -1,22 +1,21 @@
-package editor;
+package editor.graph;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import editor.nodes.GraphNode_Graph;
-import editor.nodes.GraphNode_Input;
-import editor.nodes.GraphNode_Output;
+import editor.node.GraphNode;
+import editor.node.GraphNodeDeserializer;
+import editor.node.GraphNodePin;
+import editor.gates.GraphNode_Graph;
+import editor.gates.GraphNode_Input;
+import editor.gates.GraphNode_Output;
 import imgui.ImVec2;
-import imgui.extension.nodeditor.NodeEditor;
-import org.joml.Vector2f;
 import org.joml.Vector3f;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public final class Graph {

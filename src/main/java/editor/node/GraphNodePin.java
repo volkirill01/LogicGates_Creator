@@ -1,4 +1,4 @@
-package editor;
+package editor.node;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +27,8 @@ public class GraphNodePin {
     }
 
     public String getLabel() { return this.label; }
+
+    public void setLabel(String label) { this.label = label; }
 
     public String getDescription() { return this.description; }
 

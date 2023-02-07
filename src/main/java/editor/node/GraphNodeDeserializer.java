@@ -1,4 +1,4 @@
-package editor;
+package editor.node;
 
 import com.google.gson.*;
 

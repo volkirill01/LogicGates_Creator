@@ -5,7 +5,7 @@
   "nextPinId": 1012,
   "nodes": [
     {
-      "type": "editor.nodes.GraphNode_Input",
+      "type": "editor.gates.GraphNode_Input",
       "properties": {
         "nodeId": 1,
         "inputPins": [],
@@ -41,7 +41,7 @@
       }
     },
     {
-      "type": "editor.nodes.GraphNode_Output",
+      "type": "editor.gates.GraphNode_Output",
       "properties": {
         "nodeId": 2,
         "inputPins": [
@@ -67,7 +67,7 @@
       }
     },
     {
-      "type": "editor.nodes.Gate_Not",
+      "type": "editor.gates.Gate_Not",
       "properties": {
         "nodeId": 3,
         "inputPins": [
@@ -104,7 +104,7 @@
       }
     },
     {
-      "type": "editor.nodes.Gate_Not",
+      "type": "editor.gates.Gate_Not",
       "properties": {
         "nodeId": 4,
         "inputPins": [
@@ -141,7 +141,7 @@
       }
     },
     {
-      "type": "editor.nodes.Gate_Not",
+      "type": "editor.gates.Gate_Not",
       "properties": {
         "nodeId": 5,
         "inputPins": [
@@ -178,7 +178,7 @@
       }
     },
     {
-      "type": "editor.nodes.Gate_And",
+      "type": "editor.gates.Gate_And",
       "properties": {
         "nodeId": 6,
         "inputPins": [

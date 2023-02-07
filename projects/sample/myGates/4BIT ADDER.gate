@@ -5,7 +5,7 @@
   "nextPinId": 1039,
   "nodes": [
     {
-      "type": "editor.nodes.GraphNode_Input",
+      "type": "editor.gates.GraphNode_Input",
       "properties": {
         "nodeId": 1,
         "inputPins": [],
@@ -117,7 +117,7 @@
       }
     },
     {
-      "type": "editor.nodes.GraphNode_Output",
+      "type": "editor.gates.GraphNode_Output",
       "properties": {
         "nodeId": 2,
         "inputPins": [
@@ -183,7 +183,7 @@
       }
     },
     {
-      "type": "editor.nodes.GraphNode_Graph",
+      "type": "editor.gates.GraphNode_Graph",
       "properties": {
         "gate": {
           "filepath": "projects/sample/gates/ADDER.gate",
@@ -192,7 +192,7 @@
           "nextPinId": 1034,
           "nodes": [
             {
-              "type": "editor.nodes.GraphNode_Input",
+              "type": "editor.gates.GraphNode_Input",
               "properties": {
                 "nodeId": 1,
                 "inputPins": [],
@@ -254,7 +254,7 @@
               }
             },
             {
-              "type": "editor.nodes.GraphNode_Output",
+              "type": "editor.gates.GraphNode_Output",
               "properties": {
                 "nodeId": 2,
                 "inputPins": [
@@ -295,7 +295,7 @@
               }
             },
             {
-              "type": "editor.nodes.GraphNode_Graph",
+              "type": "editor.gates.GraphNode_Graph",
               "properties": {
                 "gate": {
                   "filepath": "projects/sample/gates/XOR.gate",
@@ -304,7 +304,7 @@
                   "nextPinId": 1017,
                   "nodes": [
                     {
-                      "type": "editor.nodes.GraphNode_Input",
+                      "type": "editor.gates.GraphNode_Input",
                       "properties": {
                         "nodeId": 1,
                         "inputPins": [],
@@ -350,7 +350,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.GraphNode_Output",
+                      "type": "editor.gates.GraphNode_Output",
                       "properties": {
                         "nodeId": 2,
                         "inputPins": [
@@ -380,7 +380,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.GraphNode_Graph",
+                      "type": "editor.gates.GraphNode_Graph",
                       "properties": {
                         "gate": {
                           "filepath": "projects/sample/gates/Or.gate",
@@ -389,7 +389,7 @@
                           "nextPinId": 1012,
                           "nodes": [
                             {
-                              "type": "editor.nodes.GraphNode_Input",
+                              "type": "editor.gates.GraphNode_Input",
                               "properties": {
                                 "nodeId": 1,
                                 "inputPins": [],
@@ -431,7 +431,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.GraphNode_Output",
+                              "type": "editor.gates.GraphNode_Output",
                               "properties": {
                                 "nodeId": 2,
                                 "inputPins": [
@@ -460,7 +460,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 3,
                                 "inputPins": [
@@ -503,7 +503,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 4,
                                 "inputPins": [
@@ -546,7 +546,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 5,
                                 "inputPins": [
@@ -589,7 +589,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_And",
+                              "type": "editor.gates.Gate_And",
                               "properties": {
                                 "nodeId": 6,
                                 "inputPins": [
@@ -697,7 +697,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.GraphNode_Graph",
+                      "type": "editor.gates.GraphNode_Graph",
                       "properties": {
                         "gate": {
                           "filepath": "projects/sample/gates/NAND.gate",
@@ -706,7 +706,7 @@
                           "nextPinId": 1008,
                           "nodes": [
                             {
-                              "type": "editor.nodes.GraphNode_Input",
+                              "type": "editor.gates.GraphNode_Input",
                               "properties": {
                                 "nodeId": 1,
                                 "inputPins": [],
@@ -748,7 +748,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.GraphNode_Output",
+                              "type": "editor.gates.GraphNode_Output",
                               "properties": {
                                 "nodeId": 2,
                                 "inputPins": [
@@ -777,7 +777,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 3,
                                 "inputPins": [
@@ -820,7 +820,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_And",
+                              "type": "editor.gates.Gate_And",
                               "properties": {
                                 "nodeId": 4,
                                 "inputPins": [
@@ -928,7 +928,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.Gate_And",
+                      "type": "editor.gates.Gate_And",
                       "properties": {
                         "nodeId": 7,
                         "inputPins": [
@@ -1031,7 +1031,7 @@
               }
             },
             {
-              "type": "editor.nodes.Gate_And",
+              "type": "editor.gates.Gate_And",
               "properties": {
                 "nodeId": 9,
                 "inputPins": [
@@ -1082,7 +1082,7 @@
               }
             },
             {
-              "type": "editor.nodes.GraphNode_Graph",
+              "type": "editor.gates.GraphNode_Graph",
               "properties": {
                 "gate": {
                   "filepath": "projects/sample/gates/XOR.gate",
@@ -1091,7 +1091,7 @@
                   "nextPinId": 1017,
                   "nodes": [
                     {
-                      "type": "editor.nodes.GraphNode_Input",
+                      "type": "editor.gates.GraphNode_Input",
                       "properties": {
                         "nodeId": 1,
                         "inputPins": [],
@@ -1137,7 +1137,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.GraphNode_Output",
+                      "type": "editor.gates.GraphNode_Output",
                       "properties": {
                         "nodeId": 2,
                         "inputPins": [
@@ -1167,7 +1167,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.GraphNode_Graph",
+                      "type": "editor.gates.GraphNode_Graph",
                       "properties": {
                         "gate": {
                           "filepath": "projects/sample/gates/Or.gate",
@@ -1176,7 +1176,7 @@
                           "nextPinId": 1012,
                           "nodes": [
                             {
-                              "type": "editor.nodes.GraphNode_Input",
+                              "type": "editor.gates.GraphNode_Input",
                               "properties": {
                                 "nodeId": 1,
                                 "inputPins": [],
@@ -1218,7 +1218,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.GraphNode_Output",
+                              "type": "editor.gates.GraphNode_Output",
                               "properties": {
                                 "nodeId": 2,
                                 "inputPins": [
@@ -1247,7 +1247,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 3,
                                 "inputPins": [
@@ -1290,7 +1290,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 4,
                                 "inputPins": [
@@ -1333,7 +1333,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 5,
                                 "inputPins": [
@@ -1376,7 +1376,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_And",
+                              "type": "editor.gates.Gate_And",
                               "properties": {
                                 "nodeId": 6,
                                 "inputPins": [
@@ -1484,7 +1484,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.GraphNode_Graph",
+                      "type": "editor.gates.GraphNode_Graph",
                       "properties": {
                         "gate": {
                           "filepath": "projects/sample/gates/NAND.gate",
@@ -1493,7 +1493,7 @@
                           "nextPinId": 1008,
                           "nodes": [
                             {
-                              "type": "editor.nodes.GraphNode_Input",
+                              "type": "editor.gates.GraphNode_Input",
                               "properties": {
                                 "nodeId": 1,
                                 "inputPins": [],
@@ -1535,7 +1535,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.GraphNode_Output",
+                              "type": "editor.gates.GraphNode_Output",
                               "properties": {
                                 "nodeId": 2,
                                 "inputPins": [
@@ -1564,7 +1564,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 3,
                                 "inputPins": [
@@ -1607,7 +1607,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_And",
+                              "type": "editor.gates.Gate_And",
                               "properties": {
                                 "nodeId": 4,
                                 "inputPins": [
@@ -1715,7 +1715,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.Gate_And",
+                      "type": "editor.gates.Gate_And",
                       "properties": {
                         "nodeId": 7,
                         "inputPins": [
@@ -1817,7 +1817,7 @@
               }
             },
             {
-              "type": "editor.nodes.Gate_And",
+              "type": "editor.gates.Gate_And",
               "properties": {
                 "nodeId": 11,
                 "inputPins": [
@@ -1867,7 +1867,7 @@
               }
             },
             {
-              "type": "editor.nodes.GraphNode_Graph",
+              "type": "editor.gates.GraphNode_Graph",
               "properties": {
                 "gate": {
                   "filepath": "projects/sample/gates/Or.gate",
@@ -1876,7 +1876,7 @@
                   "nextPinId": 1012,
                   "nodes": [
                     {
-                      "type": "editor.nodes.GraphNode_Input",
+                      "type": "editor.gates.GraphNode_Input",
                       "properties": {
                         "nodeId": 1,
                         "inputPins": [],
@@ -1916,7 +1916,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.GraphNode_Output",
+                      "type": "editor.gates.GraphNode_Output",
                       "properties": {
                         "nodeId": 2,
                         "inputPins": [
@@ -1944,7 +1944,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.Gate_Not",
+                      "type": "editor.gates.Gate_Not",
                       "properties": {
                         "nodeId": 3,
                         "inputPins": [
@@ -1985,7 +1985,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.Gate_Not",
+                      "type": "editor.gates.Gate_Not",
                       "properties": {
                         "nodeId": 4,
                         "inputPins": [
@@ -2026,7 +2026,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.Gate_Not",
+                      "type": "editor.gates.Gate_Not",
                       "properties": {
                         "nodeId": 5,
                         "inputPins": [
@@ -2067,7 +2067,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.Gate_And",
+                      "type": "editor.gates.Gate_And",
                       "properties": {
                         "nodeId": 6,
                         "inputPins": [
@@ -2235,7 +2235,7 @@
       }
     },
     {
-      "type": "editor.nodes.GraphNode_Graph",
+      "type": "editor.gates.GraphNode_Graph",
       "properties": {
         "gate": {
           "filepath": "projects/sample/gates/ADDER.gate",
@@ -2244,7 +2244,7 @@
           "nextPinId": 1034,
           "nodes": [
             {
-              "type": "editor.nodes.GraphNode_Input",
+              "type": "editor.gates.GraphNode_Input",
               "properties": {
                 "nodeId": 1,
                 "inputPins": [],
@@ -2306,7 +2306,7 @@
               }
             },
             {
-              "type": "editor.nodes.GraphNode_Output",
+              "type": "editor.gates.GraphNode_Output",
               "properties": {
                 "nodeId": 2,
                 "inputPins": [
@@ -2347,7 +2347,7 @@
               }
             },
             {
-              "type": "editor.nodes.GraphNode_Graph",
+              "type": "editor.gates.GraphNode_Graph",
               "properties": {
                 "gate": {
                   "filepath": "projects/sample/gates/XOR.gate",
@@ -2356,7 +2356,7 @@
                   "nextPinId": 1017,
                   "nodes": [
                     {
-                      "type": "editor.nodes.GraphNode_Input",
+                      "type": "editor.gates.GraphNode_Input",
                       "properties": {
                         "nodeId": 1,
                         "inputPins": [],
@@ -2402,7 +2402,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.GraphNode_Output",
+                      "type": "editor.gates.GraphNode_Output",
                       "properties": {
                         "nodeId": 2,
                         "inputPins": [
@@ -2432,7 +2432,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.GraphNode_Graph",
+                      "type": "editor.gates.GraphNode_Graph",
                       "properties": {
                         "gate": {
                           "filepath": "projects/sample/gates/Or.gate",
@@ -2441,7 +2441,7 @@
                           "nextPinId": 1012,
                           "nodes": [
                             {
-                              "type": "editor.nodes.GraphNode_Input",
+                              "type": "editor.gates.GraphNode_Input",
                               "properties": {
                                 "nodeId": 1,
                                 "inputPins": [],
@@ -2483,7 +2483,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.GraphNode_Output",
+                              "type": "editor.gates.GraphNode_Output",
                               "properties": {
                                 "nodeId": 2,
                                 "inputPins": [
@@ -2512,7 +2512,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 3,
                                 "inputPins": [
@@ -2555,7 +2555,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 4,
                                 "inputPins": [
@@ -2598,7 +2598,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 5,
                                 "inputPins": [
@@ -2641,7 +2641,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_And",
+                              "type": "editor.gates.Gate_And",
                               "properties": {
                                 "nodeId": 6,
                                 "inputPins": [
@@ -2749,7 +2749,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.GraphNode_Graph",
+                      "type": "editor.gates.GraphNode_Graph",
                       "properties": {
                         "gate": {
                           "filepath": "projects/sample/gates/NAND.gate",
@@ -2758,7 +2758,7 @@
                           "nextPinId": 1008,
                           "nodes": [
                             {
-                              "type": "editor.nodes.GraphNode_Input",
+                              "type": "editor.gates.GraphNode_Input",
                               "properties": {
                                 "nodeId": 1,
                                 "inputPins": [],
@@ -2800,7 +2800,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.GraphNode_Output",
+                              "type": "editor.gates.GraphNode_Output",
                               "properties": {
                                 "nodeId": 2,
                                 "inputPins": [
@@ -2829,7 +2829,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 3,
                                 "inputPins": [
@@ -2872,7 +2872,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_And",
+                              "type": "editor.gates.Gate_And",
                               "properties": {
                                 "nodeId": 4,
                                 "inputPins": [
@@ -2980,7 +2980,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.Gate_And",
+                      "type": "editor.gates.Gate_And",
                       "properties": {
                         "nodeId": 7,
                         "inputPins": [
@@ -3083,7 +3083,7 @@
               }
             },
             {
-              "type": "editor.nodes.Gate_And",
+              "type": "editor.gates.Gate_And",
               "properties": {
                 "nodeId": 9,
                 "inputPins": [
@@ -3134,7 +3134,7 @@
               }
             },
             {
-              "type": "editor.nodes.GraphNode_Graph",
+              "type": "editor.gates.GraphNode_Graph",
               "properties": {
                 "gate": {
                   "filepath": "projects/sample/gates/XOR.gate",
@@ -3143,7 +3143,7 @@
                   "nextPinId": 1017,
                   "nodes": [
                     {
-                      "type": "editor.nodes.GraphNode_Input",
+                      "type": "editor.gates.GraphNode_Input",
                       "properties": {
                         "nodeId": 1,
                         "inputPins": [],
@@ -3189,7 +3189,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.GraphNode_Output",
+                      "type": "editor.gates.GraphNode_Output",
                       "properties": {
                         "nodeId": 2,
                         "inputPins": [
@@ -3219,7 +3219,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.GraphNode_Graph",
+                      "type": "editor.gates.GraphNode_Graph",
                       "properties": {
                         "gate": {
                           "filepath": "projects/sample/gates/Or.gate",
@@ -3228,7 +3228,7 @@
                           "nextPinId": 1012,
                           "nodes": [
                             {
-                              "type": "editor.nodes.GraphNode_Input",
+                              "type": "editor.gates.GraphNode_Input",
                               "properties": {
                                 "nodeId": 1,
                                 "inputPins": [],
@@ -3270,7 +3270,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.GraphNode_Output",
+                              "type": "editor.gates.GraphNode_Output",
                               "properties": {
                                 "nodeId": 2,
                                 "inputPins": [
@@ -3299,7 +3299,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 3,
                                 "inputPins": [
@@ -3342,7 +3342,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 4,
                                 "inputPins": [
@@ -3385,7 +3385,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 5,
                                 "inputPins": [
@@ -3428,7 +3428,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_And",
+                              "type": "editor.gates.Gate_And",
                               "properties": {
                                 "nodeId": 6,
                                 "inputPins": [
@@ -3536,7 +3536,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.GraphNode_Graph",
+                      "type": "editor.gates.GraphNode_Graph",
                       "properties": {
                         "gate": {
                           "filepath": "projects/sample/gates/NAND.gate",
@@ -3545,7 +3545,7 @@
                           "nextPinId": 1008,
                           "nodes": [
                             {
-                              "type": "editor.nodes.GraphNode_Input",
+                              "type": "editor.gates.GraphNode_Input",
                               "properties": {
                                 "nodeId": 1,
                                 "inputPins": [],
@@ -3587,7 +3587,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.GraphNode_Output",
+                              "type": "editor.gates.GraphNode_Output",
                               "properties": {
                                 "nodeId": 2,
                                 "inputPins": [
@@ -3616,7 +3616,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 3,
                                 "inputPins": [
@@ -3659,7 +3659,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_And",
+                              "type": "editor.gates.Gate_And",
                               "properties": {
                                 "nodeId": 4,
                                 "inputPins": [
@@ -3767,7 +3767,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.Gate_And",
+                      "type": "editor.gates.Gate_And",
                       "properties": {
                         "nodeId": 7,
                         "inputPins": [
@@ -3869,7 +3869,7 @@
               }
             },
             {
-              "type": "editor.nodes.Gate_And",
+              "type": "editor.gates.Gate_And",
               "properties": {
                 "nodeId": 11,
                 "inputPins": [
@@ -3919,7 +3919,7 @@
               }
             },
             {
-              "type": "editor.nodes.GraphNode_Graph",
+              "type": "editor.gates.GraphNode_Graph",
               "properties": {
                 "gate": {
                   "filepath": "projects/sample/gates/Or.gate",
@@ -3928,7 +3928,7 @@
                   "nextPinId": 1012,
                   "nodes": [
                     {
-                      "type": "editor.nodes.GraphNode_Input",
+                      "type": "editor.gates.GraphNode_Input",
                       "properties": {
                         "nodeId": 1,
                         "inputPins": [],
@@ -3968,7 +3968,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.GraphNode_Output",
+                      "type": "editor.gates.GraphNode_Output",
                       "properties": {
                         "nodeId": 2,
                         "inputPins": [
@@ -3996,7 +3996,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.Gate_Not",
+                      "type": "editor.gates.Gate_Not",
                       "properties": {
                         "nodeId": 3,
                         "inputPins": [
@@ -4037,7 +4037,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.Gate_Not",
+                      "type": "editor.gates.Gate_Not",
                       "properties": {
                         "nodeId": 4,
                         "inputPins": [
@@ -4078,7 +4078,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.Gate_Not",
+                      "type": "editor.gates.Gate_Not",
                       "properties": {
                         "nodeId": 5,
                         "inputPins": [
@@ -4119,7 +4119,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.Gate_And",
+                      "type": "editor.gates.Gate_And",
                       "properties": {
                         "nodeId": 6,
                         "inputPins": [
@@ -4287,7 +4287,7 @@
       }
     },
     {
-      "type": "editor.nodes.GraphNode_Graph",
+      "type": "editor.gates.GraphNode_Graph",
       "properties": {
         "gate": {
           "filepath": "projects/sample/gates/ADDER.gate",
@@ -4296,7 +4296,7 @@
           "nextPinId": 1034,
           "nodes": [
             {
-              "type": "editor.nodes.GraphNode_Input",
+              "type": "editor.gates.GraphNode_Input",
               "properties": {
                 "nodeId": 1,
                 "inputPins": [],
@@ -4358,7 +4358,7 @@
               }
             },
             {
-              "type": "editor.nodes.GraphNode_Output",
+              "type": "editor.gates.GraphNode_Output",
               "properties": {
                 "nodeId": 2,
                 "inputPins": [
@@ -4399,7 +4399,7 @@
               }
             },
             {
-              "type": "editor.nodes.GraphNode_Graph",
+              "type": "editor.gates.GraphNode_Graph",
               "properties": {
                 "gate": {
                   "filepath": "projects/sample/gates/XOR.gate",
@@ -4408,7 +4408,7 @@
                   "nextPinId": 1017,
                   "nodes": [
                     {
-                      "type": "editor.nodes.GraphNode_Input",
+                      "type": "editor.gates.GraphNode_Input",
                       "properties": {
                         "nodeId": 1,
                         "inputPins": [],
@@ -4454,7 +4454,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.GraphNode_Output",
+                      "type": "editor.gates.GraphNode_Output",
                       "properties": {
                         "nodeId": 2,
                         "inputPins": [
@@ -4484,7 +4484,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.GraphNode_Graph",
+                      "type": "editor.gates.GraphNode_Graph",
                       "properties": {
                         "gate": {
                           "filepath": "projects/sample/gates/Or.gate",
@@ -4493,7 +4493,7 @@
                           "nextPinId": 1012,
                           "nodes": [
                             {
-                              "type": "editor.nodes.GraphNode_Input",
+                              "type": "editor.gates.GraphNode_Input",
                               "properties": {
                                 "nodeId": 1,
                                 "inputPins": [],
@@ -4535,7 +4535,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.GraphNode_Output",
+                              "type": "editor.gates.GraphNode_Output",
                               "properties": {
                                 "nodeId": 2,
                                 "inputPins": [
@@ -4564,7 +4564,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 3,
                                 "inputPins": [
@@ -4607,7 +4607,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 4,
                                 "inputPins": [
@@ -4650,7 +4650,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 5,
                                 "inputPins": [
@@ -4693,7 +4693,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_And",
+                              "type": "editor.gates.Gate_And",
                               "properties": {
                                 "nodeId": 6,
                                 "inputPins": [
@@ -4801,7 +4801,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.GraphNode_Graph",
+                      "type": "editor.gates.GraphNode_Graph",
                       "properties": {
                         "gate": {
                           "filepath": "projects/sample/gates/NAND.gate",
@@ -4810,7 +4810,7 @@
                           "nextPinId": 1008,
                           "nodes": [
                             {
-                              "type": "editor.nodes.GraphNode_Input",
+                              "type": "editor.gates.GraphNode_Input",
                               "properties": {
                                 "nodeId": 1,
                                 "inputPins": [],
@@ -4852,7 +4852,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.GraphNode_Output",
+                              "type": "editor.gates.GraphNode_Output",
                               "properties": {
                                 "nodeId": 2,
                                 "inputPins": [
@@ -4881,7 +4881,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 3,
                                 "inputPins": [
@@ -4924,7 +4924,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_And",
+                              "type": "editor.gates.Gate_And",
                               "properties": {
                                 "nodeId": 4,
                                 "inputPins": [
@@ -5032,7 +5032,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.Gate_And",
+                      "type": "editor.gates.Gate_And",
                       "properties": {
                         "nodeId": 7,
                         "inputPins": [
@@ -5135,7 +5135,7 @@
               }
             },
             {
-              "type": "editor.nodes.Gate_And",
+              "type": "editor.gates.Gate_And",
               "properties": {
                 "nodeId": 9,
                 "inputPins": [
@@ -5186,7 +5186,7 @@
               }
             },
             {
-              "type": "editor.nodes.GraphNode_Graph",
+              "type": "editor.gates.GraphNode_Graph",
               "properties": {
                 "gate": {
                   "filepath": "projects/sample/gates/XOR.gate",
@@ -5195,7 +5195,7 @@
                   "nextPinId": 1017,
                   "nodes": [
                     {
-                      "type": "editor.nodes.GraphNode_Input",
+                      "type": "editor.gates.GraphNode_Input",
                       "properties": {
                         "nodeId": 1,
                         "inputPins": [],
@@ -5241,7 +5241,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.GraphNode_Output",
+                      "type": "editor.gates.GraphNode_Output",
                       "properties": {
                         "nodeId": 2,
                         "inputPins": [
@@ -5271,7 +5271,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.GraphNode_Graph",
+                      "type": "editor.gates.GraphNode_Graph",
                       "properties": {
                         "gate": {
                           "filepath": "projects/sample/gates/Or.gate",
@@ -5280,7 +5280,7 @@
                           "nextPinId": 1012,
                           "nodes": [
                             {
-                              "type": "editor.nodes.GraphNode_Input",
+                              "type": "editor.gates.GraphNode_Input",
                               "properties": {
                                 "nodeId": 1,
                                 "inputPins": [],
@@ -5322,7 +5322,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.GraphNode_Output",
+                              "type": "editor.gates.GraphNode_Output",
                               "properties": {
                                 "nodeId": 2,
                                 "inputPins": [
@@ -5351,7 +5351,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 3,
                                 "inputPins": [
@@ -5394,7 +5394,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 4,
                                 "inputPins": [
@@ -5437,7 +5437,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 5,
                                 "inputPins": [
@@ -5480,7 +5480,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_And",
+                              "type": "editor.gates.Gate_And",
                               "properties": {
                                 "nodeId": 6,
                                 "inputPins": [
@@ -5588,7 +5588,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.GraphNode_Graph",
+                      "type": "editor.gates.GraphNode_Graph",
                       "properties": {
                         "gate": {
                           "filepath": "projects/sample/gates/NAND.gate",
@@ -5597,7 +5597,7 @@
                           "nextPinId": 1008,
                           "nodes": [
                             {
-                              "type": "editor.nodes.GraphNode_Input",
+                              "type": "editor.gates.GraphNode_Input",
                               "properties": {
                                 "nodeId": 1,
                                 "inputPins": [],
@@ -5639,7 +5639,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.GraphNode_Output",
+                              "type": "editor.gates.GraphNode_Output",
                               "properties": {
                                 "nodeId": 2,
                                 "inputPins": [
@@ -5668,7 +5668,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 3,
                                 "inputPins": [
@@ -5711,7 +5711,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_And",
+                              "type": "editor.gates.Gate_And",
                               "properties": {
                                 "nodeId": 4,
                                 "inputPins": [
@@ -5819,7 +5819,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.Gate_And",
+                      "type": "editor.gates.Gate_And",
                       "properties": {
                         "nodeId": 7,
                         "inputPins": [
@@ -5921,7 +5921,7 @@
               }
             },
             {
-              "type": "editor.nodes.Gate_And",
+              "type": "editor.gates.Gate_And",
               "properties": {
                 "nodeId": 11,
                 "inputPins": [
@@ -5971,7 +5971,7 @@
               }
             },
             {
-              "type": "editor.nodes.GraphNode_Graph",
+              "type": "editor.gates.GraphNode_Graph",
               "properties": {
                 "gate": {
                   "filepath": "projects/sample/gates/Or.gate",
@@ -5980,7 +5980,7 @@
                   "nextPinId": 1012,
                   "nodes": [
                     {
-                      "type": "editor.nodes.GraphNode_Input",
+                      "type": "editor.gates.GraphNode_Input",
                       "properties": {
                         "nodeId": 1,
                         "inputPins": [],
@@ -6020,7 +6020,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.GraphNode_Output",
+                      "type": "editor.gates.GraphNode_Output",
                       "properties": {
                         "nodeId": 2,
                         "inputPins": [
@@ -6048,7 +6048,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.Gate_Not",
+                      "type": "editor.gates.Gate_Not",
                       "properties": {
                         "nodeId": 3,
                         "inputPins": [
@@ -6089,7 +6089,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.Gate_Not",
+                      "type": "editor.gates.Gate_Not",
                       "properties": {
                         "nodeId": 4,
                         "inputPins": [
@@ -6130,7 +6130,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.Gate_Not",
+                      "type": "editor.gates.Gate_Not",
                       "properties": {
                         "nodeId": 5,
                         "inputPins": [
@@ -6171,7 +6171,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.Gate_And",
+                      "type": "editor.gates.Gate_And",
                       "properties": {
                         "nodeId": 6,
                         "inputPins": [
@@ -6339,7 +6339,7 @@
       }
     },
     {
-      "type": "editor.nodes.GraphNode_Graph",
+      "type": "editor.gates.GraphNode_Graph",
       "properties": {
         "gate": {
           "filepath": "projects/sample/gates/ADDER.gate",
@@ -6348,7 +6348,7 @@
           "nextPinId": 1034,
           "nodes": [
             {
-              "type": "editor.nodes.GraphNode_Input",
+              "type": "editor.gates.GraphNode_Input",
               "properties": {
                 "nodeId": 1,
                 "inputPins": [],
@@ -6410,7 +6410,7 @@
               }
             },
             {
-              "type": "editor.nodes.GraphNode_Output",
+              "type": "editor.gates.GraphNode_Output",
               "properties": {
                 "nodeId": 2,
                 "inputPins": [
@@ -6451,7 +6451,7 @@
               }
             },
             {
-              "type": "editor.nodes.GraphNode_Graph",
+              "type": "editor.gates.GraphNode_Graph",
               "properties": {
                 "gate": {
                   "filepath": "projects/sample/gates/XOR.gate",
@@ -6460,7 +6460,7 @@
                   "nextPinId": 1017,
                   "nodes": [
                     {
-                      "type": "editor.nodes.GraphNode_Input",
+                      "type": "editor.gates.GraphNode_Input",
                       "properties": {
                         "nodeId": 1,
                         "inputPins": [],
@@ -6506,7 +6506,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.GraphNode_Output",
+                      "type": "editor.gates.GraphNode_Output",
                       "properties": {
                         "nodeId": 2,
                         "inputPins": [
@@ -6536,7 +6536,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.GraphNode_Graph",
+                      "type": "editor.gates.GraphNode_Graph",
                       "properties": {
                         "gate": {
                           "filepath": "projects/sample/gates/Or.gate",
@@ -6545,7 +6545,7 @@
                           "nextPinId": 1012,
                           "nodes": [
                             {
-                              "type": "editor.nodes.GraphNode_Input",
+                              "type": "editor.gates.GraphNode_Input",
                               "properties": {
                                 "nodeId": 1,
                                 "inputPins": [],
@@ -6587,7 +6587,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.GraphNode_Output",
+                              "type": "editor.gates.GraphNode_Output",
                               "properties": {
                                 "nodeId": 2,
                                 "inputPins": [
@@ -6616,7 +6616,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 3,
                                 "inputPins": [
@@ -6659,7 +6659,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 4,
                                 "inputPins": [
@@ -6702,7 +6702,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 5,
                                 "inputPins": [
@@ -6745,7 +6745,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_And",
+                              "type": "editor.gates.Gate_And",
                               "properties": {
                                 "nodeId": 6,
                                 "inputPins": [
@@ -6853,7 +6853,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.GraphNode_Graph",
+                      "type": "editor.gates.GraphNode_Graph",
                       "properties": {
                         "gate": {
                           "filepath": "projects/sample/gates/NAND.gate",
@@ -6862,7 +6862,7 @@
                           "nextPinId": 1008,
                           "nodes": [
                             {
-                              "type": "editor.nodes.GraphNode_Input",
+                              "type": "editor.gates.GraphNode_Input",
                               "properties": {
                                 "nodeId": 1,
                                 "inputPins": [],
@@ -6904,7 +6904,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.GraphNode_Output",
+                              "type": "editor.gates.GraphNode_Output",
                               "properties": {
                                 "nodeId": 2,
                                 "inputPins": [
@@ -6933,7 +6933,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 3,
                                 "inputPins": [
@@ -6976,7 +6976,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_And",
+                              "type": "editor.gates.Gate_And",
                               "properties": {
                                 "nodeId": 4,
                                 "inputPins": [
@@ -7084,7 +7084,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.Gate_And",
+                      "type": "editor.gates.Gate_And",
                       "properties": {
                         "nodeId": 7,
                         "inputPins": [
@@ -7187,7 +7187,7 @@
               }
             },
             {
-              "type": "editor.nodes.Gate_And",
+              "type": "editor.gates.Gate_And",
               "properties": {
                 "nodeId": 9,
                 "inputPins": [
@@ -7238,7 +7238,7 @@
               }
             },
             {
-              "type": "editor.nodes.GraphNode_Graph",
+              "type": "editor.gates.GraphNode_Graph",
               "properties": {
                 "gate": {
                   "filepath": "projects/sample/gates/XOR.gate",
@@ -7247,7 +7247,7 @@
                   "nextPinId": 1017,
                   "nodes": [
                     {
-                      "type": "editor.nodes.GraphNode_Input",
+                      "type": "editor.gates.GraphNode_Input",
                       "properties": {
                         "nodeId": 1,
                         "inputPins": [],
@@ -7293,7 +7293,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.GraphNode_Output",
+                      "type": "editor.gates.GraphNode_Output",
                       "properties": {
                         "nodeId": 2,
                         "inputPins": [
@@ -7323,7 +7323,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.GraphNode_Graph",
+                      "type": "editor.gates.GraphNode_Graph",
                       "properties": {
                         "gate": {
                           "filepath": "projects/sample/gates/Or.gate",
@@ -7332,7 +7332,7 @@
                           "nextPinId": 1012,
                           "nodes": [
                             {
-                              "type": "editor.nodes.GraphNode_Input",
+                              "type": "editor.gates.GraphNode_Input",
                               "properties": {
                                 "nodeId": 1,
                                 "inputPins": [],
@@ -7374,7 +7374,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.GraphNode_Output",
+                              "type": "editor.gates.GraphNode_Output",
                               "properties": {
                                 "nodeId": 2,
                                 "inputPins": [
@@ -7403,7 +7403,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 3,
                                 "inputPins": [
@@ -7446,7 +7446,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 4,
                                 "inputPins": [
@@ -7489,7 +7489,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 5,
                                 "inputPins": [
@@ -7532,7 +7532,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_And",
+                              "type": "editor.gates.Gate_And",
                               "properties": {
                                 "nodeId": 6,
                                 "inputPins": [
@@ -7640,7 +7640,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.GraphNode_Graph",
+                      "type": "editor.gates.GraphNode_Graph",
                       "properties": {
                         "gate": {
                           "filepath": "projects/sample/gates/NAND.gate",
@@ -7649,7 +7649,7 @@
                           "nextPinId": 1008,
                           "nodes": [
                             {
-                              "type": "editor.nodes.GraphNode_Input",
+                              "type": "editor.gates.GraphNode_Input",
                               "properties": {
                                 "nodeId": 1,
                                 "inputPins": [],
@@ -7691,7 +7691,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.GraphNode_Output",
+                              "type": "editor.gates.GraphNode_Output",
                               "properties": {
                                 "nodeId": 2,
                                 "inputPins": [
@@ -7720,7 +7720,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_Not",
+                              "type": "editor.gates.Gate_Not",
                               "properties": {
                                 "nodeId": 3,
                                 "inputPins": [
@@ -7763,7 +7763,7 @@
                               }
                             },
                             {
-                              "type": "editor.nodes.Gate_And",
+                              "type": "editor.gates.Gate_And",
                               "properties": {
                                 "nodeId": 4,
                                 "inputPins": [
@@ -7871,7 +7871,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.Gate_And",
+                      "type": "editor.gates.Gate_And",
                       "properties": {
                         "nodeId": 7,
                         "inputPins": [
@@ -7973,7 +7973,7 @@
               }
             },
             {
-              "type": "editor.nodes.Gate_And",
+              "type": "editor.gates.Gate_And",
               "properties": {
                 "nodeId": 11,
                 "inputPins": [
@@ -8023,7 +8023,7 @@
               }
             },
             {
-              "type": "editor.nodes.GraphNode_Graph",
+              "type": "editor.gates.GraphNode_Graph",
               "properties": {
                 "gate": {
                   "filepath": "projects/sample/gates/Or.gate",
@@ -8032,7 +8032,7 @@
                   "nextPinId": 1012,
                   "nodes": [
                     {
-                      "type": "editor.nodes.GraphNode_Input",
+                      "type": "editor.gates.GraphNode_Input",
                       "properties": {
                         "nodeId": 1,
                         "inputPins": [],
@@ -8072,7 +8072,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.GraphNode_Output",
+                      "type": "editor.gates.GraphNode_Output",
                       "properties": {
                         "nodeId": 2,
                         "inputPins": [
@@ -8100,7 +8100,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.Gate_Not",
+                      "type": "editor.gates.Gate_Not",
                       "properties": {
                         "nodeId": 3,
                         "inputPins": [
@@ -8141,7 +8141,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.Gate_Not",
+                      "type": "editor.gates.Gate_Not",
                       "properties": {
                         "nodeId": 4,
                         "inputPins": [
@@ -8182,7 +8182,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.Gate_Not",
+                      "type": "editor.gates.Gate_Not",
                       "properties": {
                         "nodeId": 5,
                         "inputPins": [
@@ -8223,7 +8223,7 @@
                       }
                     },
                     {
-                      "type": "editor.nodes.Gate_And",
+                      "type": "editor.gates.Gate_And",
                       "properties": {
                         "nodeId": 6,
                         "inputPins": [

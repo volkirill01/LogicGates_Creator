@@ -1,4 +1,4 @@
-package editor;
+package editor.node;
 
 import editor.utils.ImFonts;
 import imgui.ImGui;
@@ -111,8 +111,8 @@ public abstract class GraphNode {
 
         ImGui.sameLine();
         ImGui.getWindowDrawList().addCircleFilled(
-                ImGui.getCursorScreenPos().x - 16.0f, // X Pos
-                ImGui.getCursorScreenPos().y + 11.0f, // Y Pos
+                ImGui.getCursorScreenPosX() - 16.0f, // X Pos
+                ImGui.getCursorScreenPosY() + 11.0f, // Y Pos
                 9.0f, // Circle size
                 color, // Color
                 12); // Circle segments
@@ -121,6 +121,22 @@ public abstract class GraphNode {
 //        if (pin.hasConnections())
 //            for (int i = 0; i < pin.getConnectedPins().size(); i++)
 //                ImGui.text("" + pin.getConnectedPin(i).getId() + " " + pin.getConnectedPin(i).getValue());
+
+        float xPos = ImGui.getCursorScreenPosX() + 5.0f;
+
+        ImVec2 tmp = new ImVec2();
+        ImGui.calcTextSize(tmp, pin.getLabel());
+
+        if (pin.isInput())
+            xPos = ImGui.getCursorScreenPosX() - tmp.x - 35.0f;
+
+        ImGui.getWindowDrawList().addText(
+                ImFonts.regular100, // Font
+                ImGui.getFontSize(), // Font size
+                xPos, // X POS
+                ImGui.getCursorScreenPosY() + 3.0f, // Y POS
+                ImGui.getColorU32(1.0f, 1.0f, 1.0f, 1.0f), // Color
+                pin.getLabel());    // Text
 
         NodeEditor.endPin();
     }

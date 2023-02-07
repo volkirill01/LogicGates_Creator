@@ -1,11 +1,9 @@
-package editor.nodes;
+package editor.gates;
 
-import editor.Graph;
-import editor.GraphNode;
-import editor.GraphNodePin;
+import editor.graph.Graph;
+import editor.node.GraphNode;
+import editor.node.GraphNodePin;
 import imgui.ImVec2;
-import imgui.internal.ImGui;
-import imgui.type.ImBoolean;
 
 public class GraphNode_Graph extends GraphNode {
 
@@ -18,9 +16,9 @@ public class GraphNode_Graph extends GraphNode {
         this.getNodeColor().set(this.gate.getGateColor().x, this.gate.getGateColor().y, this.gate.getGateColor().z);
 
         for (GraphNodePin pin : this.gate.findById(1).outputPins)
-            this.inputPins.add(new GraphNodePin(true, pin.getLabel(), pin.getDescription()));
+            this.inputPins.add(new GraphNodePin(true, pin.getLabel(), pin.getDescription().replace("Out", "In")));
         for (GraphNodePin pin : this.gate.findById(2).inputPins)
-            this.outputPins.add(new GraphNodePin(false, pin.getLabel(), pin.getDescription()));
+            this.outputPins.add(new GraphNodePin(false, pin.getLabel(), pin.getDescription().replace("In", "Out")));
     }
 
     @Override

@@ -6,7 +6,7 @@
   "nextPinId": 1002,
   "nodes": [
     {
-      "type": "editor.nodes.GraphNode_Input",
+      "type": "editor.gates.GraphNode_Input",
       "properties": {
         "nodeId": 1,
         "inputPins": [],
@@ -14,8 +14,8 @@
           {
             "id": 1000,
             "isInput": false,
-            "label": "Out (1)",
-            "description": "Out",
+            "label": "In (1)",
+            "description": "",
             "value": false,
             "connectedPinsIds": []
           }
@@ -26,21 +26,21 @@
           "z": 52.0
         },
         "position": {
-          "x": 410.0,
-          "y": 338.0
+          "x": 288.0,
+          "y": 306.0
         }
       }
     },
     {
-      "type": "editor.nodes.GraphNode_Output",
+      "type": "editor.gates.GraphNode_Output",
       "properties": {
         "nodeId": 2,
         "inputPins": [
           {
             "id": 1001,
             "isInput": true,
-            "label": "In (1)",
-            "description": "In",
+            "label": "Out (1)",
+            "description": "",
             "value": false,
             "connectedPinsIds": []
           }
@@ -52,8 +52,8 @@
           "z": 52.0
         },
         "position": {
-          "x": 656.0,
-          "y": 338.0
+          "x": 704.0,
+          "y": 306.0
         }
       }
     }

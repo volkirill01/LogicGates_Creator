@@ -1,10 +1,10 @@
-package editor;
+package editor.node;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import editor.nodes.*;
-import editor.utils.FileTypeFilter;
-import editor.utils.FileUtil;
+import editor.graph.Graph;
+import editor.graph.GraphDeserializer;
+import editor.gates.*;
 import imgui.ImGui;
 import imgui.ImVec2;
 import imgui.extension.nodeditor.NodeEditor;
@@ -12,13 +12,11 @@ import imgui.extension.nodeditor.NodeEditorConfig;
 import imgui.extension.nodeditor.NodeEditorContext;
 import imgui.extension.nodeditor.flag.NodeEditorStyleColor;
 import imgui.extension.nodeditor.flag.NodeEditorStyleVar;
-import imgui.flag.ImGuiCol;
 import imgui.flag.ImGuiColorEditFlags;
 import imgui.flag.ImGuiMouseButton;
 import imgui.type.ImLong;
 import imgui.type.ImString;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -54,114 +52,96 @@ public class Gates_NodeEditor {
     public static void setCurrentGraph(Graph graph) { currentGraph = graph; }
 
     public void imgui() {
-        loadGates();
+        if (ImGui.begin("Editor")) {
+            loadGates();
 
-        drawMenuBar();
+            drawMenuBar();
 
-        NodeEditor.setCurrentEditor(CONTEXT);
-        NodeEditor.begin("Node Editor");
-        NodeEditor.pushStyleVar(NodeEditorStyleVar.NodePadding, 4.0f, 3.0f, 4.0f, 4.0f);
-        NodeEditor.pushStyleVar(NodeEditorStyleVar.NodeRounding, 5.0f);
-        NodeEditor.pushStyleVar(NodeEditorStyleVar.LinkStrength, 400.0f);
-        NodeEditor.pushStyleColor(NodeEditorStyleColor.PinRect, 0.0f, 0.0f, 0.0f, 0.0f);
-        NodeEditor.pushStyleColor(NodeEditorStyleColor.NodeBg, 0.206f, 0.214f, 0.225f, 1.0f);
-        NodeEditor.pushStyleColor(NodeEditorStyleColor.HovNodeBorder, 1.0f, 1.0f, 1.0f, 0.5f);
-        NodeEditor.pushStyleColor(NodeEditorStyleColor.SelNodeBorder, 0.0f, 0.794f, 1.0f, 1.0f);
-        NodeEditor.pushStyleColor(NodeEditorStyleColor.NodeBorder,  0.343f, 0.343f, 0.343f, 1.0f);
-        NodeEditor.pushStyleColor(NodeEditorStyleColor.Bg,  0.104f, 0.099f, 0.132f, 1.0f);
-        NodeEditor.pushStyleColor(NodeEditorStyleColor.Grid,  1.0f, 1.0f, 1.0f, 0.039f);
+            NodeEditor.setCurrentEditor(CONTEXT);
+            NodeEditor.begin("Node Editor");
+            NodeEditor.pushStyleVar(NodeEditorStyleVar.NodePadding, 4.0f, 3.0f, 4.0f, 4.0f);
+            NodeEditor.pushStyleVar(NodeEditorStyleVar.NodeRounding, 5.0f);
+            NodeEditor.pushStyleVar(NodeEditorStyleVar.LinkStrength, 400.0f);
+            NodeEditor.pushStyleColor(NodeEditorStyleColor.PinRect, 0.0f, 0.0f, 0.0f, 0.0f);
+            NodeEditor.pushStyleColor(NodeEditorStyleColor.NodeBg, 0.206f, 0.214f, 0.225f, 1.0f);
+            NodeEditor.pushStyleColor(NodeEditorStyleColor.HovNodeBorder, 1.0f, 1.0f, 1.0f, 0.5f);
+            NodeEditor.pushStyleColor(NodeEditorStyleColor.SelNodeBorder, 0.0f, 0.794f, 1.0f, 1.0f);
+            NodeEditor.pushStyleColor(NodeEditorStyleColor.NodeBorder, 0.343f, 0.343f, 0.343f, 1.0f);
+            NodeEditor.pushStyleColor(NodeEditorStyleColor.Bg, 0.104f, 0.099f, 0.132f, 1.0f);
+            NodeEditor.pushStyleColor(NodeEditorStyleColor.Grid, 1.0f, 1.0f, 1.0f, 0.039f);
 
-        if (isStart) {
-            isStart = false;
-            currentGraph = currentGraph.load(currentGraph.getFilepath());
-        }
-
-        for (GraphNode node : currentGraph.nodes.values()) {
-            NodeEditor.pushStyleColor(NodeEditorStyleColor.NodeBg, node.getNodeColor().x / 255.0f, node.getNodeColor().y / 255.0f, node.getNodeColor().z / 255.0f, 1.0f);
-            NodeEditor.beginNode(node.getId());
-            ImGui.pushID(node.getId());
-
-            node.updatePins();
-            node.update();
-
-            node.imgui();
-
-            ImGui.popID();
-
-            NodeEditor.endNode();
-            NodeEditor.popStyleColor(1);
-
-            for (int i = 0; i < node.inputPins.size(); i++) {
-                final ImVec2 descriptionSize = new ImVec2();
-                ImGui.calcTextSize(descriptionSize, node.inputPins.get(i).getDescription());
-
-                final float canvasX = NodeEditor.getNodePositionX(node.getId());
-                final float canvasY = NodeEditor.getNodePositionY(node.getId());
-                ImGui.setCursorPos(canvasX - descriptionSize.x - 7.0f, canvasY + 6.0f + (26.0f * i));
-                ImGui.text(node.inputPins.get(i).getDescription());
+            if (isStart) {
+                isStart = false;
+                currentGraph = currentGraph.load(currentGraph.getFilepath());
             }
-            for (int i = 0; i < node.outputPins.size(); i++) {
-                final ImVec2 descriptionSize = new ImVec2();
-                ImGui.calcTextSize(descriptionSize, node.outputPins.get(i).getDescription());
 
-                final float canvasX = NodeEditor.getNodePositionX(node.getId());
-                final float canvasY = NodeEditor.getNodePositionY(node.getId());
-                ImGui.setCursorPos(canvasX + NodeEditor.getNodeSizeX(node.getId()) + 7.0f, canvasY + 6.0f + (26.0f * i));
-                ImGui.text(node.outputPins.get(i).getDescription());
+            for (GraphNode node : currentGraph.nodes.values()) {
+                NodeEditor.pushStyleColor(NodeEditorStyleColor.NodeBg, node.getNodeColor().x / 255.0f, node.getNodeColor().y / 255.0f, node.getNodeColor().z / 255.0f, 1.0f);
+                NodeEditor.beginNode(node.getId());
+                ImGui.pushID(node.getId());
+
+                node.updatePins();
+                node.update();
+
+                node.imgui();
+
+                ImGui.popID();
+
+                NodeEditor.endNode();
+                NodeEditor.popStyleColor(1);
             }
-        }
 
-        if (NodeEditor.beginCreate()) {
-            final ImLong a = new ImLong();
-            final ImLong b = new ImLong();
-            if (NodeEditor.queryNewLink(a, b)) {
-                GraphNode sourceNode = currentGraph.findByOutput(a.get());
-                GraphNodePin sourcePin = currentGraph.findOutputPin(a.get());
-                GraphNode targetNode = currentGraph.findByInput(b.get());
-                GraphNodePin targetPin = currentGraph.findInputPin(b.get());
-                if (ImGui.isMouseReleased(ImGuiMouseButton.Left)) {
-                    if (sourceNode != null && sourcePin != null && targetNode != null && targetPin != null) {
-                        if (sourceNode != targetNode) {
-                            if (targetPin.hasConnections())
-                                for (GraphNodePin connectedPin : targetPin.getConnectedPins())
-                                    connectedPin.removeConnectedPin(targetPin);
+            if (NodeEditor.beginCreate()) {
+                final ImLong a = new ImLong();
+                final ImLong b = new ImLong();
+                if (NodeEditor.queryNewLink(a, b)) {
+                    GraphNode sourceNode = currentGraph.findByOutput(a.get());
+                    GraphNodePin sourcePin = currentGraph.findOutputPin(a.get());
+                    GraphNode targetNode = currentGraph.findByInput(b.get());
+                    GraphNodePin targetPin = currentGraph.findInputPin(b.get());
+                    if (ImGui.isMouseReleased(ImGuiMouseButton.Left)) {
+                        if (sourceNode != null && sourcePin != null && targetNode != null && targetPin != null) {
+                            if (sourceNode != targetNode) {
+                                if (targetPin.hasConnections())
+                                    for (GraphNodePin connectedPin : targetPin.getConnectedPins())
+                                        connectedPin.removeConnectedPin(targetPin);
 
-                            targetPin.setConnectedPin(sourcePin);
-                            sourcePin.addConnectedPin(targetPin);
+                                targetPin.setConnectedPin(sourcePin);
+                                sourcePin.addConnectedPin(targetPin);
+                            }
                         }
                     }
                 }
             }
-        }
-        NodeEditor.endCreate();
+            NodeEditor.endCreate();
 
-        int uniqueLinkId = 1;
-        for (GraphNode node : currentGraph.nodes.values()) {
-            for (GraphNodePin inputPin : node.inputPins)
-                if (inputPin.hasConnections())
-                    for (GraphNodePin connectedPin : inputPin.getConnectedPins()) {
-                        GraphNode tmpNode = currentGraph.findByOutput(connectedPin.getId());
-                        if (tmpNode != null && currentGraph.nodes.containsKey(tmpNode.getId()))
-                            NodeEditor.link(uniqueLinkId++, connectedPin.getId(), inputPin.getId());
+            int uniqueLinkId = 1;
+            for (GraphNode node : currentGraph.nodes.values()) {
+                for (GraphNodePin inputPin : node.inputPins)
+                    if (inputPin.hasConnections())
+                        for (GraphNodePin connectedPin : inputPin.getConnectedPins()) {
+                            GraphNode tmpNode = currentGraph.findByOutput(connectedPin.getId());
+                            if (tmpNode != null && currentGraph.nodes.containsKey(tmpNode.getId()))
+                                NodeEditor.link(uniqueLinkId++, connectedPin.getId(), inputPin.getId());
+                        }
+            }
+
+            NodeEditor.suspend();
+
+            final long nodeWithContextMenu = NodeEditor.getNodeWithContextMenu();
+            if (nodeWithContextMenu != -1) {
+                ImGui.openPopup("node_context");
+                ImGui.getStateStorage().setInt(ImGui.getID("delete_node_id"), (int) nodeWithContextMenu);
+            }
+
+            if (ImGui.isPopupOpen("node_context")) {
+                final int targetNode = ImGui.getStateStorage().getInt(ImGui.getID("delete_node_id"));
+                if (targetNode != 1 && targetNode != 2)
+                    if (ImGui.beginPopup("node_context")) {
+                        drawNodeContextPopup(targetNode);
+                        ImGui.endPopup();
                     }
-        }
-
-        NodeEditor.suspend();
-
-        final long nodeWithContextMenu = NodeEditor.getNodeWithContextMenu();
-        if (nodeWithContextMenu != -1) {
-            ImGui.openPopup("node_context");
-            ImGui.getStateStorage().setInt(ImGui.getID("delete_node_id"), (int) nodeWithContextMenu);
-        }
-
-        if (ImGui.isPopupOpen("node_context")) {
-            final int targetNode = ImGui.getStateStorage().getInt(ImGui.getID("delete_node_id"));
-            if (targetNode != 1 && targetNode != 2)
-                if (ImGui.beginPopup("node_context")) {
-                    drawNodeContextPopup(targetNode);
-                    ImGui.endPopup();
-                }
-        }
+            }
 
 //        if (NodeEditor.showBackgroundContextMenu())
 //            ImGui.openPopup("node_editor_context");
@@ -171,10 +151,12 @@ public class Gates_NodeEditor {
 //            ImGui.endPopup();
 //        }
 
-        NodeEditor.resume();
-        NodeEditor.end();
+            NodeEditor.resume();
+            NodeEditor.end();
 
-        isUpdate = true;
+            isUpdate = true;
+        }
+        ImGui.end();
     }
 
     private void loadGates() {

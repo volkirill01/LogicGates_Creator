@@ -1,15 +1,16 @@
-package editor;
+package editor.graph;
 
 import com.google.gson.*;
-import editor.nodes.GraphNode_Input;
-import editor.nodes.GraphNode_Output;
+import editor.node.GraphNode;
+import editor.node.GraphNodePin;
+import editor.gates.GraphNode_Input;
+import editor.gates.GraphNode_Output;
 import imgui.ImVec2;
 import imgui.extension.nodeditor.NodeEditor;
 import org.joml.Vector3f;
 
 import java.lang.reflect.Type;
 import java.text.NumberFormat;
-import java.util.List;
 
 public class GraphDeserializer implements JsonSerializer<Graph>, JsonDeserializer<Graph> {
 
