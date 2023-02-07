@@ -15,10 +15,14 @@ public class GraphNode_Graph extends GraphNode {
 
         this.getNodeColor().set(this.gate.getGateColor().x, this.gate.getGateColor().y, this.gate.getGateColor().z);
 
-        for (GraphNodePin pin : this.gate.findById(1).outputPins)
+        for (GraphNodePin pin : this.gate.findById(1).outputPins) {
+            pin.setValue(false);
             this.inputPins.add(new GraphNodePin(true, pin.getLabel(), pin.getDescription().replace("Out", "In")));
-        for (GraphNodePin pin : this.gate.findById(2).inputPins)
+        }
+        for (GraphNodePin pin : this.gate.findById(2).inputPins) {
+            pin.setValue(false);
             this.outputPins.add(new GraphNodePin(false, pin.getLabel(), pin.getDescription().replace("In", "Out")));
+        }
     }
 
     @Override

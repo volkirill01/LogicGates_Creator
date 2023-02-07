@@ -251,6 +251,12 @@ public class Gates_NodeEditor {
         if (ImGui.button("Create Gate")) {
             if (!gateName.equals("")) {
                 this.gates.clear();
+
+                for (GraphNodePin pin : currentGraph.getInputNode().outputPins)
+                    pin.setValue(false);
+                for (GraphNodePin pin : currentGraph.getOutputNode().inputPins)
+                    pin.setValue(false);
+
                 currentGraph.saveAsGate(gateName);
 
                 currentGraph = new Graph(currentGraph.getFilepath(), currentGraph.getGateName());

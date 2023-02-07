@@ -9,36 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cf11e7bc-f8ac-474d-a996-2f52d6444fdf" name="Changes" comment="Mostly Finish project">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/LogicGatesCreator_main_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="cf11e7bc-f8ac-474d-a996-2f52d6444fdf" name="Changes" comment="Add custom Labels for pins">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/graph.ini" beforeDir="false" afterPath="$PROJECT_DIR$/graph.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hs_err_pid3864.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/sample/graphs/sample.graph" beforeDir="false" afterPath="$PROJECT_DIR$/projects/sample/graphs/sample.graph" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/sample/myGates/4BIT ADDER.gate" beforeDir="false" afterPath="$PROJECT_DIR$/projects/sample/myGates/4BIT ADDER.gate" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/sample/myGates/ADDER.gate" beforeDir="false" afterPath="$PROJECT_DIR$/projects/sample/myGates/ADDER.gate" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/sample/myGates/ALU.gate" beforeDir="false" afterPath="$PROJECT_DIR$/projects/sample/myGates/ALU.gate" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/sample/myGates/DATA LATCH.gate" beforeDir="false" afterPath="$PROJECT_DIR$/projects/sample/myGates/DATA LATCH.gate" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/sample/myGates/NAND.gate" beforeDir="false" afterPath="$PROJECT_DIR$/projects/sample/myGates/NAND.gate" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/sample/myGates/NOR.gate" beforeDir="false" afterPath="$PROJECT_DIR$/projects/sample/myGates/NOR.gate" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/sample/myGates/OR.gate" beforeDir="false" afterPath="$PROJECT_DIR$/projects/sample/myGates/OR.gate" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/sample/myGates/REGISTER.gate" beforeDir="false" afterPath="$PROJECT_DIR$/projects/sample/myGates/REGISTER.gate" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/sample/myGates/XOR.gate" beforeDir="false" afterPath="$PROJECT_DIR$/projects/sample/myGates/XOR.gate" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgui.ini" beforeDir="false" afterPath="$PROJECT_DIR$/imgui.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/editor/ExampleImNodes.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/editor/Gates_NodeEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/editor/node/Gates_NodeEditor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/editor/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/editor/graph/Graph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/editor/GraphDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/editor/graph/GraphDeserializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/editor/GraphNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/editor/node/GraphNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/editor/GraphNodeDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/editor/node/GraphNodeDeserializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/editor/GraphNodePin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/editor/node/GraphNodePin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/editor/nodes/Gate_And.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/editor/gates/Gate_And.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/editor/nodes/Gate_Not.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/editor/gates/Gate_Not.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/editor/nodes/GraphNode_Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/editor/gates/GraphNode_Graph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/editor/nodes/GraphNode_Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/editor/gates/GraphNode_Input.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/editor/nodes/GraphNode_Output.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/editor/gates/GraphNode_Output.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/editor/gates/GraphNode_Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/editor/gates/GraphNode_Graph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/editor/node/Gates_NodeEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/editor/node/Gates_NodeEditor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,7 +156,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675680745819</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Add custom Labels for pins">
+      <created>1675751193788</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1675751193788</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -197,6 +181,7 @@
     <MESSAGE value="Initial Commit" />
     <MESSAGE value="Test" />
     <MESSAGE value="Mostly Finish project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mostly Finish project" />
+    <MESSAGE value="Add custom Labels for pins" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add custom Labels for pins" />
   </component>
 </project>

@@ -22,6 +22,7 @@ public class Main extends Application {
     @Override
     protected void configure(final Configuration config) {
         getColorBg().set(0.0f, 0.0f, 0.0f, 1.0f);
+        config.setFullScreen(true);
         config.setTitle("LogicGates Creator");
     }
 
@@ -49,7 +50,7 @@ public class Main extends Application {
 
     private void setTheme() {
         ImGui.pushStyleColor(ImGuiCol.WindowBg, 0.120f, 0.126f, 0.136f, 1.0f);
-        ImGui.pushStyleColor(ImGuiCol.PopupBg, 0.120f, 0.126f, 0.136f, 0.940f);
+        ImGui.pushStyleColor(ImGuiCol.PopupBg, 0.120f, 0.126f, 0.136f, 1.0f);
         ImGui.pushStyleColor(ImGuiCol.Border, 1.0f, 1.0f, 1.0f, 0.125f);
         ImGui.pushStyleColor(ImGuiCol.FrameBg, 0.046f, 0.050f, 0.063f, 0.552f);
         ImGui.pushStyleColor(ImGuiCol.FrameBgHovered, 0.058f, 0.066f, 0.079f, 0.552f);
@@ -95,10 +96,9 @@ public class Main extends Application {
     public void process() {
         setupDockspace();
 
-            editor.imgui();
-//            editor.ExampleImNodes.imgui(GRAPH);
+        editor.imgui();
 
-//        ImGui.showDemoWindow();
+        ImGui.showDemoWindow();
         TestFieldsWindow.imgui();
     }
 
@@ -148,6 +148,40 @@ public class Main extends Application {
             ImGui.endMenu();
         }
 
+        if (ImGui.beginMenu("Help")) {
+            ImGui.pushStyleColor(ImGuiCol.PopupBg, 0.22f, 0.22f, 0.22f, 1.0f);
+            if (ImGui.beginMenu("Basics")) {
+                ImGui.text("On/1/true");
+                ImGui.getForegroundDrawList().addCircleFilled(
+                        ImGui.getCursorScreenPosX() + 90.0f, // X Pos
+                        ImGui.getCursorScreenPosY() - 10.0f, // Y Pos
+                        9.0f, // Circle size
+                        ImGui.getColorU32(0.936f, 0.401f, 0.069f, 1.0f), // Color
+                        12); // Circle segments
+
+                ImVec2 start = ImGui.getCursorPos();
+                ImGui.sameLine();
+                ImGui.setCursorPosX(ImGui.getCursorPosX() + 20.0f);
+
+                ImGui.setCursorPos(start.x, start.y + ImGui.getStyle().getItemSpacingY());
+                ImGui.text("Off/0/false");
+                ImGui.getForegroundDrawList().addCircleFilled(
+                        ImGui.getCursorScreenPosX() + 90.0f, // X Pos
+                        ImGui.getCursorScreenPosY() - 10.0f, // Y Pos
+                        9.0f, // Circle size
+                        ImGui.getColorU32(0.080f, 0.083f, 0.103f, 1.0f), // Color
+                        12); // Circle segments
+
+                ImGui.endMenu();
+            }
+            ImGui.popStyleColor();
+
+//            if (ImGui.menuItem("Creating Gates")) {
+//            }
+
+            ImGui.endMenu();
+        }
+
 //        if (ImGui.beginMenu("Edit")) {
 //            if (ImGui.menuItem("Test1")) {
 //            }
@@ -169,16 +203,6 @@ public class Main extends Application {
 //        }
 
 //        if (ImGui.beginMenu("Window")) {
-//            if (ImGui.menuItem("Test1")) {
-//            }
-//
-//            if (ImGui.menuItem("Test2")) {
-//            }
-//
-//            ImGui.endMenu();
-//        }
-
-//        if (ImGui.beginMenu("Help")) {
 //            if (ImGui.menuItem("Test1")) {
 //            }
 //
