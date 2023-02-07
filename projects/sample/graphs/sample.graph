@@ -3,7 +3,7 @@
   "gateName": "Demo",
   "gateColor": "(43 45 52)",
   "nextNodeId": 3,
-  "nextPinId": 1002,
+  "nextPinId": 1014,
   "nodes": [
     {
       "type": "editor.gates.GraphNode_Input",
@@ -17,6 +17,41 @@
             "label": "In (1)",
             "value": false,
             "connectedPinsIds": []
+          },
+          {
+            "id": 1009,
+            "isInput": false,
+            "label": "In (2)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1010,
+            "isInput": false,
+            "label": "In (3)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1011,
+            "isInput": false,
+            "label": "In (4)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1012,
+            "isInput": false,
+            "label": "In (5)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1013,
+            "isInput": false,
+            "label": "In (6)",
+            "value": false,
+            "connectedPinsIds": []
           }
         ],
         "nodeColor": {
@@ -25,8 +60,15 @@
           "z": 52.0
         },
         "position": {
-          "x": 288.0,
-          "y": 306.0
+          "x": 464.0,
+          "y": 322.0
+        },
+        "pinGroups": {
+          "Gto2": [
+            1009,
+            1011,
+            1012
+          ]
         }
       }
     },
@@ -41,6 +83,55 @@
             "label": "Out (1)",
             "value": false,
             "connectedPinsIds": []
+          },
+          {
+            "id": 1002,
+            "isInput": true,
+            "label": "Out (2)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1003,
+            "isInput": true,
+            "label": "Out (3)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1004,
+            "isInput": true,
+            "label": "Out (4)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1005,
+            "isInput": true,
+            "label": "Out (5)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1006,
+            "isInput": true,
+            "label": "Out (6)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1007,
+            "isInput": true,
+            "label": "Out (7)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1008,
+            "isInput": true,
+            "label": "Out (8)",
+            "value": false,
+            "connectedPinsIds": []
           }
         ],
         "outputPins": [],
@@ -50,8 +141,19 @@
           "z": 52.0
         },
         "position": {
-          "x": 704.0,
-          "y": 306.0
+          "x": 864.0,
+          "y": 322.0
+        },
+        "pinGroups": {
+          "Test1": [
+            1002,
+            1003,
+            1004
+          ],
+          "Test2": [
+            1006,
+            1008
+          ]
         }
       }
     }

@@ -34,7 +34,7 @@ public class GraphNode_Input extends GraphNode {
     protected void drawPin(GraphNodePin pin) {
         ImGui.pushID(pin.getId());
         ImGui.setNextItemWidth(70.0f);
-        ImString pinLabelTmp = new ImString(pin.getLabel(), 256);
+        ImString pinLabelTmp = new ImString(pin.getLabel(), 14);
         if (ImGui.inputText("##PinLabel", pinLabelTmp))
             pin.setLabel(pinLabelTmp.get());
         ImGui.sameLine();
@@ -54,6 +54,7 @@ public class GraphNode_Input extends GraphNode {
             pin.setValue(!pin.getValue());
         ImGui.popStyleVar();
         ImGui.popStyleColor(4);
+
         ImGui.sameLine();
         super.drawPin(pin);
         ImGui.popID();

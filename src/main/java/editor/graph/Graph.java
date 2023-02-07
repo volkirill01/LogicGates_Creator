@@ -150,6 +150,20 @@ public final class Graph {
         return null;
     }
 
+    public GraphNode findByPin(int pinId) {
+        for (GraphNode node : nodes.values())
+            for (GraphNodePin pin : node.inputPins)
+                if (pin.getId() == pinId)
+                    return node;
+
+        for (GraphNode node : nodes.values())
+            for (GraphNodePin pin : node.outputPins)
+                if (pin.getId() == pinId)
+                    return node;
+
+        return null;
+    }
+
     public GraphNodePin findInputPin(long inputPinId) {
         for (GraphNode node : nodes.values())
             for (GraphNodePin pin : node.inputPins)

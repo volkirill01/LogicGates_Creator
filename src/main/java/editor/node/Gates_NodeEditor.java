@@ -2,6 +2,7 @@ package editor.node;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import editor.TestFieldsWindow;
 import editor.graph.Graph;
 import editor.graph.GraphDeserializer;
 import editor.gates.*;
@@ -14,6 +15,8 @@ import imgui.extension.nodeditor.flag.NodeEditorStyleColor;
 import imgui.extension.nodeditor.flag.NodeEditorStyleVar;
 import imgui.flag.ImGuiColorEditFlags;
 import imgui.flag.ImGuiMouseButton;
+import imgui.flag.ImGuiStyleVar;
+import imgui.flag.ImGuiWindowFlags;
 import imgui.type.ImLong;
 import imgui.type.ImString;
 
@@ -22,6 +25,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_CONTROL;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_SHIFT;
 
 public class Gates_NodeEditor {
 
@@ -89,6 +95,30 @@ public class Gates_NodeEditor {
 
                 NodeEditor.endNode();
                 NodeEditor.popStyleColor(1);
+
+//                List<GraphNodePin> groupInputPins = new ArrayList<>();
+//                float yPos = 0.0f;
+//
+//                for (int i = 0; i < node.inputPins.size(); i++) {
+//                    if (node.inputPins.get(i).getGroupName() != null)
+//                        if (!node.inputPins.get(i).getGroupName().equals("")) {
+//                            if (yPos == 0.0f)
+//                                yPos = i;
+//
+//                            groupInputPins.add(node.inputPins.get(i));
+//                        }
+//                }
+//
+//                for (int i = 0; i < groupInputPins.size(); i++) {
+//                    if (i == 0) {
+//                        ImGui.setCursorScreenPos(NodeEditor.getNodePositionX(node.getId()) - 9.0f, NodeEditor.getNodePositionY(node.getId()) + (yPos * 26.0f));
+//                        ImGui.text("-");
+//                    }
+//                    if (i == groupInputPins.size() - 1) {
+//                        ImGui.setCursorScreenPos(NodeEditor.getNodePositionX(node.getId()) - 9.0f, NodeEditor.getNodePositionY(node.getId()) + (yPos * 26.0f) + TestFieldsWindow.getFloats[1]);
+//                        ImGui.text("-");
+//                    }
+//                }
             }
 
             if (NodeEditor.beginCreate()) {
@@ -136,11 +166,10 @@ public class Gates_NodeEditor {
 
             if (ImGui.isPopupOpen("node_context")) {
                 final int targetNode = ImGui.getStateStorage().getInt(ImGui.getID("delete_node_id"));
-                if (targetNode != 1 && targetNode != 2)
-                    if (ImGui.beginPopup("node_context")) {
-                        drawNodeContextPopup(targetNode);
-                        ImGui.endPopup();
-                    }
+                if (ImGui.beginPopup("node_context")) {
+                    drawNodeContextPopup(targetNode);
+                    ImGui.endPopup();
+                }
             }
 
 //        if (NodeEditor.showBackgroundContextMenu())
@@ -150,6 +179,11 @@ public class Gates_NodeEditor {
 //            drawEditorContextPopup();
 //            ImGui.endPopup();
 //        }
+
+            if (showGroupNameDialog)
+                ImGui.openPopup("Enter group name");
+
+            showGroutNameInputPopup();
 
             NodeEditor.resume();
             NodeEditor.end();
@@ -222,6 +256,8 @@ public class Gates_NodeEditor {
 
         ImGui.sameLine();
         if (ImGui.button("Clear Graph")) {
+            selectedPins.clear();
+
             this.gateName = "";
             currentGraph = new Graph(currentGraph.getFilepath(), currentGraph.getGateName());
             currentGraph.createInputAndOutput();
@@ -250,6 +286,8 @@ public class Gates_NodeEditor {
         ImGui.sameLine();
         if (ImGui.button("Create Gate")) {
             if (!gateName.equals("")) {
+                selectedPins.clear();
+
                 this.gates.clear();
 
                 for (GraphNodePin pin : currentGraph.getInputNode().outputPins)
@@ -332,10 +370,109 @@ public class Gates_NodeEditor {
 //    }
 
     private void drawNodeContextPopup(int targetNode) {
-        if (ImGui.button("Delete " + currentGraph.nodes.get(targetNode).getName())) {
+        if (currentGraph.getInputNode().getId() == targetNode) {
+            if (ImGui.menuItem("Group selected pins")) {
+                showGroupNameDialog = true;
+                isInputNodeSelected = true;
+            }
+
+        } else if (currentGraph.getOutputNode().getId() == targetNode) {
+            if (ImGui.menuItem("Group selected pins")) {
+                showGroupNameDialog = true;
+                isInputNodeSelected = false;
+            }
+
+        } else if (ImGui.menuItem("Delete " + currentGraph.nodes.get(targetNode).getName())) {
             currentGraph.deleteNodeById(targetNode);
-//            this.currentGraph.nodes.remove(targetNode);
             ImGui.closeCurrentPopup();
         }
     }
+
+    private boolean showGroupNameDialog = false;
+    private boolean isInputNodeSelected = false;
+    private String groupName = "";
+
+    private void showGroutNameInputPopup() {
+        if (selectedPins.size() > 0) {
+            ImGui.setNextWindowSize(438.0f, 130.0f);
+            ImGui.setNextWindowPos(ImGui.getWindowViewport().getWorkSizeX() / 2.0f - 438.0f / 2.0f + ImGui.getWindowViewport().getPosX(),
+                    ImGui.getWindowViewport().getWorkSizeY() / 2.0f - 130.0f / 2.0f + ImGui.getWindowViewport().getPosY());
+        } else {
+            ImGui.setNextWindowSize(438.0f, 100.0f);
+            ImGui.setNextWindowPos(ImGui.getWindowViewport().getWorkSizeX() / 2.0f - 438.0f / 2.0f + ImGui.getWindowViewport().getPosX(),
+                    ImGui.getWindowViewport().getWorkSizeY() / 2.0f - 100.0f / 2.0f + ImGui.getWindowViewport().getPosY());
+        }
+
+        if (showGroupNameDialog && ImGui.beginPopupModal("Enter group name", ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove)) {
+            ImVec2 tmp = new ImVec2();
+            if (selectedPins.size() > 0) {
+                ImGui.calcTextSize(tmp, "Group Name");
+                ImGui.setCursorPos((ImGui.getContentRegionAvailX() / 2.0f) - (tmp.x / 2.0f), ImGui.getCursorPosY() + 5.0f);
+                ImGui.text("Group Name");
+
+                ImGui.setNextItemWidth(ImGui.getContentRegionAvailX());
+                ImGui.pushStyleVar(ImGuiStyleVar.FramePadding, 10.0f, ImGui.getStyle().getFramePaddingY());
+                ImGui.setCursorPosY(ImGui.getCursorPosY() + 5.0f);
+
+                ImString tmpStr = new ImString(groupName, 14);
+                if (ImGui.inputText("##GroupName", tmpStr))
+                    groupName = tmpStr.get();
+
+                ImGui.popStyleVar();
+            } else {
+                ImGui.calcTextSize(tmp, "No pins selected");
+                ImGui.setCursorPos((ImGui.getContentRegionAvailX() / 2.0f) - (tmp.x / 2.0f), ImGui.getCursorPosY() + 5.0f);
+                ImGui.text("No pins selected");
+            }
+            ImGui.setCursorPos(ImGui.getContentRegionAvailX() / 6.0f, ImGui.getCursorPosY() + 10.0f);
+            ImGui.pushStyleVar(ImGuiStyleVar.FramePadding, ImGui.getContentRegionAvailX() / 6.0f, ImGui.getStyle().getFramePaddingY());
+            if (ImGui.button("Close")) {
+                groupName = "";
+                showGroupNameDialog = false;
+            }
+
+            ImGui.sameLine();
+            if (ImGui.button("Ok")) {
+                if (!groupName.equals("")) {
+                    groupSelectedPins();
+
+                    groupName = "";
+                    showGroupNameDialog = false;
+                }
+            }
+            ImGui.popStyleVar();
+            ImGui.endPopup();
+        }
+    }
+
+    private void groupSelectedPins() {
+        List<GraphNodePin> currentNodePins = new ArrayList<>(selectedPins);
+
+        if (isInputNodeSelected) {
+            GraphNode parent = currentGraph.getInputNode();
+            currentNodePins.removeIf(pin -> !parent.outputPins.contains(pin));
+        } else {
+            GraphNode parent = currentGraph.getOutputNode();
+            currentNodePins.removeIf(pin -> !parent.inputPins.contains(pin));
+        }
+
+        if (isInputNodeSelected)
+            currentGraph.getInputNode().addGroup(groupName, currentNodePins);
+        else
+            currentGraph.getOutputNode().addGroup(groupName, currentNodePins);
+    }
+
+    private static List<GraphNodePin> selectedPins = new ArrayList<>();
+
+    public static void setPinSelected(GraphNodePin pin) {
+        if (!ImGui.isKeyDown(GLFW_KEY_LEFT_SHIFT) && !ImGui.isKeyDown(GLFW_KEY_LEFT_CONTROL))
+            selectedPins.clear();
+
+        if (ImGui.isKeyDown(GLFW_KEY_LEFT_CONTROL))
+            selectedPins.remove(pin);
+        else if (!selectedPins.contains(pin))
+            selectedPins.add(pin);
+    }
+
+    public static boolean isPinSelected(GraphNodePin pin) { return selectedPins.contains(pin); }
 }

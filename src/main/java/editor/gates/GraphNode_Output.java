@@ -33,7 +33,7 @@ public class GraphNode_Output extends GraphNode {
         super.drawPin(pin);
         ImGui.sameLine();
         ImGui.setNextItemWidth(70.0f);
-        ImString pinLabelTmp = new ImString(pin.getLabel(), 256);
+        ImString pinLabelTmp = new ImString(pin.getLabel(), 14);
         if (ImGui.inputText("##PinLabel", pinLabelTmp))
             pin.setLabel(pinLabelTmp.get());
         ImGui.popID();
