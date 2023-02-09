@@ -1,0 +1,241 @@
+{
+  "filepath": "projects/sample/gates/Or.gate",
+  "gateName": "Or",
+  "gateColor": "(149,557 27,135 30,234)",
+  "nextNodeId": 11,
+  "nextPinId": 1022,
+  "nodes": [
+    {
+      "type": "editor.gates.GraphNode_Input",
+      "properties": {
+        "nodeId": 1,
+        "inputPins": [],
+        "outputPins": [
+          {
+            "id": 1000,
+            "isInput": false,
+            "label": "A",
+            "description": "",
+            "value": false,
+            "connectedPinsIds": [
+              1019
+            ]
+          },
+          {
+            "id": 1021,
+            "isInput": false,
+            "label": "B",
+            "description": "",
+            "value": false,
+            "connectedPinsIds": [
+              1017
+            ]
+          }
+        ],
+        "nodeColor": {
+          "x": 43.0,
+          "y": 45.0,
+          "z": 52.0
+        },
+        "position": {
+          "x": -111.0,
+          "y": -8.0
+        }
+      }
+    },
+    {
+      "type": "editor.gates.GraphNode_Output",
+      "properties": {
+        "nodeId": 2,
+        "inputPins": [
+          {
+            "id": 1001,
+            "isInput": true,
+            "label": "Out",
+            "description": "",
+            "value": false,
+            "connectedPinsIds": [
+              1016
+            ]
+          }
+        ],
+        "outputPins": [],
+        "nodeColor": {
+          "x": 43.0,
+          "y": 45.0,
+          "z": 52.0
+        },
+        "position": {
+          "x": 640.0,
+          "y": 2.0
+        }
+      }
+    },
+    {
+      "type": "editor.gates.Gate_And",
+      "properties": {
+        "nodeId": 6,
+        "inputPins": [
+          {
+            "id": 1010,
+            "isInput": true,
+            "label": "A",
+            "description": "",
+            "value": true,
+            "connectedPinsIds": [
+              1020
+            ]
+          },
+          {
+            "id": 1011,
+            "isInput": true,
+            "label": "B",
+            "description": "",
+            "value": true,
+            "connectedPinsIds": [
+              1018
+            ]
+          }
+        ],
+        "outputPins": [
+          {
+            "id": 1012,
+            "isInput": false,
+            "label": "Out",
+            "description": "",
+            "value": true,
+            "connectedPinsIds": [
+              1015
+            ]
+          }
+        ],
+        "nodeColor": {
+          "x": 43.0,
+          "y": 45.0,
+          "z": 52.0
+        },
+        "position": {
+          "x": 334.0,
+          "y": -8.0
+        }
+      }
+    },
+    {
+      "type": "editor.gates.Gate_Not",
+      "properties": {
+        "nodeId": 8,
+        "inputPins": [
+          {
+            "id": 1015,
+            "isInput": true,
+            "label": "In",
+            "description": "",
+            "value": true,
+            "connectedPinsIds": [
+              1012
+            ]
+          }
+        ],
+        "outputPins": [
+          {
+            "id": 1016,
+            "isInput": false,
+            "label": "Out",
+            "description": "",
+            "value": false,
+            "connectedPinsIds": [
+              1001
+            ]
+          }
+        ],
+        "nodeColor": {
+          "x": 43.0,
+          "y": 45.0,
+          "z": 52.0
+        },
+        "position": {
+          "x": 480.0,
+          "y": 2.0
+        }
+      }
+    },
+    {
+      "type": "editor.gates.Gate_Not",
+      "properties": {
+        "nodeId": 9,
+        "inputPins": [
+          {
+            "id": 1017,
+            "isInput": true,
+            "label": "In",
+            "description": "",
+            "value": false,
+            "connectedPinsIds": [
+              1021
+            ]
+          }
+        ],
+        "outputPins": [
+          {
+            "id": 1018,
+            "isInput": false,
+            "label": "Out",
+            "description": "",
+            "value": true,
+            "connectedPinsIds": [
+              1011
+            ]
+          }
+        ],
+        "nodeColor": {
+          "x": 43.0,
+          "y": 45.0,
+          "z": 52.0
+        },
+        "position": {
+          "x": 190.0,
+          "y": 34.0
+        }
+      }
+    },
+    {
+      "type": "editor.gates.Gate_Not",
+      "properties": {
+        "nodeId": 10,
+        "inputPins": [
+          {
+            "id": 1019,
+            "isInput": true,
+            "label": "In",
+            "description": "",
+            "value": false,
+            "connectedPinsIds": [
+              1000
+            ]
+          }
+        ],
+        "outputPins": [
+          {
+            "id": 1020,
+            "isInput": false,
+            "label": "Out",
+            "description": "",
+            "value": true,
+            "connectedPinsIds": [
+              1010
+            ]
+          }
+        ],
+        "nodeColor": {
+          "x": 43.0,
+          "y": 45.0,
+          "z": 52.0
+        },
+        "position": {
+          "x": 190.0,
+          "y": -14.0
+        }
+      }
+    }
+  ]
+}
