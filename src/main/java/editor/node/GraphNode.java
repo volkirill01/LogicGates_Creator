@@ -1,9 +1,9 @@
 package editor.node;
 
-import editor.TestFieldsWindow;
 import editor.utils.ImFonts;
 import imgui.ImGui;
 import imgui.ImVec2;
+import imgui.ImVec4;
 import imgui.extension.nodeditor.NodeEditor;
 import imgui.extension.nodeditor.flag.NodeEditorPinKind;
 import imgui.flag.ImGuiCol;
@@ -29,7 +29,7 @@ public abstract class GraphNode {
     private transient float outputHeight = 0.0f;
     private transient float contentWidth = 1.0f;
 
-    private Map<String, List<Integer>> pinGroups = new HashMap<>();
+    protected Map<String, List<Integer>> pinGroups = new HashMap<>();
 
     public void init(final int nodeId, ImVec2 position) {
         this.nodeId = nodeId;
@@ -124,7 +124,7 @@ public abstract class GraphNode {
                     ImGui.getCursorScreenPosY() + 11.0f, // Y Pos
                     11.0f, // Circle size
                     ImGui.getColorU32(0.1f, 0.629f, 0.873f, 0.827f), // Color
-                    12); // Circle segments
+                    20); // Circle segments
         }
         ImGui.sameLine();
         ImGui.getWindowDrawList().addCircleFilled(
@@ -132,12 +132,17 @@ public abstract class GraphNode {
                 ImGui.getCursorScreenPosY() + 11.0f, // Y Pos
                 9.0f, // Circle size
                 color, // Color
-                12); // Circle segments
+                20); // Circle segments
 
 //        ImGui.text((pin.isInput() ? "<-" : "->") + "/" + pin.getId() + "/" + pin.getValue());
 //        if (pin.hasConnections())
 //            for (int i = 0; i < pin.getConnectedPins().size(); i++)
 //                ImGui.text("" + pin.getConnectedPin(i).getId() + " " + pin.getConnectedPin(i).getValue());
+
+        if (!Gates_NodeEditor.showPinTitles) {
+            NodeEditor.endPin();
+            return;
+        }
 
         String groupName = getGroupNameFromContainsPin(pin);
 
@@ -148,7 +153,9 @@ public abstract class GraphNode {
         if (groupName != null)
             for (int i = 0; i < groupPins.size(); i++) {
                 if (groupPins.get(i) == pin) {
-                    if (i == 0)
+                    if (groupPins.size() == 1)
+                        pinIndexState = 3;
+                    else if (i == 0)
                         pinIndexState = 0;
                     else if (i == groupPins.size() - 1)
                         pinIndexState = 2;
@@ -159,6 +166,8 @@ public abstract class GraphNode {
 
         float xPos = ImGui.getCursorScreenPosX() + 5.0f;
         ImVec2 tmp = new ImVec2();
+
+        ImVec4 textColor = ImGui.getStyle().getColor(ImGuiCol.Text);
 
         if (groupName == null) {
             ImGui.calcTextSize(tmp, pin.getLabel());
@@ -171,47 +180,69 @@ public abstract class GraphNode {
                     ImGui.getFontSize(), // Font size
                     xPos, // X POS
                     ImGui.getCursorScreenPosY() + 3.0f, // Y POS
-                    ImGui.getColorU32(1.0f, 1.0f, 1.0f, 1.0f), // Color
+                    ImGui.getColorU32(textColor.x, textColor.y, textColor.z, textColor.w), // Color
                     pin.getLabel());    // Text
         } else {
-            if (pinIndexState == 0 || pinIndexState == 2)
-                ImGui.calcTextSize(tmp, "--");
-            else
-                ImGui.calcTextSize(tmp, "|");
-
+            //<editor-fold desc="Draw Group Lines">
             if (pin.isInput())
-                xPos = ImGui.getCursorScreenPosX() - tmp.x - 35.0f;
+                xPos = ImGui.getCursorScreenPosX() - 47.0f;
+            else
+                xPos = ImGui.getCursorScreenPosX() + 4.0f;
 
             if (pinIndexState == 0) {
-                ImGui.getWindowDrawList().addText(
-                        ImFonts.regular100, // Font
-                        ImGui.getFontSize(), // Font size
-                        xPos, // X POS
-                        ImGui.getCursorScreenPosY() - 4.0f, // Y POS
-                        ImGui.getColorU32(1.0f, 1.0f, 1.0f, 1.0f), // Color
-                        "--");    // Text
-            } else if (pinIndexState == 2) {
-                ImGui.getWindowDrawList().addText(
-                        ImFonts.regular100, // Font
-                        ImGui.getFontSize(), // Font size
-                        xPos, // X POS
-                        ImGui.getCursorScreenPosY() + 11.0f, // Y POS
-                        ImGui.getColorU32(1.0f, 1.0f, 1.0f, 1.0f), // Color
-                        "--");    // Text
-            } else if (pinIndexState == 1) {
-                if (pin.isInput())
-                    xPos -= 5.0f;
-                else
-                    xPos += 5.0f;
+                ImGui.getWindowDrawList().addLine(
+                        xPos, ImGui.getCursorScreenPosY() - 2.0f,
+                        xPos + 10.0f, ImGui.getCursorScreenPosY() - 2.0f,
+                        ImGui.getColorU32(textColor.x, textColor.y, textColor.z, textColor.w));
 
-                ImGui.getWindowDrawList().addText(
-                        ImFonts.regular100, // Font
-                        ImGui.getFontSize(), // Font size
-                        xPos, // X POS
-                        ImGui.getCursorScreenPosY() + 3.0f, // Y POS
-                        ImGui.getColorU32(1.0f, 1.0f, 1.0f, 1.0f), // Color
-                        "|");    // Text
+                if (!pin.isInput())
+                    xPos += 10.0f;
+
+                ImGui.getWindowDrawList().addLine(
+                        xPos, ImGui.getCursorScreenPosY() - 2.0f,
+                        xPos, ImGui.getCursorScreenPosY() + 24.0f,
+                        ImGui.getColorU32(textColor.x, textColor.y, textColor.z, textColor.w));
+            } else if (pinIndexState == 2) {
+                ImGui.getWindowDrawList().addLine(
+                        xPos, ImGui.getCursorScreenPosY() + 23.0f,
+                        xPos + 10.0f , ImGui.getCursorScreenPosY() + 23.0f,
+                        ImGui.getColorU32(textColor.x, textColor.y, textColor.z, textColor.w));
+
+                if (!pin.isInput())
+                    xPos += 10.0f;
+
+                ImGui.getWindowDrawList().addLine(
+                        xPos, ImGui.getCursorScreenPosY() - 2.0f,
+                        xPos, ImGui.getCursorScreenPosY() + 23.0f,
+                        ImGui.getColorU32(textColor.x, textColor.y, textColor.z, textColor.w));
+
+            } else if (pinIndexState == 1) {
+                if (!pin.isInput())
+                    xPos += 10.0f;
+
+                ImGui.getWindowDrawList().addLine(
+                        xPos, ImGui.getCursorScreenPosY() - 2.0f,
+                        xPos, ImGui.getCursorScreenPosY() + 24.0f,
+                        ImGui.getColorU32(textColor.x, textColor.y, textColor.z, textColor.w));
+            } else if (pinIndexState == 3) {
+                ImGui.getWindowDrawList().addLine(
+                        xPos, ImGui.getCursorScreenPosY() + 23.0f,
+                        xPos + 10.0f , ImGui.getCursorScreenPosY() + 23.0f,
+                        ImGui.getColorU32(textColor.x, textColor.y, textColor.z, textColor.w));
+                ImGui.getWindowDrawList().addLine(
+                        xPos, ImGui.getCursorScreenPosY() - 2.0f,
+                        xPos + 10.0f , ImGui.getCursorScreenPosY() - 2.0f,
+                        ImGui.getColorU32(textColor.x, textColor.y, textColor.z, textColor.w));
+
+                if (!pin.isInput())
+                    xPos += 10.0f;
+
+                ImGui.getWindowDrawList().addLine(
+                        xPos, ImGui.getCursorScreenPosY() - 2.0f,
+                        xPos, ImGui.getCursorScreenPosY() + 23.0f,
+                        ImGui.getColorU32(textColor.x, textColor.y, textColor.z, textColor.w));
             }
+            //</editor-fold>
         }
 
         NodeEditor.endPin();
@@ -225,8 +256,6 @@ public abstract class GraphNode {
 
     public abstract String getName();
 
-    public abstract String getDescription();
-
     public int getId() { return this.nodeId; }
 
     public int getInputPinId(int index) { return inputPins.get(index).getId(); }
@@ -235,11 +264,11 @@ public abstract class GraphNode {
 
     public Vector3f getNodeColor() { return this.nodeColor; }
 
-    public void drawDescription() { ImGui.text(getDescription()); }
-
     public ImVec2 getPosition() { return this.position; }
 
     public void setPosition(ImVec2 position) { this.position.set(position); }
+
+    public void setPosition(float x, float y) { this.position.set(x, y); }
 
     public void addGroup(String groupName, List<GraphNodePin> pins) {
         List<Integer> pinsIds = new ArrayList<>();
@@ -249,6 +278,8 @@ public abstract class GraphNode {
 
         this.pinGroups.put(groupName, pinsIds);
     }
+
+    public void addGroupWithIds(String groupName, List<Integer> pinsIds) { this.pinGroups.put(groupName, pinsIds); }
 
     private List<String> getGroupNames() { return this.pinGroups.keySet().stream().toList(); }
 
@@ -277,4 +308,6 @@ public abstract class GraphNode {
 
         return pins;
     }
+
+    public Map<String, List<Integer>> getGroups() { return this.pinGroups; }
 }

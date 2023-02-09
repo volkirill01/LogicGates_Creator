@@ -25,8 +25,5 @@ public class Gate_And extends GraphNode {
     public String getName() { return "And"; }
 
     @Override
-    public String getDescription() { return "Description"; }
-
-    @Override
     public GraphNode copy() { return new Gate_And(); }
 }

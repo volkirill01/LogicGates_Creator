@@ -43,12 +43,15 @@ public class Main extends Application {
         io.addConfigFlags(ImGuiConfigFlags.ViewportsEnable);    // Enable Multi-Viewport / Platform Windows
         io.setConfigViewportsNoTaskBarIcon(true);
 
+        io.setFramerate(60);
+
         ImFonts.init(io);
 
         setTheme();
     }
 
     private void setTheme() {
+        ImGui.pushStyleColor(ImGuiCol.TextDisabled, 0.650f, 0.650f, 0.650f, 1.0f);
         ImGui.pushStyleColor(ImGuiCol.WindowBg, 0.120f, 0.126f, 0.136f, 1.0f);
         ImGui.pushStyleColor(ImGuiCol.PopupBg, 0.120f, 0.126f, 0.136f, 1.0f);
         ImGui.pushStyleColor(ImGuiCol.Border, 1.0f, 1.0f, 1.0f, 0.125f);
@@ -90,16 +93,18 @@ public class Main extends Application {
         ImGui.pushStyleVar(ImGuiStyleVar.FrameRounding, 4.0f);
         ImGui.pushStyleVar(ImGuiStyleVar.PopupRounding, 4.0f);
         ImGui.getStyle().setWindowMenuButtonPosition(-1);
+        ImGui.getStyle().setCircleTessellationMaxError(0.1f);
+        ImGui.getStyle().setCurveTessellationTol(0.8f);
     }
 
     @Override
     public void process() {
         setupDockspace();
 
-        editor.imgui();
+//        TestFieldsWindow.imgui();
+//        ImGui.showDemoWindow();
 
-        ImGui.showDemoWindow();
-        TestFieldsWindow.imgui();
+        editor.imgui();
     }
 
     private void setupDockspace() {

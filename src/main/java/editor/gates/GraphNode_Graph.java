@@ -5,9 +5,16 @@ import editor.node.GraphNode;
 import editor.node.GraphNodePin;
 import imgui.ImVec2;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class GraphNode_Graph extends GraphNode {
 
     private Graph gate;
+
+    private transient Map<Integer, GraphNodePin> tmpMap = new HashMap<>();
 
     public void init(int nodeId, Graph gate, ImVec2 position) {
         super.init(nodeId, position);
@@ -17,16 +24,44 @@ public class GraphNode_Graph extends GraphNode {
 
         for (GraphNodePin pin : this.gate.findById(1).outputPins) {
             pin.setValue(false);
-            this.inputPins.add(new GraphNodePin(true, pin.getLabel()));
+            GraphNodePin newPin = new GraphNodePin(true, pin.getLabel());
+
+            this.inputPins.add(newPin);
+
+            this.tmpMap.put(pin.getId(), newPin);
         }
         for (GraphNodePin pin : this.gate.findById(2).inputPins) {
             pin.setValue(false);
-            this.outputPins.add(new GraphNodePin(false, pin.getLabel()));
+            GraphNodePin newPin = new GraphNodePin(false, pin.getLabel());
+
+            this.outputPins.add(newPin);
+
+            this.tmpMap.put(pin.getId(), newPin);
         }
+
+        this.pinGroups = null;
+    }
+
+    private void initGroups() {
+        this.pinGroups = new HashMap<>();
+        Map<String, List<Integer>> tmpGroups = this.gate.findById(1).getGroups();
+        tmpGroups.putAll(this.gate.findById(2).getGroups());
+
+        for (String groupName : tmpGroups.keySet()) {
+            List<GraphNodePin> pins = new ArrayList<>();
+            for (int id : tmpGroups.get(groupName))
+                pins.add(tmpMap.get(id));
+
+            addGroup(groupName, pins);
+        }
+        this.tmpMap = null;
     }
 
     @Override
     public void update() {
+        if (this.pinGroups == null)
+            initGroups();
+
         for (GraphNode node : this.gate.nodes.values()) {
             if (node.getName().equals("Input"))
                 for (int i = 0; i < this.inputPins.size(); i++)
@@ -47,8 +82,5 @@ public class GraphNode_Graph extends GraphNode {
     public String getName() { return this.gate.getGateName(); }
 
     @Override
-    public String getDescription() { return "Description"; }
-
-    @Override
-    public GraphNode copy() { return new GraphNode_Graph(); }
+    public GraphNode_Graph copy() { return new GraphNode_Graph(); }
 }

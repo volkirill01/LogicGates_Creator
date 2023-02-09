@@ -8,15 +8,14 @@ import editor.graph.GraphDeserializer;
 import editor.gates.*;
 import imgui.ImGui;
 import imgui.ImVec2;
+import imgui.ImVec4;
 import imgui.extension.nodeditor.NodeEditor;
 import imgui.extension.nodeditor.NodeEditorConfig;
 import imgui.extension.nodeditor.NodeEditorContext;
 import imgui.extension.nodeditor.flag.NodeEditorStyleColor;
 import imgui.extension.nodeditor.flag.NodeEditorStyleVar;
-import imgui.flag.ImGuiColorEditFlags;
-import imgui.flag.ImGuiMouseButton;
-import imgui.flag.ImGuiStyleVar;
-import imgui.flag.ImGuiWindowFlags;
+import imgui.flag.*;
+import imgui.type.ImInt;
 import imgui.type.ImLong;
 import imgui.type.ImString;
 
@@ -34,13 +33,26 @@ public class Gates_NodeEditor {
     private static final NodeEditorContext CONTEXT;
     private static Graph currentGraph = new Graph("projects/sample/graphs/sample.graph", "Demo");
 
-    private ImVec2 startMousePos;
-
     private List<Graph> gates = new ArrayList<>();
     private boolean isStart;
     private boolean isUpdate;
 
     private String gateName = "";
+
+    public static boolean showPinTitles = true;
+
+    private ImInt groupNumbersDisplayFormat = new ImInt(0);
+    private final int groupNumbersDisplay_Decimal = 0;
+    private final int groupNumbersDisplay_Binary = 1;
+    private final int groupNumbersDisplay_DecimalBinary = 2;
+    private final int groupNumbersDisplay_BinaryDecimal = 3;
+
+    private String[] numbersDisplayFormatsList = new String[]{
+            "Decimal",
+            "Binary",
+            "Decimal | Binary",
+            "Binary | Decimal"
+    };
 
     static {
         NodeEditorConfig config = new NodeEditorConfig();
@@ -64,6 +76,7 @@ public class Gates_NodeEditor {
             drawMenuBar();
 
             NodeEditor.setCurrentEditor(CONTEXT);
+
             NodeEditor.begin("Node Editor");
             NodeEditor.pushStyleVar(NodeEditorStyleVar.NodePadding, 4.0f, 3.0f, 4.0f, 4.0f);
             NodeEditor.pushStyleVar(NodeEditorStyleVar.NodeRounding, 5.0f);
@@ -96,29 +109,25 @@ public class Gates_NodeEditor {
                 NodeEditor.endNode();
                 NodeEditor.popStyleColor(1);
 
-//                List<GraphNodePin> groupInputPins = new ArrayList<>();
-//                float yPos = 0.0f;
-//
-//                for (int i = 0; i < node.inputPins.size(); i++) {
-//                    if (node.inputPins.get(i).getGroupName() != null)
-//                        if (!node.inputPins.get(i).getGroupName().equals("")) {
-//                            if (yPos == 0.0f)
-//                                yPos = i;
-//
-//                            groupInputPins.add(node.inputPins.get(i));
-//                        }
-//                }
-//
-//                for (int i = 0; i < groupInputPins.size(); i++) {
-//                    if (i == 0) {
-//                        ImGui.setCursorScreenPos(NodeEditor.getNodePositionX(node.getId()) - 9.0f, NodeEditor.getNodePositionY(node.getId()) + (yPos * 26.0f));
-//                        ImGui.text("-");
-//                    }
-//                    if (i == groupInputPins.size() - 1) {
-//                        ImGui.setCursorScreenPos(NodeEditor.getNodePositionX(node.getId()) - 9.0f, NodeEditor.getNodePositionY(node.getId()) + (yPos * 26.0f) + TestFieldsWindow.getFloats[1]);
-//                        ImGui.text("-");
-//                    }
-//                }
+                if (showPinTitles) {
+                    //<editor-fold desc="Draw Pin Group Names">
+                    ImVec2 nodePosition = new ImVec2(NodeEditor.getNodePositionX(node.getId()), NodeEditor.getNodePositionY(node.getId()));
+
+                    Map<String, List<Integer>> groups = node.getGroups();
+
+                    for (String groupName : groups.keySet()) {
+                        ImVec2 tmp = new ImVec2();
+                        ImGui.calcTextSize(tmp, groupName);
+
+                        if (groupName.startsWith("##Number_"))
+                            drawGroup(node.inputPins, node.getGroupPins(groupName), groupName, nodePosition, new ImVec2(20.0f, 0.0f));
+                        else
+                            drawGroup(node.inputPins, node.getGroupPins(groupName), groupName, nodePosition, new ImVec2(tmp.x + 20.0f, 0.0f));
+
+                        drawGroup(node.outputPins, node.getGroupPins(groupName), groupName, nodePosition, new ImVec2(-NodeEditor.getNodeSizeX(node.getId()) - 20.0f, 0.0f));
+                    }
+                    //</editor-fold>
+                }
             }
 
             if (NodeEditor.beginCreate()) {
@@ -186,11 +195,71 @@ public class Gates_NodeEditor {
             showGroutNameInputPopup();
 
             NodeEditor.resume();
+
+            if (NodeEditor.isBackgroundClicked())
+                selectedPins.clear();
+
             NodeEditor.end();
 
             isUpdate = true;
         }
         ImGui.end();
+    }
+
+    private void drawGroup(List<GraphNodePin> pins, List<GraphNodePin> group, String groupName, ImVec2 nodePosition, ImVec2 offset) {
+        for (int i = 0; i < pins.size(); i++) {
+            int groupIndex = 0;
+            for (GraphNodePin grPin : group) {
+                int j = grPin.getId();
+
+                if (group.size() > 1) {
+                    if ((float) group.size() % 2 == 0.0f) {
+                        if (groupIndex == group.size() / 2)
+                            if (pins.get(i).getId() == j)
+                                drawGroupText(groupName, new ImVec2(nodePosition.x - offset.x, nodePosition.y + (i * 26.0f) - 7.0f), group);
+                    } else if (groupIndex == group.size() / 2) {
+                        if (pins.get(i).getId() == j)
+                            drawGroupText(groupName, new ImVec2(nodePosition.x - offset.x, nodePosition.y + (i * 26.0f) + 6.0f), group);
+                    }
+                } else {
+                    if (pins.get(i).getId() == j)
+                        drawGroupText(groupName, new ImVec2(nodePosition.x - offset.x, nodePosition.y + (i * 26.0f) + 6.0f), group);
+                }
+                groupIndex++;
+            }
+        }
+    }
+
+    private void drawGroupText(String groupName, ImVec2 position, List<GraphNodePin> groupPins) {
+        ImGui.setCursorPos(position.x, position.y);
+        if (groupName.startsWith("##Number_")) {
+            StringBuilder binaryString = new StringBuilder();
+            for (GraphNodePin groupPin : groupPins) {
+                if (groupPin.getValue())
+                    binaryString.append("1");
+                else
+                    binaryString.append("0");
+            }
+            int finalNumber = Integer.parseInt(binaryString.reverse().toString(),2);
+
+            String finalText = "";
+
+            switch (groupNumbersDisplayFormat.get()) {
+                case groupNumbersDisplay_Decimal -> finalText = groupName.replace("##Number_", "") + ": " + finalNumber;
+                case groupNumbersDisplay_Binary -> finalText = groupName.replace("##Number_", "") + ": " + binaryString;
+                case groupNumbersDisplay_DecimalBinary -> finalText = groupName.replace("##Number_", "") + ": " + finalNumber + " | " + binaryString;
+                case groupNumbersDisplay_BinaryDecimal -> finalText = groupName.replace("##Number_", "") + ": " + binaryString + " | " + finalNumber;
+            }
+
+            ImVec2 tmp = new ImVec2();
+            ImGui.calcTextSize(tmp, finalText);
+            if (groupPins.get(0).isInput())
+                ImGui.setCursorPos(position.x - tmp.x, position.y);
+
+            ImGui.text(finalText);
+        } else {
+            ImGui.text(groupName);
+        }
     }
 
     private void loadGates() {
@@ -264,6 +333,23 @@ public class Gates_NodeEditor {
             currentGraph.getGateColor().set(43.0f, 45.0f, 52.0f);
         }
 
+        ImGui.sameLine();
+        ImGui.text("Numbers display format");
+        ImGui.sameLine();
+        ImGui.setNextItemWidth(150.0f);
+        ImVec4 buttonColor = ImGui.getStyle().getColor(ImGuiCol.Button);
+        ImVec4 buttonHoveredColor = ImGui.getStyle().getColor(ImGuiCol.ButtonHovered);
+        ImGui.pushStyleColor(ImGuiCol.FrameBg, buttonColor.x, buttonColor.y, buttonColor.z, buttonColor.w);
+        ImGui.pushStyleColor(ImGuiCol.FrameBgHovered, buttonHoveredColor.x, buttonHoveredColor.y, buttonHoveredColor.z, buttonHoveredColor.w);
+        ImGui.combo("##NumbersDisplayFormat", groupNumbersDisplayFormat, numbersDisplayFormatsList);
+        ImGui.popStyleColor(2);
+
+        ImGui.sameLine();
+        ImGui.text("Show Pin titles");
+        ImGui.sameLine();
+        if (ImGui.checkbox("##ShowPinTitles", showPinTitles))
+            showPinTitles = !showPinTitles;
+
         ImGui.setCursorPosY(ImGui.getCursorPosY() + 3.0f);
         ImGui.text("Gate Name");
         ImGui.sameLine();
@@ -295,9 +381,10 @@ public class Gates_NodeEditor {
                 for (GraphNodePin pin : currentGraph.getOutputNode().inputPins)
                     pin.setValue(false);
 
+                Graph backup = new Graph(currentGraph.getFilepath(), currentGraph.getGateName());
                 currentGraph.saveAsGate(gateName);
 
-                currentGraph = new Graph(currentGraph.getFilepath(), currentGraph.getGateName());
+                currentGraph = backup;
                 currentGraph.createInputAndOutput();
                 currentGraph.getGateColor().set(43.0f, 45.0f, 52.0f);
                 this.gateName = "";
@@ -307,37 +394,34 @@ public class Gates_NodeEditor {
         }
 
         ImGui.separator();
-        if (ImGui.button("And")) {
-            startMousePos = ImGui.getMousePos();
-            Gate_And createdNode = (Gate_And) currentGraph.copyCreateGraphNode(new Gate_And(), startMousePos);
-            final float canvasX = NodeEditor.toCanvasX(startMousePos.x + 50.0f);
-            final float canvasY = NodeEditor.toCanvasY(startMousePos.y + 40.0f);
-            startMousePos = null;
-            NodeEditor.setNodePosition(createdNode.getId(), canvasX, canvasY);
-        }
+        if (ImGui.button("And"))
+            positionNode(currentGraph.copyCreateGraphNode(new Gate_And(), new ImVec2()));
         ImGui.sameLine();
-        if (ImGui.button("Not")) {
-            startMousePos = ImGui.getMousePos();
-            Gate_Not createdNode = (Gate_Not) currentGraph.copyCreateGraphNode(new Gate_Not(), startMousePos);
-            final float canvasX = NodeEditor.toCanvasX(startMousePos.x + 50.0f);
-            final float canvasY = NodeEditor.toCanvasY(startMousePos.y + 40.0f);
-            startMousePos = null;
-            NodeEditor.setNodePosition(createdNode.getId(), canvasX, canvasY);
-        }
+        if (ImGui.button("Not"))
+            positionNode(currentGraph.copyCreateGraphNode(new Gate_Not(), new ImVec2()));
 
         ImGui.separator();
         for (int i = 0; i < this.gates.size(); i++) {
-            if (ImGui.button(this.gates.get(i).getGateName())) {
-                startMousePos = ImGui.getMousePos();
-                GraphNode_Graph createdNode = currentGraph.loadCreateGate(this.gates.get(i), startMousePos);
-                final float canvasX = NodeEditor.toCanvasX(startMousePos.x + 50.0f);
-                final float canvasY = NodeEditor.toCanvasY(startMousePos.y + 40.0f);
-                startMousePos = null;
-                NodeEditor.setNodePosition(createdNode.getId(), canvasX, canvasY);
-            }
-            if (i < this.gates.size() - 1)
+            if (ImGui.button(this.gates.get(i).getGateName()))
+                positionNode(currentGraph.loadCreateGate(this.gates.get(i), new ImVec2()));
+
+            ImVec2 tmp = new ImVec2();
+            ImGui.calcTextSize(tmp, this.gates.get(i).getGateName());
+
+            ImVec2 lastButtonPos = new ImVec2();
+            ImGui.getItemRectMax(lastButtonPos);
+            float nextButtonX2 = lastButtonPos.x + ImGui.getStyle().getItemSpacingX() + tmp.x;
+
+            if (i < this.gates.size() - 1 && nextButtonX2 < ImGui.getContentRegionAvailX())
                 ImGui.sameLine();
         }
+    }
+
+    private void positionNode(GraphNode node) {
+        float canvasX = NodeEditor.toCanvasX(ImGui.getWindowSizeX() / 2.0f + ImGui.getWindowPosX());
+        float canvasY = NodeEditor.toCanvasY(ImGui.getWindowSizeY() / 2.0f + ImGui.getWindowPosY());
+        node.setPosition(canvasX, canvasY);
+        NodeEditor.setNodePosition(node.getId(), canvasX, canvasY);
     }
 
 //    private void drawEditorContextPopup() {
@@ -374,12 +458,24 @@ public class Gates_NodeEditor {
             if (ImGui.menuItem("Group selected pins")) {
                 showGroupNameDialog = true;
                 isInputNodeSelected = true;
+                isNumberGroup = false;
+            }
+            if (ImGui.menuItem("Group selected pins to number")) {
+                showGroupNameDialog = true;
+                isInputNodeSelected = true;
+                isNumberGroup = true;
             }
 
         } else if (currentGraph.getOutputNode().getId() == targetNode) {
             if (ImGui.menuItem("Group selected pins")) {
                 showGroupNameDialog = true;
                 isInputNodeSelected = false;
+                isNumberGroup = false;
+            }
+            if (ImGui.menuItem("Group selected pins to number")) {
+                showGroupNameDialog = true;
+                isInputNodeSelected = false;
+                isNumberGroup = true;
             }
 
         } else if (ImGui.menuItem("Delete " + currentGraph.nodes.get(targetNode).getName())) {
@@ -390,6 +486,7 @@ public class Gates_NodeEditor {
 
     private boolean showGroupNameDialog = false;
     private boolean isInputNodeSelected = false;
+    private boolean isNumberGroup = false;
     private String groupName = "";
 
     private void showGroutNameInputPopup() {
@@ -434,6 +531,9 @@ public class Gates_NodeEditor {
             ImGui.sameLine();
             if (ImGui.button("Ok")) {
                 if (!groupName.equals("")) {
+                    if (isNumberGroup)
+                        groupName = "##Number_" + groupName;
+
                     groupSelectedPins();
 
                     groupName = "";

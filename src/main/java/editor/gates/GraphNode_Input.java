@@ -6,6 +6,7 @@ import editor.node.GraphNodePin;
 import editor.utils.ImFonts;
 import imgui.ImGui;
 import imgui.flag.ImGuiCol;
+import imgui.flag.ImGuiMouseButton;
 import imgui.flag.ImGuiStyleVar;
 import imgui.type.ImString;
 
@@ -33,11 +34,13 @@ public class GraphNode_Input extends GraphNode {
     @Override
     protected void drawPin(GraphNodePin pin) {
         ImGui.pushID(pin.getId());
-        ImGui.setNextItemWidth(70.0f);
-        ImString pinLabelTmp = new ImString(pin.getLabel(), 14);
-        if (ImGui.inputText("##PinLabel", pinLabelTmp))
-            pin.setLabel(pinLabelTmp.get());
-        ImGui.sameLine();
+        if (Gates_NodeEditor.showPinTitles) {
+            ImGui.setNextItemWidth(70.0f);
+            ImString pinLabelTmp = new ImString(pin.getLabel(), 14);
+            if (ImGui.inputText("##PinLabel", pinLabelTmp))
+                pin.setLabel(pinLabelTmp.get());
+            ImGui.sameLine();
+        }
 
         if (pin.getValue()) {
             ImGui.pushStyleColor(ImGuiCol.FrameBg, 0.743f, 0.912f, 0.051f, 1.0f);
@@ -62,9 +65,6 @@ public class GraphNode_Input extends GraphNode {
 
     @Override
     public String getName() { return "Input"; }
-
-    @Override
-    public String getDescription() { return "Description"; }
 
     @Override
     public GraphNode copy() { return new GraphNode_Input(); }

@@ -49,22 +49,7 @@ public final class Graph {
         this.nodes.put(outputNode.getId(), outputNode);
     }
 
-    public void save() {
-        try {
-            FileWriter writer = new FileWriter(this.filepath);
-            Gson gson = new GsonBuilder()
-                    .setPrettyPrinting()
-                    .registerTypeAdapter(Graph.class, new GraphDeserializer())
-                    .registerTypeAdapter(GraphNode.class, new GraphNodeDeserializer())
-                    .create();
-
-            String json = gson.toJson(this);
-            writer.write(json);
-            writer.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    public void save() { saveAs(this.filepath); }
 
     public void saveAs(String filepath) {
         try {

@@ -32,18 +32,17 @@ public class GraphNode_Output extends GraphNode {
         ImGui.pushID(pin.getId());
         super.drawPin(pin);
         ImGui.sameLine();
-        ImGui.setNextItemWidth(70.0f);
-        ImString pinLabelTmp = new ImString(pin.getLabel(), 14);
-        if (ImGui.inputText("##PinLabel", pinLabelTmp))
-            pin.setLabel(pinLabelTmp.get());
+        if (Gates_NodeEditor.showPinTitles) {
+            ImGui.setNextItemWidth(70.0f);
+            ImString pinLabelTmp = new ImString(pin.getLabel(), 14);
+            if (ImGui.inputText("##PinLabel", pinLabelTmp))
+                pin.setLabel(pinLabelTmp.get());
+        }
         ImGui.popID();
     }
 
     @Override
     public String getName() { return "Output"; }
-
-    @Override
-    public String getDescription() { return "Description"; }
 
     @Override
     public GraphNode copy() { return new GraphNode_Output(); }
