@@ -137,15 +137,17 @@ public class Main extends Application {
         ImGui.beginMenuBar();
         ImGui.pushStyleVar(ImGuiStyleVar.ItemSpacing, 15f, ImGui.getStyle().getItemSpacingY());
 
-        if (ImGui.isKeyDown(GLFW_KEY_LEFT_CONTROL) && ImGui.isKeyPressed(GLFW_KEY_S))
-            Gates_NodeEditor.getCurrentGraph().save();
-        if (ImGui.isKeyDown(GLFW_KEY_LEFT_CONTROL) && ImGui.isKeyPressed(GLFW_KEY_O)) {
-            File graph = FileUtil.openFile(FileTypeFilter.gateAndGraphFilter, true);
-            if (graph != null)
-                Gates_NodeEditor.setCurrentGraph(Gates_NodeEditor.getCurrentGraph().load(graph.getPath()));
+        if (!Gates_NodeEditor.showGroupNameDialog && !Gates_NodeEditor.showGatesGroupNameDialog) {
+            if (ImGui.isKeyDown(GLFW_KEY_LEFT_CONTROL) && ImGui.isKeyPressed(GLFW_KEY_S))
+                Gates_NodeEditor.getCurrentGraph().save();
+            if (ImGui.isKeyDown(GLFW_KEY_LEFT_CONTROL) && ImGui.isKeyPressed(GLFW_KEY_O)) {
+                File graph = FileUtil.openFile(FileTypeFilter.gateAndGraphFilter, true);
+                if (graph != null)
+                    Gates_NodeEditor.setCurrentGraph(Gates_NodeEditor.getCurrentGraph().load(graph.getPath()));
+            }
+            if (ImGui.isKeyDown(GLFW_KEY_LEFT_CONTROL) && ImGui.isKeyPressed(GLFW_KEY_R))
+                Gates_NodeEditor.setCurrentGraph(Gates_NodeEditor.getCurrentGraph().load(Gates_NodeEditor.getCurrentGraph().getFilepath()));
         }
-        if (ImGui.isKeyDown(GLFW_KEY_LEFT_CONTROL) && ImGui.isKeyPressed(GLFW_KEY_R))
-            Gates_NodeEditor.setCurrentGraph(Gates_NodeEditor.getCurrentGraph().load(Gates_NodeEditor.getCurrentGraph().getFilepath()));
 
         if (ImGui.beginMenu("File")) {
             if (ImGui.menuItem("Save")) {
