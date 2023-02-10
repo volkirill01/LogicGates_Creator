@@ -1,6 +1,5 @@
 package editor.gates;
 
-import editor.TestFieldsWindow;
 import editor.node.Gates_NodeEditor;
 import editor.node.GraphNode;
 import editor.node.GraphNodePin;
@@ -20,14 +19,17 @@ public class GraphNode_Input extends GraphNode {
 
     @Override
     public void drawNode() {
+        ImGui.pushFont(ImFonts.regular150);
+        ImGui.setCursorPosY(ImGui.getCursorPosY() + 3.0f);
+        ImGui.pushStyleVar(ImGuiStyleVar.FramePadding, ImGui.getStyle().getFramePaddingX() - 3.0f, ImGui.getStyle().getFramePaddingY() - 4.0f);
         if (ImGui.button("+")) {
             GraphNodePin newPin = new GraphNodePin(false, "In (" + (this.outputPins.size() + 1) + ")");
             newPin.init(Gates_NodeEditor.getCurrentGraph().getNextPinId());
             this.outputPins.add(newPin);
         }
+        ImGui.popStyleVar();
         ImGui.sameLine();
-        ImGui.setCursorPosY(ImGui.getCursorPosY() - 4.0f);
-        ImGui.pushFont(ImFonts.regular150);
+        ImGui.setCursorPosX(ImGui.getCursorPosX() + 2.0f);
         ImGui.text(getName());
         ImGui.popFont();
     }

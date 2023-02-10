@@ -194,21 +194,8 @@ public abstract class GraphNode {
 
             if (pinIndexState == 0) {
                 ImGui.getWindowDrawList().addLine(
-                        xPos, ImGui.getCursorScreenPosY() + 4.0f,
-                        xPos + 10.0f, ImGui.getCursorScreenPosY() + 4.0f,
-                        ImGui.getColorU32(textColor.x, textColor.y, textColor.z, textColor.w));
-
-                if (!pin.isInput())
-                    xPos += 10.0f;
-
-                ImGui.getWindowDrawList().addLine(
-                        xPos, ImGui.getCursorScreenPosY() + 4.0f,
-                        xPos, ImGui.getCursorScreenPosY() + 23.0f + (Gates_NodeEditor.pinTouchExtraPadding * 2.0f),
-                        ImGui.getColorU32(textColor.x, textColor.y, textColor.z, textColor.w));
-            } else if (pinIndexState == 2) {
-                ImGui.getWindowDrawList().addLine(
-                        xPos, ImGui.getCursorScreenPosY() + 23.0f + (Gates_NodeEditor.pinTouchExtraPadding * 2.0f),
-                        xPos + 10.0f , ImGui.getCursorScreenPosY() + 23.0f + (Gates_NodeEditor.pinTouchExtraPadding * 2.0f),
+                        xPos, ImGui.getCursorScreenPosY() + 1.0f,
+                        xPos + 10.0f, ImGui.getCursorScreenPosY() + 1.0f,
                         ImGui.getColorU32(textColor.x, textColor.y, textColor.z, textColor.w));
 
                 if (!pin.isInput())
@@ -216,7 +203,20 @@ public abstract class GraphNode {
 
                 ImGui.getWindowDrawList().addLine(
                         xPos, ImGui.getCursorScreenPosY() + 1.0f,
-                        xPos, ImGui.getCursorScreenPosY() + 23.0f + (Gates_NodeEditor.pinTouchExtraPadding * 2.0f),
+                        xPos, ImGui.getCursorScreenPosY() + 20.0f + (Gates_NodeEditor.pinTouchExtraPadding * 2.0f),
+                        ImGui.getColorU32(textColor.x, textColor.y, textColor.z, textColor.w));
+            } else if (pinIndexState == 2) {
+                ImGui.getWindowDrawList().addLine(
+                        xPos, ImGui.getCursorScreenPosY() + 20.0f + (Gates_NodeEditor.pinTouchExtraPadding * 2.0f),
+                        xPos + 10.0f , ImGui.getCursorScreenPosY() + 20.0f + (Gates_NodeEditor.pinTouchExtraPadding * 2.0f),
+                        ImGui.getColorU32(textColor.x, textColor.y, textColor.z, textColor.w));
+
+                if (!pin.isInput())
+                    xPos += 10.0f;
+
+                ImGui.getWindowDrawList().addLine(
+                        xPos, ImGui.getCursorScreenPosY() - 2.0f,
+                        xPos, ImGui.getCursorScreenPosY() + 20.0f + (Gates_NodeEditor.pinTouchExtraPadding * 2.0f),
                         ImGui.getColorU32(textColor.x, textColor.y, textColor.z, textColor.w));
 
             } else if (pinIndexState == 1) {
@@ -224,25 +224,25 @@ public abstract class GraphNode {
                     xPos += 10.0f;
 
                 ImGui.getWindowDrawList().addLine(
-                        xPos, ImGui.getCursorScreenPosY() + 1.0f,
-                        xPos, ImGui.getCursorScreenPosY() + 23.0f + (Gates_NodeEditor.pinTouchExtraPadding * 2.0f),
+                        xPos, ImGui.getCursorScreenPosY() - 2.0f,
+                        xPos, ImGui.getCursorScreenPosY() + 20.0f + (Gates_NodeEditor.pinTouchExtraPadding * 2.0f),
                         ImGui.getColorU32(textColor.x, textColor.y, textColor.z, textColor.w));
             } else if (pinIndexState == 3) {
                 ImGui.getWindowDrawList().addLine(
-                        xPos, ImGui.getCursorScreenPosY() + 23.0f + (Gates_NodeEditor.pinTouchExtraPadding * 2.0f),
-                        xPos + 10.0f , ImGui.getCursorScreenPosY() + 23.0f + (Gates_NodeEditor.pinTouchExtraPadding * 2.0f),
+                        xPos, ImGui.getCursorScreenPosY() + 20.0f + (Gates_NodeEditor.pinTouchExtraPadding * 2.0f),
+                        xPos + 10.0f , ImGui.getCursorScreenPosY() + 20.0f + (Gates_NodeEditor.pinTouchExtraPadding * 2.0f),
                         ImGui.getColorU32(textColor.x, textColor.y, textColor.z, textColor.w));
                 ImGui.getWindowDrawList().addLine(
-                        xPos, ImGui.getCursorScreenPosY() - 2.0f,
-                        xPos + 10.0f , ImGui.getCursorScreenPosY() - 2.0f,
+                        xPos, ImGui.getCursorScreenPosY() + 1.0f,
+                        xPos + 10.0f , ImGui.getCursorScreenPosY() + 1.0f,
                         ImGui.getColorU32(textColor.x, textColor.y, textColor.z, textColor.w));
 
                 if (!pin.isInput())
                     xPos += 10.0f;
 
                 ImGui.getWindowDrawList().addLine(
-                        xPos, ImGui.getCursorScreenPosY() - 2.0f,
-                        xPos, ImGui.getCursorScreenPosY() + 23.0f + (Gates_NodeEditor.pinTouchExtraPadding * 2.0f),
+                        xPos, ImGui.getCursorScreenPosY() + 1.0f,
+                        xPos, ImGui.getCursorScreenPosY() + 20.0f + (Gates_NodeEditor.pinTouchExtraPadding * 2.0f),
                         ImGui.getColorU32(textColor.x, textColor.y, textColor.z, textColor.w));
             }
             //</editor-fold>

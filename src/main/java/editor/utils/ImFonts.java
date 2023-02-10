@@ -11,6 +11,7 @@ public class ImFonts {
 
     public static ImFont bold100;
     public static ImFont bold150;
+    public static ImFont bold200;
 
     public static ImFont semiBold100;
 
@@ -36,6 +37,7 @@ public class ImFonts {
 
         bold100 = fontAtlas.addFontFromFileTTF("engineFiles/fonts/cascadia/Cascadia Mono Bold 700.otf", fontSize, defaultFontConfig);
         bold150 = fontAtlas.addFontFromFileTTF("engineFiles/fonts/cascadia/Cascadia Mono Bold 700.otf", fontSize * 1.5f, defaultFontConfig);
+        bold200 = fontAtlas.addFontFromFileTTF("engineFiles/fonts/cascadia/Cascadia Mono Bold 700.otf", fontSize * 2.0f, defaultFontConfig);
 
         semiBold100 = fontAtlas.addFontFromFileTTF("engineFiles/fonts/cascadia/Cascadia Mono SemiBold 600.otf", fontSize, defaultFontConfig);
 

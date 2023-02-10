@@ -15,6 +15,8 @@ import imgui.type.ImBoolean;
 import javax.swing.*;
 import java.io.File;
 
+import static org.lwjgl.glfw.GLFW.*;
+
 public class Main extends Application {
 
     private static final Gates_NodeEditor editor = new Gates_NodeEditor();
@@ -101,8 +103,8 @@ public class Main extends Application {
     public void process() {
         setupDockspace();
 
-        TestFieldsWindow.imgui();
-        ImGui.showDemoWindow();
+//        TestFieldsWindow.imgui();
+//        ImGui.showDemoWindow();
 
         editor.imgui();
     }
@@ -135,6 +137,16 @@ public class Main extends Application {
         ImGui.beginMenuBar();
         ImGui.pushStyleVar(ImGuiStyleVar.ItemSpacing, 15f, ImGui.getStyle().getItemSpacingY());
 
+        if (ImGui.isKeyDown(GLFW_KEY_LEFT_CONTROL) && ImGui.isKeyPressed(GLFW_KEY_S))
+            Gates_NodeEditor.getCurrentGraph().save();
+        if (ImGui.isKeyDown(GLFW_KEY_LEFT_CONTROL) && ImGui.isKeyPressed(GLFW_KEY_O)) {
+            File graph = FileUtil.openFile(FileTypeFilter.gateAndGraphFilter, true);
+            if (graph != null)
+                Gates_NodeEditor.setCurrentGraph(Gates_NodeEditor.getCurrentGraph().load(graph.getPath()));
+        }
+        if (ImGui.isKeyDown(GLFW_KEY_LEFT_CONTROL) && ImGui.isKeyPressed(GLFW_KEY_R))
+            Gates_NodeEditor.setCurrentGraph(Gates_NodeEditor.getCurrentGraph().load(Gates_NodeEditor.getCurrentGraph().getFilepath()));
+
         if (ImGui.beginMenu("File")) {
             if (ImGui.menuItem("Save")) {
                 Gates_NodeEditor.getCurrentGraph().save();
@@ -146,9 +158,8 @@ public class Main extends Application {
                     Gates_NodeEditor.setCurrentGraph(Gates_NodeEditor.getCurrentGraph().load(graph.getPath()));
             }
 
-            if (ImGui.menuItem("Reload")) {
+            if (ImGui.menuItem("Reload"))
                 Gates_NodeEditor.setCurrentGraph(Gates_NodeEditor.getCurrentGraph().load(Gates_NodeEditor.getCurrentGraph().getFilepath()));
-            }
 
             ImGui.endMenu();
         }

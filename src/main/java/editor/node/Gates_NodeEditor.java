@@ -71,8 +71,6 @@ public class Gates_NodeEditor {
     public static void setCurrentGraph(Graph graph) { currentGraph = graph; }
 
     public void imgui() {
-        pinTouchExtraPadding = TestFieldsWindow.getFloats[0]; // TODO DELETE THIS
-
         if (ImGui.begin("Editor")) {
             loadGates();
 
@@ -84,7 +82,7 @@ public class Gates_NodeEditor {
             NodeEditor.pushStyleVar(NodeEditorStyleVar.NodePadding, 4.0f, 3.0f, 4.0f, 4.0f);
             NodeEditor.pushStyleVar(NodeEditorStyleVar.NodeRounding, 5.0f);
             NodeEditor.pushStyleVar(NodeEditorStyleVar.LinkStrength, 400.0f);
-            NodeEditor.pushStyleColor(NodeEditorStyleColor.PinRect, 0.0f, 0.0f, 1.0f, 0.5f);
+            NodeEditor.pushStyleColor(NodeEditorStyleColor.PinRect, 0.0f, 0.0f, 0.0f, 0.0f);
             NodeEditor.pushStyleColor(NodeEditorStyleColor.NodeBg, 0.206f, 0.214f, 0.225f, 1.0f);
             NodeEditor.pushStyleColor(NodeEditorStyleColor.HovNodeBorder, 1.0f, 1.0f, 1.0f, 0.5f);
             NodeEditor.pushStyleColor(NodeEditorStyleColor.SelNodeBorder, 0.0f, 0.794f, 1.0f, 1.0f);
@@ -112,7 +110,7 @@ public class Gates_NodeEditor {
                 NodeEditor.endNode();
                 NodeEditor.popStyleColor(1);
 
-                if (showPinTitles) {
+                if (showPinTitles) { // TODO MOVE THIS IN GraphNode CLASS
                     //<editor-fold desc="Draw Pin Group Names">
                     ImVec2 nodePosition = new ImVec2(NodeEditor.getNodePositionX(node.getId()), NodeEditor.getNodePositionY(node.getId()));
 
@@ -225,14 +223,14 @@ public class Gates_NodeEditor {
                     if ((float) group.size() % 2 == 0.0f) {
                         if (groupIndex == group.size() / 2)
                             if (pins.get(i).getId() == j)
-                                drawGroupText(groupName, new ImVec2(nodePosition.x - offset.x, nodePosition.y + (i * 26.0f) - 7.0f), group);
+                                drawGroupText(groupName, new ImVec2(nodePosition.x - offset.x, nodePosition.y + (i * (22.0f + pinTouchExtraPadding * 2.0f)) - 11.0f + 5.0f), group);
                     } else if (groupIndex == group.size() / 2) {
                         if (pins.get(i).getId() == j)
-                            drawGroupText(groupName, new ImVec2(nodePosition.x - offset.x, nodePosition.y + (i * 26.0f) + 6.0f), group);
+                            drawGroupText(groupName, new ImVec2(nodePosition.x - offset.x, nodePosition.y + (i * (22.0f + pinTouchExtraPadding * 2.0f)) + pinTouchExtraPadding + 5.0f), group);
                     }
                 } else {
                     if (pins.get(i).getId() == j)
-                        drawGroupText(groupName, new ImVec2(nodePosition.x - offset.x, nodePosition.y + (i * 26.0f) + 6.0f), group);
+                        drawGroupText(groupName, new ImVec2(nodePosition.x - offset.x, nodePosition.y + (i * (22.0f + pinTouchExtraPadding * 2.0f)) + pinTouchExtraPadding + 5.0f), group);
                 }
                 groupIndex++;
             }
@@ -314,8 +312,12 @@ public class Gates_NodeEditor {
     }
 
     private void drawMenuBar() {
-        if (ImGui.button("Navigate to content"))
+        if (ImGui.button("Navigate to content  ") || ImGui.isKeyPressed(GLFW_KEY_F))
             NodeEditor.navigateToContent(1);
+
+        ImGui.sameLine();
+        ImGui.setCursorPosX(ImGui.getCursorPosX() - 20.0f);
+        ImGui.textDisabled("F");
 
 //        ImGui.sameLine();
 //        if (ImGui.button("Save"))
@@ -333,16 +335,26 @@ public class Gates_NodeEditor {
 //            currentGraph = currentGraph.load(currentGraph.getFilepath());
 
         ImGui.sameLine();
-        if (ImGui.button("Clear Graph")) {
+        ImGui.setCursorPosX(ImGui.getCursorPosX() + 9.0f);
+        if (ImGui.button("Clear Graph\t   ") || (ImGui.isKeyDown(GLFW_KEY_LEFT_CONTROL) && ImGui.isKeyPressed(GLFW_KEY_L))) {
             selectedPins.clear();
 
             this.gateName = "";
             currentGraph = new Graph(currentGraph.getFilepath(), currentGraph.getGateName());
             currentGraph.createInputAndOutput();
             currentGraph.getGateColor().set(43.0f, 45.0f, 52.0f);
+
+            NodeEditor.setNodePosition(currentGraph.getInputNode().getId(), 450.0f, 350.0f);
+            NodeEditor.setNodePosition(currentGraph.getOutputNode().getId(), 900.0f, 350.0f);
+
+            NodeEditor.navigateToContent(1);
         }
+        ImGui.sameLine();
+        ImGui.setCursorPosX(ImGui.getCursorPosX() - 54.0f);
+        ImGui.textDisabled("Ctrl+L");
 
         ImGui.sameLine();
+        ImGui.setCursorPosX(ImGui.getCursorPosX() + 8.0f);
         ImGui.text("Numbers display format");
         ImGui.sameLine();
         ImGui.setNextItemWidth(150.0f);
