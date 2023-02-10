@@ -2,7 +2,6 @@ package editor.node;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import editor.TestFieldsWindow;
 import editor.graph.Graph;
 import editor.graph.GraphDeserializer;
 import editor.gates.*;
@@ -64,7 +63,11 @@ public class Gates_NodeEditor {
     private String groupName = "";
 
     private List<File> oldGates = new ArrayList<>();
-    private List<Boolean> isGatesActiveArray = new ArrayList<>();
+    private List<Boolean> isGatesActiveList = new ArrayList<>();
+
+    private boolean showGatesGroupNameDialog = false;
+    private String gateGroupName = "";
+    private Map<String, List<Graph>> gateGroups = new HashMap<>();
 
     static {
         NodeEditorConfig config = new NodeEditorConfig();
@@ -207,15 +210,15 @@ public class Gates_NodeEditor {
 //            ImGui.endPopup();
 //        }
 
-            if (showGroupNameDialog) {
-                ImGui.openPopup("Enter group name");
-                showGroutNameInputPopup();
-            }
+            if (showGroupNameDialog)
+                showGroupNameInputPopup();
 
             NodeEditor.resume();
 
-            if (NodeEditor.isBackgroundClicked())
+            if (NodeEditor.isBackgroundClicked()) {
                 selectedPins.clear();
+                Collections.fill(isGatesActiveList, false);
+            }
 
             NodeEditor.end();
 
@@ -296,7 +299,7 @@ public class Gates_NodeEditor {
             oldGates = gates;
 
             this.gates.clear();
-            this.isGatesActiveArray.clear();
+            this.isGatesActiveList.clear();
 
             for (File gate : gates) {
                 String inFile = "";
@@ -309,15 +312,16 @@ public class Gates_NodeEditor {
                 if (!inFile.equals("")) {
                     Graph graph = gson.fromJson(inFile, Graph.class);
 
-                    if (this.gates.size() > 0) {
-                        if (!containsGate(graph.getFilepath())) {
+                    if (!isGateGrouped(graph))
+                        if (this.gates.size() > 0) {
+                            if (!containsGate(graph.getFilepath())) {
+                                this.gates.add(graph);
+                                this.isGatesActiveList.add(false);
+                            }
+                        } else {
                             this.gates.add(graph);
-                            this.isGatesActiveArray.add(false);
+                            this.isGatesActiveList.add(false);
                         }
-                    } else {
-                        this.gates.add(graph);
-                        this.isGatesActiveArray.add(false);
-                    }
                 }
             }
         }
@@ -417,7 +421,7 @@ public class Gates_NodeEditor {
                 selectedPins.clear();
 
                 this.gates.clear();
-                this.isGatesActiveArray.clear();
+                this.isGatesActiveList.clear();
 
                 for (GraphNodePin pin : currentGraph.getInputNode().outputPins)
                     pin.setValue(false);
@@ -448,7 +452,7 @@ public class Gates_NodeEditor {
             ImVec4 butColor = ImGui.getStyle().getColor(ImGuiCol.Button);
             ImVec4 butHoveredColor = ImGui.getStyle().getColor(ImGuiCol.ButtonHovered);
             ImVec4 butActiveColor = ImGui.getStyle().getColor(ImGuiCol.ButtonActive);
-            if (ImGui.isKeyDown(GLFW_KEY_LEFT_SHIFT) || ImGui.isKeyDown(GLFW_KEY_LEFT_CONTROL)) {
+            if ((ImGui.isKeyDown(GLFW_KEY_LEFT_SHIFT) || ImGui.isKeyDown(GLFW_KEY_LEFT_CONTROL)) && (!showGroupNameDialog && !showGatesGroupNameDialog)) {
                 butColor = ImGui.getStyle().getColor(ImGuiCol.FrameBgHovered);
                 butHoveredColor = ImGui.getStyle().getColor(ImGuiCol.FrameBgHovered);
                 butActiveColor = ImGui.getStyle().getColor(ImGuiCol.FrameBgHovered);
@@ -458,7 +462,7 @@ public class Gates_NodeEditor {
             ImGui.pushStyleColor(ImGuiCol.ButtonActive, butActiveColor.x, butActiveColor.y, butActiveColor.z, butActiveColor.w);
             ImVec2 tmp = new ImVec2();
             ImGui.calcTextSize(tmp, this.gates.get(i).getGateName());
-            if (this.isGatesActiveArray.get(i)) {
+            if (this.isGatesActiveList.get(i)) {
                 float buttonSelectionOutlineThickness = 2.0f;
                 ImGui.getWindowDrawList().addRectFilled(
                         ImGui.getCursorScreenPosX() - buttonSelectionOutlineThickness, // X pos
@@ -471,10 +475,11 @@ public class Gates_NodeEditor {
                 if (!ImGui.isKeyDown(GLFW_KEY_LEFT_SHIFT) && !ImGui.isKeyDown(GLFW_KEY_LEFT_CONTROL))
                     positionNode(currentGraph.loadCreateGate(this.gates.get(i), new ImVec2()));
                 else if (ImGui.isKeyDown(GLFW_KEY_LEFT_SHIFT))
-                    this.isGatesActiveArray.set(i, !this.isGatesActiveArray.get(i));
+                    this.isGatesActiveList.set(i, !this.isGatesActiveList.get(i));
                 else if (ImGui.isKeyDown(GLFW_KEY_LEFT_CONTROL))
-                    this.isGatesActiveArray.set(i, false);
+                    this.isGatesActiveList.set(i, false);
             }
+            ImGui.openPopupOnItemClick("GroupButtons", ImGuiMouseButton.Right);
 
             ImGui.popStyleColor(3);
 
@@ -485,6 +490,15 @@ public class Gates_NodeEditor {
             if (i < this.gates.size() - 1 && nextButtonX2 < ImGui.getContentRegionAvailX())
                 ImGui.sameLine();
         }
+
+        if (ImGui.beginPopup("GroupButtons")) {
+            if (ImGui.menuItem("Group Selected Gates"))
+                showGatesGroupNameDialog = true;
+            ImGui.endPopup();
+        }
+
+        if (showGatesGroupNameDialog)
+            showGatesGroupNameInputPopup();
     }
 
     private void positionNode(GraphNode node) {
@@ -554,7 +568,7 @@ public class Gates_NodeEditor {
         }
     }
 
-    private void showGroutNameInputPopup() {
+    private void showGroupNameInputPopup() {
         if (selectedPins.size() > 0) {
             ImGui.setNextWindowSize(438.0f, 130.0f);
             ImGui.setNextWindowPos(ImGui.getWindowViewport().getWorkSizeX() / 2.0f - 438.0f / 2.0f + ImGui.getWindowViewport().getPosX(),
@@ -565,6 +579,7 @@ public class Gates_NodeEditor {
                     ImGui.getWindowViewport().getWorkSizeY() / 2.0f - 100.0f / 2.0f + ImGui.getWindowViewport().getPosY());
         }
 
+        ImGui.openPopup("Enter group name");
         if (ImGui.beginPopupModal("Enter group name", ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove)) {
             ImVec2 tmp = new ImVec2();
             if (selectedPins.size() > 0) {
@@ -618,6 +633,71 @@ public class Gates_NodeEditor {
         }
     }
 
+    private void showGatesGroupNameInputPopup() {
+        if (isGatesActiveList.contains(true)) {
+            ImGui.setNextWindowSize(438.0f, 130.0f);
+            ImGui.setNextWindowPos(ImGui.getWindowViewport().getWorkSizeX() / 2.0f - 438.0f / 2.0f + ImGui.getWindowViewport().getPosX(),
+                    ImGui.getWindowViewport().getWorkSizeY() / 2.0f - 130.0f / 2.0f + ImGui.getWindowViewport().getPosY());
+        } else {
+            ImGui.setNextWindowSize(438.0f, 100.0f);
+            ImGui.setNextWindowPos(ImGui.getWindowViewport().getWorkSizeX() / 2.0f - 438.0f / 2.0f + ImGui.getWindowViewport().getPosX(),
+                    ImGui.getWindowViewport().getWorkSizeY() / 2.0f - 100.0f / 2.0f + ImGui.getWindowViewport().getPosY());
+        }
+
+        ImGui.openPopup("Enter group name##Gates");
+        if (ImGui.beginPopupModal("Enter group name##Gates", ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove)) {
+            ImVec2 tmp = new ImVec2();
+            if (isGatesActiveList.contains(true)) {
+                ImGui.calcTextSize(tmp, "Group Name");
+                ImGui.setCursorPos((ImGui.getContentRegionAvailX() / 2.0f) - (tmp.x / 2.0f), ImGui.getCursorPosY() + 5.0f);
+                ImGui.text("Group Name");
+
+                ImGui.setNextItemWidth(ImGui.getContentRegionAvailX());
+                ImGui.pushStyleVar(ImGuiStyleVar.FramePadding, 10.0f, ImGui.getStyle().getFramePaddingY());
+                ImGui.setCursorPosY(ImGui.getCursorPosY() + 5.0f);
+
+                ImString tmpStr = new ImString(gateGroupName, 14);
+                if (ImGui.inputText("##GroupName", tmpStr))
+                    gateGroupName = tmpStr.get();
+
+                if (setFocusOnInput) {
+                    ImGui.setKeyboardFocusHere(-1);
+                    setFocusOnInput = false;
+                }
+                ImGui.setWindowFocus();
+
+                ImGui.popStyleVar();
+            } else {
+                ImGui.calcTextSize(tmp, "No gates selected");
+                ImGui.setCursorPos((ImGui.getContentRegionAvailX() / 2.0f) - (tmp.x / 2.0f), ImGui.getCursorPosY() + 5.0f);
+                ImGui.text("No gates selected");
+            }
+            ImGui.setCursorPos(ImGui.getContentRegionAvailX() / 6.0f, ImGui.getCursorPosY() + 10.0f);
+            ImGui.pushStyleVar(ImGuiStyleVar.FramePadding, ImGui.getContentRegionAvailX() / 6.0f, ImGui.getStyle().getFramePaddingY());
+            if (ImGui.button("Close") || ImGui.isKeyPressed(GLFW_KEY_ESCAPE)) {
+                gateGroupName = "";
+                showGatesGroupNameDialog = false;
+                setFocusOnInput = true;
+            }
+
+            ImGui.sameLine();
+            if (ImGui.button("Ok") || ImGui.isKeyPressed(GLFW_KEY_ENTER)) {
+                if (!gateGroupName.equals("")) {
+                    if (isNumberGroup)
+                        gateGroupName = "##Number_" + gateGroupName;
+
+                    groupSelectedGates();
+
+                    gateGroupName = "";
+                    showGatesGroupNameDialog = false;
+                    setFocusOnInput = true;
+                }
+            }
+            ImGui.popStyleVar();
+            ImGui.endPopup();
+        }
+    }
+
     private void groupSelectedPins() {
         List<GraphNodePin> currentNodePins = new ArrayList<>(selectedPins);
 
@@ -630,6 +710,28 @@ public class Gates_NodeEditor {
             currentNodePins.removeIf(pin -> !parent.inputPins.contains(pin));
             currentGraph.getOutputNode().addGroup(groupName, currentNodePins);
         }
+    }
+
+    private void groupSelectedGates() {
+        List<Graph> groupGates = new ArrayList<>();
+
+        for (int i = 0; i < this.gates.size(); i++)
+            if (this.isGatesActiveList.get(i)) {
+                groupGates.add(this.gates.get(i));
+                this.gates.remove(i);
+                i--;
+            }
+
+        gateGroups.put(gateGroupName, groupGates);
+    }
+
+    private boolean isGateGrouped(Graph gate) {
+        for (String groupName : this.gateGroups.keySet())
+            for (Graph ga : this.gateGroups.get(groupName))
+                if (ga.getFilepath().equals(gate.getFilepath()))
+                    return true;
+
+        return false;
     }
 
     public static void setPinSelected(GraphNodePin pin) {
