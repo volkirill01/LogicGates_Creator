@@ -1,5 +1,6 @@
 package editor.node;
 
+import editor.TestFieldsWindow;
 import editor.utils.ImFonts;
 import imgui.ImGui;
 import imgui.ImVec2;
@@ -54,6 +55,7 @@ public abstract class GraphNode {
     public void imgui() {
 //        ImGui.text("Node Id " + this.nodeId);
 
+        ImGui.pushStyleVar(ImGuiStyleVar.ItemSpacing, ImGui.getStyle().getItemSpacingX(), 0.0f);
         float spacing = 5.0f;
 
         ImVec2 startCursorPos = ImGui.getCursorPos();
@@ -94,6 +96,7 @@ public abstract class GraphNode {
             drawPin(pin);
         ImGui.endGroup();
         outputHeight = ImGui.getItemRectSizeY();
+        ImGui.popStyleVar();
     }
 
     protected void drawPin(GraphNodePin pin) {
@@ -102,7 +105,7 @@ public abstract class GraphNode {
         else
             NodeEditor.beginPin(pin.getId(), NodeEditorPinKind.Output);
 
-        ImGui.pushStyleVar(ImGuiStyleVar.FramePadding, ImGui.getStyle().getFramePaddingX(), ImGui.getStyle().getFramePaddingY());
+        ImGui.pushStyleVar(ImGuiStyleVar.FramePadding, ImGui.getStyle().getFramePaddingX() + Gates_NodeEditor.pinTouchExtraPadding, ImGui.getStyle().getFramePaddingY() + Gates_NodeEditor.pinTouchExtraPadding);
         ImGui.pushStyleColor(ImGuiCol.Button, 0.0f, 0.0f, 0.0f, 0.0f);
         ImGui.pushStyleColor(ImGuiCol.ButtonHovered, 0.0f, 0.0f, 0.0f, 0.0f);
         ImGui.pushStyleColor(ImGuiCol.ButtonActive, 0.0f, 0.0f, 0.0f, 0.0f);
@@ -120,16 +123,16 @@ public abstract class GraphNode {
         if (Gates_NodeEditor.isPinSelected(pin)) {
             ImGui.sameLine();
             ImGui.getWindowDrawList().addCircleFilled(
-                    ImGui.getCursorScreenPosX() - 16.0f, // X Pos
-                    ImGui.getCursorScreenPosY() + 11.0f, // Y Pos
+                    ImGui.getCursorScreenPosX() - 16.0f - Gates_NodeEditor.pinTouchExtraPadding, // X Pos
+                    ImGui.getCursorScreenPosY() + 11.0f + Gates_NodeEditor.pinTouchExtraPadding, // Y Pos
                     11.0f, // Circle size
                     ImGui.getColorU32(0.1f, 0.629f, 0.873f, 0.827f), // Color
                     20); // Circle segments
         }
         ImGui.sameLine();
         ImGui.getWindowDrawList().addCircleFilled(
-                ImGui.getCursorScreenPosX() - 16.0f, // X Pos
-                ImGui.getCursorScreenPosY() + 11.0f, // Y Pos
+                ImGui.getCursorScreenPosX() - 16.0f - Gates_NodeEditor.pinTouchExtraPadding, // X Pos
+                ImGui.getCursorScreenPosY() + 11.0f + Gates_NodeEditor.pinTouchExtraPadding, // Y Pos
                 9.0f, // Circle size
                 color, // Color
                 20); // Circle segments
@@ -173,47 +176,47 @@ public abstract class GraphNode {
             ImGui.calcTextSize(tmp, pin.getLabel());
 
             if (pin.isInput())
-                xPos = ImGui.getCursorScreenPosX() - tmp.x - 35.0f;
+                xPos = ImGui.getCursorScreenPosX() - tmp.x - 40.0f - (Gates_NodeEditor.pinTouchExtraPadding * 2.0f);
 
             ImGui.getWindowDrawList().addText(
                     ImFonts.regular100, // Font
                     ImGui.getFontSize(), // Font size
-                    xPos, // X POS
-                    ImGui.getCursorScreenPosY() + 3.0f, // Y POS
+                    xPos + 1.0f, // X POS
+                    ImGui.getCursorScreenPosY() + 3.0f + Gates_NodeEditor.pinTouchExtraPadding, // Y POS
                     ImGui.getColorU32(textColor.x, textColor.y, textColor.z, textColor.w), // Color
                     pin.getLabel());    // Text
         } else {
             //<editor-fold desc="Draw Group Lines">
             if (pin.isInput())
-                xPos = ImGui.getCursorScreenPosX() - 47.0f;
+                xPos = ImGui.getCursorScreenPosX() - 47.0f - (Gates_NodeEditor.pinTouchExtraPadding * 2.0f);
             else
                 xPos = ImGui.getCursorScreenPosX() + 4.0f;
 
             if (pinIndexState == 0) {
                 ImGui.getWindowDrawList().addLine(
-                        xPos, ImGui.getCursorScreenPosY() - 2.0f,
-                        xPos + 10.0f, ImGui.getCursorScreenPosY() - 2.0f,
+                        xPos, ImGui.getCursorScreenPosY() + 4.0f,
+                        xPos + 10.0f, ImGui.getCursorScreenPosY() + 4.0f,
                         ImGui.getColorU32(textColor.x, textColor.y, textColor.z, textColor.w));
 
                 if (!pin.isInput())
                     xPos += 10.0f;
 
                 ImGui.getWindowDrawList().addLine(
-                        xPos, ImGui.getCursorScreenPosY() - 2.0f,
-                        xPos, ImGui.getCursorScreenPosY() + 24.0f,
+                        xPos, ImGui.getCursorScreenPosY() + 4.0f,
+                        xPos, ImGui.getCursorScreenPosY() + 23.0f + (Gates_NodeEditor.pinTouchExtraPadding * 2.0f),
                         ImGui.getColorU32(textColor.x, textColor.y, textColor.z, textColor.w));
             } else if (pinIndexState == 2) {
                 ImGui.getWindowDrawList().addLine(
-                        xPos, ImGui.getCursorScreenPosY() + 23.0f,
-                        xPos + 10.0f , ImGui.getCursorScreenPosY() + 23.0f,
+                        xPos, ImGui.getCursorScreenPosY() + 23.0f + (Gates_NodeEditor.pinTouchExtraPadding * 2.0f),
+                        xPos + 10.0f , ImGui.getCursorScreenPosY() + 23.0f + (Gates_NodeEditor.pinTouchExtraPadding * 2.0f),
                         ImGui.getColorU32(textColor.x, textColor.y, textColor.z, textColor.w));
 
                 if (!pin.isInput())
                     xPos += 10.0f;
 
                 ImGui.getWindowDrawList().addLine(
-                        xPos, ImGui.getCursorScreenPosY() - 2.0f,
-                        xPos, ImGui.getCursorScreenPosY() + 23.0f,
+                        xPos, ImGui.getCursorScreenPosY() + 1.0f,
+                        xPos, ImGui.getCursorScreenPosY() + 23.0f + (Gates_NodeEditor.pinTouchExtraPadding * 2.0f),
                         ImGui.getColorU32(textColor.x, textColor.y, textColor.z, textColor.w));
 
             } else if (pinIndexState == 1) {
@@ -221,13 +224,13 @@ public abstract class GraphNode {
                     xPos += 10.0f;
 
                 ImGui.getWindowDrawList().addLine(
-                        xPos, ImGui.getCursorScreenPosY() - 2.0f,
-                        xPos, ImGui.getCursorScreenPosY() + 24.0f,
+                        xPos, ImGui.getCursorScreenPosY() + 1.0f,
+                        xPos, ImGui.getCursorScreenPosY() + 23.0f + (Gates_NodeEditor.pinTouchExtraPadding * 2.0f),
                         ImGui.getColorU32(textColor.x, textColor.y, textColor.z, textColor.w));
             } else if (pinIndexState == 3) {
                 ImGui.getWindowDrawList().addLine(
-                        xPos, ImGui.getCursorScreenPosY() + 23.0f,
-                        xPos + 10.0f , ImGui.getCursorScreenPosY() + 23.0f,
+                        xPos, ImGui.getCursorScreenPosY() + 23.0f + (Gates_NodeEditor.pinTouchExtraPadding * 2.0f),
+                        xPos + 10.0f , ImGui.getCursorScreenPosY() + 23.0f + (Gates_NodeEditor.pinTouchExtraPadding * 2.0f),
                         ImGui.getColorU32(textColor.x, textColor.y, textColor.z, textColor.w));
                 ImGui.getWindowDrawList().addLine(
                         xPos, ImGui.getCursorScreenPosY() - 2.0f,
@@ -239,7 +242,7 @@ public abstract class GraphNode {
 
                 ImGui.getWindowDrawList().addLine(
                         xPos, ImGui.getCursorScreenPosY() - 2.0f,
-                        xPos, ImGui.getCursorScreenPosY() + 23.0f,
+                        xPos, ImGui.getCursorScreenPosY() + 23.0f + (Gates_NodeEditor.pinTouchExtraPadding * 2.0f),
                         ImGui.getColorU32(textColor.x, textColor.y, textColor.z, textColor.w));
             }
             //</editor-fold>
@@ -276,7 +279,7 @@ public abstract class GraphNode {
         for (GraphNodePin pin : pins)
             pinsIds.add(pin.getId());
 
-        this.pinGroups.put(groupName, pinsIds);
+        this.pinGroups.put(groupName, pinsIds.stream().sorted().toList());
     }
 
     public void addGroupWithIds(String groupName, List<Integer> pinsIds) { this.pinGroups.put(groupName, pinsIds); }

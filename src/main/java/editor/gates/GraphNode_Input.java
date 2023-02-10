@@ -1,5 +1,6 @@
 package editor.gates;
 
+import editor.TestFieldsWindow;
 import editor.node.Gates_NodeEditor;
 import editor.node.GraphNode;
 import editor.node.GraphNodePin;
@@ -34,6 +35,7 @@ public class GraphNode_Input extends GraphNode {
     @Override
     protected void drawPin(GraphNodePin pin) {
         ImGui.pushID(pin.getId());
+        ImGui.setCursorPosY(ImGui.getCursorPosY() + Gates_NodeEditor.pinTouchExtraPadding);
         if (Gates_NodeEditor.showPinTitles) {
             ImGui.setNextItemWidth(70.0f);
             ImString pinLabelTmp = new ImString(pin.getLabel(), 14);
@@ -59,6 +61,7 @@ public class GraphNode_Input extends GraphNode {
         ImGui.popStyleColor(4);
 
         ImGui.sameLine();
+        ImGui.setCursorPosY(ImGui.getCursorPosY() - Gates_NodeEditor.pinTouchExtraPadding);
         super.drawPin(pin);
         ImGui.popID();
     }

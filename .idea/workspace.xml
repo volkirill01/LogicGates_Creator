@@ -9,41 +9,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cf11e7bc-f8ac-474d-a996-2f52d6444fdf" name="Changes" comment="Test2">
-      <change afterPath="$PROJECT_DIR$/projects/sample/myGates/3 And.gate" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/sample/myGates/4 And.gate" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/sample/myGates/4Bit Counte.gate" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/sample/myGates/4Bit MEM.gate" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/sample/myGates/8Bit Counter.gate" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/sample/myGates/Clock 555 Flip-Flop.gate" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/sample/myGates/Clock 555.gate" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/sample/myGates/Clock 555_2.gate" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/sample/myGates/Clock.gate" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/sample/myGates/Data Latch.gate" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/sample/myGates/Edge Detection.gate" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/sample/myGates/Falling Edge.gate" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/sample/myGates/JK-FlipFlop.gate" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/sample/myGates/Rasing Edge.gate" afterDir="false" />
+    <list default="true" id="cf11e7bc-f8ac-474d-a996-2f52d6444fdf" name="Changes" comment="Fix bugs">
+      <change afterPath="$PROJECT_DIR$/projects/sample/myGates/8Bit MEM.gate" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/graph.ini" beforeDir="false" afterPath="$PROJECT_DIR$/graph.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/imgui.ini" beforeDir="false" afterPath="$PROJECT_DIR$/imgui.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/sample/graphs/sample.graph" beforeDir="false" afterPath="$PROJECT_DIR$/projects/sample/graphs/sample.graph" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/sample/myGates/4BIT ADDER.gate" beforeDir="false" afterPath="$PROJECT_DIR$/projects/sample/myGates/4Bit Adder.gate" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/sample/myGates/ADDER.gate" beforeDir="false" afterPath="$PROJECT_DIR$/projects/sample/myGates/1Bit Adder.gate" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/sample/myGates/ALU.gate" beforeDir="false" afterPath="$PROJECT_DIR$/projects/sample/myGates/4Bit ALU.gate" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/sample/myGates/DATA LATCH.gate" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/sample/myGates/NAND.gate" beforeDir="false" afterPath="$PROJECT_DIR$/projects/sample/myGates/NAND.gate" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/sample/myGates/NOR.gate" beforeDir="false" afterPath="$PROJECT_DIR$/projects/sample/myGates/NOR.gate" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/sample/myGates/OR.gate" beforeDir="false" afterPath="$PROJECT_DIR$/projects/sample/myGates/Or.gate" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/sample/myGates/REGISTER.gate" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/sample/myGates/XOR.gate" beforeDir="false" afterPath="$PROJECT_DIR$/projects/sample/myGates/XOR.gate" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/editor/gates/Gate_And.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/editor/gates/Gate_And.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/editor/gates/Gate_Not.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/editor/gates/Gate_Not.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/editor/gates/GraphNode_Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/editor/gates/GraphNode_Graph.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/editor/gates/GraphNode_Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/editor/gates/GraphNode_Input.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/editor/gates/GraphNode_Output.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/editor/gates/GraphNode_Output.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/editor/graph/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/editor/graph/Graph.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/editor/node/Gates_NodeEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/editor/node/Gates_NodeEditor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/editor/node/GraphNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/editor/node/GraphNode.java" afterDir="false" />
     </list>
@@ -78,16 +52,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/_Files/Projects/Java/LogicGatesCreator/projects/sample/myGates",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15429688",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "terminal"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/_Files/Projects/Java/LogicGatesCreator/projects/sample/myGates&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15429688&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\_Files\Projects\Java\LogicGatesCreator\projects\sample\myGates" />
@@ -143,8 +117,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.testExtensions.Main" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.testExtensions.Main" />
         <item itemvalue="Application.Main2" />
       </list>
     </recent_temporary>
@@ -214,7 +188,21 @@
       <option name="project" value="LOCAL" />
       <updated>1675765420054</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Fix bugs">
+      <created>1675939848501</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1675939848501</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Fix bugs">
+      <created>1675939859500</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1675939859500</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -234,6 +222,7 @@
     <MESSAGE value="Add custom Labels for pins" />
     <MESSAGE value="Test" />
     <MESSAGE value="Test2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Test2" />
+    <MESSAGE value="Fix bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix bugs" />
   </component>
 </project>

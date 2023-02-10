@@ -25,13 +25,14 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_CONTROL;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_SHIFT;
+import static org.lwjgl.glfw.GLFW.*;
 
 public class Gates_NodeEditor {
 
     private static final NodeEditorContext CONTEXT;
     private static Graph currentGraph = new Graph("projects/sample/graphs/sample.graph", "Demo");
+
+    public static float pinTouchExtraPadding = 2.0f;
 
     private List<Graph> gates = new ArrayList<>();
     private boolean isStart;
@@ -70,6 +71,8 @@ public class Gates_NodeEditor {
     public static void setCurrentGraph(Graph graph) { currentGraph = graph; }
 
     public void imgui() {
+        pinTouchExtraPadding = TestFieldsWindow.getFloats[0]; // TODO DELETE THIS
+
         if (ImGui.begin("Editor")) {
             loadGates();
 
@@ -81,7 +84,7 @@ public class Gates_NodeEditor {
             NodeEditor.pushStyleVar(NodeEditorStyleVar.NodePadding, 4.0f, 3.0f, 4.0f, 4.0f);
             NodeEditor.pushStyleVar(NodeEditorStyleVar.NodeRounding, 5.0f);
             NodeEditor.pushStyleVar(NodeEditorStyleVar.LinkStrength, 400.0f);
-            NodeEditor.pushStyleColor(NodeEditorStyleColor.PinRect, 0.0f, 0.0f, 0.0f, 0.0f);
+            NodeEditor.pushStyleColor(NodeEditorStyleColor.PinRect, 0.0f, 0.0f, 1.0f, 0.5f);
             NodeEditor.pushStyleColor(NodeEditorStyleColor.NodeBg, 0.206f, 0.214f, 0.225f, 1.0f);
             NodeEditor.pushStyleColor(NodeEditorStyleColor.HovNodeBorder, 1.0f, 1.0f, 1.0f, 0.5f);
             NodeEditor.pushStyleColor(NodeEditorStyleColor.SelNodeBorder, 0.0f, 0.794f, 1.0f, 1.0f);
@@ -180,6 +183,12 @@ public class Gates_NodeEditor {
                     ImGui.endPopup();
                 }
             }
+            if (ImGui.isKeyDown(GLFW_KEY_LEFT_CONTROL) && ImGui.isKeyPressed(GLFW_KEY_G)) {
+                // tODO in here
+                showGroupNameDialog = true;
+                isInputNodeSelected = selectedPins.get(0).isInput();
+                isNumberGroup = false;
+            }
 
 //        if (NodeEditor.showBackgroundContextMenu())
 //            ImGui.openPopup("node_editor_context");
@@ -189,10 +198,10 @@ public class Gates_NodeEditor {
 //            ImGui.endPopup();
 //        }
 
-            if (showGroupNameDialog)
+            if (showGroupNameDialog) {
                 ImGui.openPopup("Enter group name");
-
-            showGroutNameInputPopup();
+                showGroutNameInputPopup();
+            }
 
             NodeEditor.resume();
 
@@ -487,6 +496,7 @@ public class Gates_NodeEditor {
     private boolean showGroupNameDialog = false;
     private boolean isInputNodeSelected = false;
     private boolean isNumberGroup = false;
+    private boolean setFocusOnInput = true;
     private String groupName = "";
 
     private void showGroutNameInputPopup() {
@@ -500,7 +510,7 @@ public class Gates_NodeEditor {
                     ImGui.getWindowViewport().getWorkSizeY() / 2.0f - 100.0f / 2.0f + ImGui.getWindowViewport().getPosY());
         }
 
-        if (showGroupNameDialog && ImGui.beginPopupModal("Enter group name", ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove)) {
+        if (ImGui.beginPopupModal("Enter group name", ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove)) {
             ImVec2 tmp = new ImVec2();
             if (selectedPins.size() > 0) {
                 ImGui.calcTextSize(tmp, "Group Name");
@@ -515,6 +525,12 @@ public class Gates_NodeEditor {
                 if (ImGui.inputText("##GroupName", tmpStr))
                     groupName = tmpStr.get();
 
+                if (setFocusOnInput) {
+                    ImGui.setKeyboardFocusHere(-1);
+                    setFocusOnInput = false;
+                }
+                ImGui.setWindowFocus();
+
                 ImGui.popStyleVar();
             } else {
                 ImGui.calcTextSize(tmp, "No pins selected");
@@ -523,13 +539,14 @@ public class Gates_NodeEditor {
             }
             ImGui.setCursorPos(ImGui.getContentRegionAvailX() / 6.0f, ImGui.getCursorPosY() + 10.0f);
             ImGui.pushStyleVar(ImGuiStyleVar.FramePadding, ImGui.getContentRegionAvailX() / 6.0f, ImGui.getStyle().getFramePaddingY());
-            if (ImGui.button("Close")) {
+            if (ImGui.button("Close") || ImGui.isKeyPressed(GLFW_KEY_ESCAPE)) {
                 groupName = "";
                 showGroupNameDialog = false;
+                setFocusOnInput = true;
             }
 
             ImGui.sameLine();
-            if (ImGui.button("Ok")) {
+            if (ImGui.button("Ok") || ImGui.isKeyPressed(GLFW_KEY_ENTER)) {
                 if (!groupName.equals("")) {
                     if (isNumberGroup)
                         groupName = "##Number_" + groupName;
@@ -538,6 +555,7 @@ public class Gates_NodeEditor {
 
                     groupName = "";
                     showGroupNameDialog = false;
+                    setFocusOnInput = true;
                 }
             }
             ImGui.popStyleVar();
@@ -551,15 +569,12 @@ public class Gates_NodeEditor {
         if (isInputNodeSelected) {
             GraphNode parent = currentGraph.getInputNode();
             currentNodePins.removeIf(pin -> !parent.outputPins.contains(pin));
+            currentGraph.getInputNode().addGroup(groupName, currentNodePins);
         } else {
             GraphNode parent = currentGraph.getOutputNode();
             currentNodePins.removeIf(pin -> !parent.inputPins.contains(pin));
-        }
-
-        if (isInputNodeSelected)
-            currentGraph.getInputNode().addGroup(groupName, currentNodePins);
-        else
             currentGraph.getOutputNode().addGroup(groupName, currentNodePins);
+        }
     }
 
     private static List<GraphNodePin> selectedPins = new ArrayList<>();

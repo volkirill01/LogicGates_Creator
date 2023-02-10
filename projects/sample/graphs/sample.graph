@@ -3,7 +3,7 @@
   "gateName": "Demo",
   "gateColor": "(43 45 52)",
   "nextNodeId": 5,
-  "nextPinId": 1007,
+  "nextPinId": 1037,
   "nodes": [
     {
       "type": "editor.gates.GraphNode_Input",
@@ -17,6 +17,111 @@
             "label": "In (1)",
             "value": false,
             "connectedPinsIds": []
+          },
+          {
+            "id": 1007,
+            "isInput": false,
+            "label": "In (2)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1008,
+            "isInput": false,
+            "label": "In (3)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1009,
+            "isInput": false,
+            "label": "In (4)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1010,
+            "isInput": false,
+            "label": "In (5)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1011,
+            "isInput": false,
+            "label": "In (6)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1012,
+            "isInput": false,
+            "label": "In (7)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1013,
+            "isInput": false,
+            "label": "In (8)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1014,
+            "isInput": false,
+            "label": "In (9)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1015,
+            "isInput": false,
+            "label": "In (10)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1016,
+            "isInput": false,
+            "label": "In (11)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1017,
+            "isInput": false,
+            "label": "In (12)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1018,
+            "isInput": false,
+            "label": "In (13)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1019,
+            "isInput": false,
+            "label": "In (14)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1020,
+            "isInput": false,
+            "label": "In (15)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1021,
+            "isInput": false,
+            "label": "In (16)",
+            "value": false,
+            "connectedPinsIds": []
           }
         ],
         "nodeColor": {
@@ -28,7 +133,34 @@
           "x": 561.0,
           "y": 322.0
         },
-        "pinGroups": {}
+        "pinGroups": {
+          "A": [
+            1000
+          ],
+          "B": [
+            1007,
+            1008
+          ],
+          "C": [
+            1009,
+            1010,
+            1011
+          ],
+          "##Number_D": [
+            1012,
+            1013,
+            1014,
+            1015
+          ],
+          "E": [
+            1016,
+            1017,
+            1018,
+            1019,
+            1020,
+            1021
+          ]
+        }
       }
     },
     {
@@ -40,6 +172,111 @@
             "id": 1001,
             "isInput": true,
             "label": "Out (1)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1022,
+            "isInput": true,
+            "label": "Out (2)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1023,
+            "isInput": true,
+            "label": "Out (3)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1024,
+            "isInput": true,
+            "label": "Out (4)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1025,
+            "isInput": true,
+            "label": "Out (5)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1026,
+            "isInput": true,
+            "label": "Out (6)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1027,
+            "isInput": true,
+            "label": "Out (7)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1028,
+            "isInput": true,
+            "label": "Out (8)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1029,
+            "isInput": true,
+            "label": "Out (9)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1030,
+            "isInput": true,
+            "label": "Out (10)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1031,
+            "isInput": true,
+            "label": "Out (11)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1032,
+            "isInput": true,
+            "label": "Out (12)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1033,
+            "isInput": true,
+            "label": "Out (13)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1034,
+            "isInput": true,
+            "label": "Out (14)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1035,
+            "isInput": true,
+            "label": "Out (15)",
+            "value": false,
+            "connectedPinsIds": []
+          },
+          {
+            "id": 1036,
+            "isInput": true,
+            "label": "Out (16)",
             "value": false,
             "connectedPinsIds": []
           }
@@ -54,7 +291,34 @@
           "x": 960.0,
           "y": 322.0
         },
-        "pinGroups": {}
+        "pinGroups": {
+          "A": [
+            1001
+          ],
+          "B": [
+            1022,
+            1023
+          ],
+          "C": [
+            1024,
+            1025,
+            1026
+          ],
+          "##Number_D": [
+            1027,
+            1028,
+            1029,
+            1030
+          ],
+          "##Number_E": [
+            1031,
+            1032,
+            1033,
+            1034,
+            1035,
+            1036
+          ]
+        }
       }
     }
   ]
