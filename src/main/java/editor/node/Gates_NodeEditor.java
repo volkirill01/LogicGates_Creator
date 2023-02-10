@@ -38,9 +38,11 @@ public class Gates_NodeEditor {
     private boolean isStart;
     private boolean isUpdate;
 
-    private String gateName = "";
+    private String newGateName = "";
 
     public static boolean showPinTitles = true;
+
+    private static List<GraphNodePin> selectedPins = new ArrayList<>();
 
     private ImInt groupNumbersDisplayFormat = new ImInt(0);
     private final int groupNumbersDisplay_Decimal = 0;
@@ -54,6 +56,15 @@ public class Gates_NodeEditor {
             "Decimal | Binary",
             "Binary | Decimal"
     };
+
+    private boolean showGroupNameDialog = false;
+    private boolean isInputNodeSelected = false;
+    private boolean isNumberGroup = false;
+    private boolean setFocusOnInput = true;
+    private String groupName = "";
+
+    private List<File> oldGates = new ArrayList<>();
+    private List<Boolean> isGatesActiveArray = new ArrayList<>();
 
     static {
         NodeEditorConfig config = new NodeEditorConfig();
@@ -271,7 +282,6 @@ public class Gates_NodeEditor {
 
     private void loadGates() {
         if (isUpdate) {
-            this.gates.clear();
             Gson gson = new GsonBuilder()
                     .registerTypeAdapter(Graph.class, new GraphDeserializer())
                     .registerTypeAdapter(GraphNode.class, new GraphNodeDeserializer())
@@ -280,6 +290,13 @@ public class Gates_NodeEditor {
             File gatesFolder = new File("projects/sample/gates");
 
             List<File> gates = new ArrayList<>(List.of(Objects.requireNonNull(gatesFolder.listFiles())));
+            if (gates.equals(oldGates)) {
+                return;
+            }
+            oldGates = gates;
+
+            this.gates.clear();
+            this.isGatesActiveArray.clear();
 
             for (File gate : gates) {
                 String inFile = "";
@@ -293,10 +310,14 @@ public class Gates_NodeEditor {
                     Graph graph = gson.fromJson(inFile, Graph.class);
 
                     if (this.gates.size() > 0) {
-                        if (!containsGate(graph.getFilepath()))
+                        if (!containsGate(graph.getFilepath())) {
                             this.gates.add(graph);
-                    } else
+                            this.isGatesActiveArray.add(false);
+                        }
+                    } else {
                         this.gates.add(graph);
+                        this.isGatesActiveArray.add(false);
+                    }
                 }
             }
         }
@@ -339,7 +360,7 @@ public class Gates_NodeEditor {
         if (ImGui.button("Clear Graph\t   ") || (ImGui.isKeyDown(GLFW_KEY_LEFT_CONTROL) && ImGui.isKeyPressed(GLFW_KEY_L))) {
             selectedPins.clear();
 
-            this.gateName = "";
+            this.newGateName = "";
             currentGraph = new Graph(currentGraph.getFilepath(), currentGraph.getGateName());
             currentGraph.createInputAndOutput();
             currentGraph.getGateColor().set(43.0f, 45.0f, 52.0f);
@@ -375,9 +396,9 @@ public class Gates_NodeEditor {
         ImGui.text("Gate Name");
         ImGui.sameLine();
         ImGui.setCursorPosY(ImGui.getCursorPosY() - 3.0f);
-        ImString gateNameTmp = new ImString(this.gateName, 256);
+        ImString gateNameTmp = new ImString(this.newGateName, 256);
         if (ImGui.inputText("##GateName", gateNameTmp))
-            this.gateName = gateNameTmp.get();
+            this.newGateName = gateNameTmp.get();
 
         ImGui.sameLine();
         ImGui.text("Gate Color");
@@ -392,10 +413,11 @@ public class Gates_NodeEditor {
 
         ImGui.sameLine();
         if (ImGui.button("Create Gate")) {
-            if (!gateName.equals("")) {
+            if (!newGateName.equals("")) {
                 selectedPins.clear();
 
                 this.gates.clear();
+                this.isGatesActiveArray.clear();
 
                 for (GraphNodePin pin : currentGraph.getInputNode().outputPins)
                     pin.setValue(false);
@@ -403,12 +425,12 @@ public class Gates_NodeEditor {
                     pin.setValue(false);
 
                 Graph backup = new Graph(currentGraph.getFilepath(), currentGraph.getGateName());
-                currentGraph.saveAsGate(gateName);
+                currentGraph.saveAsGate(newGateName);
 
                 currentGraph = backup;
                 currentGraph.createInputAndOutput();
                 currentGraph.getGateColor().set(43.0f, 45.0f, 52.0f);
-                this.gateName = "";
+                this.newGateName = "";
             } else {
                 System.out.println("Empty Gate Name!!!");
             }
@@ -423,11 +445,38 @@ public class Gates_NodeEditor {
 
         ImGui.separator();
         for (int i = 0; i < this.gates.size(); i++) {
-            if (ImGui.button(this.gates.get(i).getGateName()))
-                positionNode(currentGraph.loadCreateGate(this.gates.get(i), new ImVec2()));
-
+            ImVec4 butColor = ImGui.getStyle().getColor(ImGuiCol.Button);
+            ImVec4 butHoveredColor = ImGui.getStyle().getColor(ImGuiCol.ButtonHovered);
+            ImVec4 butActiveColor = ImGui.getStyle().getColor(ImGuiCol.ButtonActive);
+            if (ImGui.isKeyDown(GLFW_KEY_LEFT_SHIFT) || ImGui.isKeyDown(GLFW_KEY_LEFT_CONTROL)) {
+                butColor = ImGui.getStyle().getColor(ImGuiCol.FrameBgHovered);
+                butHoveredColor = ImGui.getStyle().getColor(ImGuiCol.FrameBgHovered);
+                butActiveColor = ImGui.getStyle().getColor(ImGuiCol.FrameBgHovered);
+            }
+            ImGui.pushStyleColor(ImGuiCol.Button, butColor.x, butColor.y, butColor.z, butColor.w);
+            ImGui.pushStyleColor(ImGuiCol.ButtonHovered, butHoveredColor.x, butHoveredColor.y, butHoveredColor.z, butHoveredColor.w);
+            ImGui.pushStyleColor(ImGuiCol.ButtonActive, butActiveColor.x, butActiveColor.y, butActiveColor.z, butActiveColor.w);
             ImVec2 tmp = new ImVec2();
             ImGui.calcTextSize(tmp, this.gates.get(i).getGateName());
+            if (this.isGatesActiveArray.get(i)) {
+                float buttonSelectionOutlineThickness = 2.0f;
+                ImGui.getWindowDrawList().addRectFilled(
+                        ImGui.getCursorScreenPosX() - buttonSelectionOutlineThickness, // X pos
+                        ImGui.getCursorScreenPosY() - buttonSelectionOutlineThickness, // Y pos
+                        ImGui.getCursorScreenPosX() + tmp.x + (ImGui.getStyle().getFramePaddingX() * 2.0f) + buttonSelectionOutlineThickness, // Size X
+                        ImGui.getCursorScreenPosY() + ImGui.getFontSize() + (ImGui.getStyle().getFramePaddingY() * 2.0f) + buttonSelectionOutlineThickness, // Size Y
+                        ImGui.getColorU32(0.1f, 0.629f, 0.873f, 0.827f), ImGui.getStyle().getFrameRounding() + 1.0f); // Color
+            }
+            if (ImGui.button(this.gates.get(i).getGateName())) {
+                if (!ImGui.isKeyDown(GLFW_KEY_LEFT_SHIFT) && !ImGui.isKeyDown(GLFW_KEY_LEFT_CONTROL))
+                    positionNode(currentGraph.loadCreateGate(this.gates.get(i), new ImVec2()));
+                else if (ImGui.isKeyDown(GLFW_KEY_LEFT_SHIFT))
+                    this.isGatesActiveArray.set(i, !this.isGatesActiveArray.get(i));
+                else if (ImGui.isKeyDown(GLFW_KEY_LEFT_CONTROL))
+                    this.isGatesActiveArray.set(i, false);
+            }
+
+            ImGui.popStyleColor(3);
 
             ImVec2 lastButtonPos = new ImVec2();
             ImGui.getItemRectMax(lastButtonPos);
@@ -504,12 +553,6 @@ public class Gates_NodeEditor {
             ImGui.closeCurrentPopup();
         }
     }
-
-    private boolean showGroupNameDialog = false;
-    private boolean isInputNodeSelected = false;
-    private boolean isNumberGroup = false;
-    private boolean setFocusOnInput = true;
-    private String groupName = "";
 
     private void showGroutNameInputPopup() {
         if (selectedPins.size() > 0) {
@@ -589,13 +632,11 @@ public class Gates_NodeEditor {
         }
     }
 
-    private static List<GraphNodePin> selectedPins = new ArrayList<>();
-
     public static void setPinSelected(GraphNodePin pin) {
         if (!ImGui.isKeyDown(GLFW_KEY_LEFT_SHIFT) && !ImGui.isKeyDown(GLFW_KEY_LEFT_CONTROL))
             selectedPins.clear();
 
-        if (ImGui.isKeyDown(GLFW_KEY_LEFT_CONTROL))
+        if (ImGui.isKeyDown(GLFW_KEY_LEFT_CONTROL) || (selectedPins.contains(pin) && ImGui.isKeyDown(GLFW_KEY_LEFT_SHIFT)))
             selectedPins.remove(pin);
         else if (!selectedPins.contains(pin))
             selectedPins.add(pin);
