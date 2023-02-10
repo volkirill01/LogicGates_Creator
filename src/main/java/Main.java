@@ -103,8 +103,8 @@ public class Main extends Application {
     public void process() {
         setupDockspace();
 
-        TestFieldsWindow.imgui();
-        ImGui.showDemoWindow();
+//        TestFieldsWindow.imgui();
+//        ImGui.showDemoWindow();
 
         editor.imgui();
     }

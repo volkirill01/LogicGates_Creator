@@ -197,14 +197,22 @@ public class Gates_NodeEditor {
                     ImGui.endPopup();
                 }
             }
-            if (ImGui.isKeyDown(GLFW_KEY_LEFT_CONTROL) && ImGui.isKeyPressed(GLFW_KEY_G)) {
+            if (ImGui.isKeyDown(GLFW_KEY_LEFT_CONTROL) && ImGui.isKeyPressed(GLFW_KEY_G) && !ImGui.isKeyDown(GLFW_KEY_LEFT_SHIFT)) {
                 if (!showGroupNameDialog && !showGatesGroupNameDialog) {
-                    // tODO in here
                     showGroupNameDialog = true;
                     if (selectedPins.size() > 0)
-                        isInputNodeSelected = selectedPins.get(0).isInput();
+                        isInputNodeSelected = !selectedPins.get(0).isInput();
 
                     isNumberGroup = false;
+                }
+            }
+            if (ImGui.isKeyDown(GLFW_KEY_LEFT_CONTROL) && ImGui.isKeyDown(GLFW_KEY_LEFT_SHIFT) && ImGui.isKeyPressed(GLFW_KEY_G)) {
+                if (!showGroupNameDialog && !showGatesGroupNameDialog) {
+                    showGroupNameDialog = true;
+                    if (selectedPins.size() > 0)
+                        isInputNodeSelected = !selectedPins.get(0).isInput();
+
+                    isNumberGroup = true;
                 }
             }
 
@@ -388,7 +396,7 @@ public class Gates_NodeEditor {
         ImGui.textDisabled("Ctrl+L");
 
         ImGui.sameLine();
-        ImGui.setCursorPosX(ImGui.getCursorPosX() + 8.0f);
+        ImGui.setCursorPosX(ImGui.getCursorPosX() + 11.0f);
         ImGui.text("Numbers display format");
         ImGui.sameLine();
         ImGui.setNextItemWidth(150.0f);
@@ -400,16 +408,21 @@ public class Gates_NodeEditor {
         ImGui.popStyleColor(2);
 
         ImGui.sameLine();
+        ImGui.setCursorPosX(ImGui.getCursorPosX() + 3.0f);
         ImGui.text("Show Pin titles");
         ImGui.sameLine();
-        if (ImGui.checkbox("##ShowPinTitles", showPinTitles))
+        ImGui.setCursorPosX(ImGui.getCursorPosX() + 10.0f);
+        ImGui.textDisabled("Alt+H");
+        ImGui.sameLine();
+        if (ImGui.checkbox("##ShowPinTitles", showPinTitles) || ImGui.isKeyPressed(GLFW_KEY_H))
             showPinTitles = !showPinTitles;
 
         ImGui.setCursorPosY(ImGui.getCursorPosY() + 3.0f);
         ImGui.text("Gate Name");
         ImGui.sameLine();
         ImGui.setCursorPosY(ImGui.getCursorPosY() - 3.0f);
-        ImString gateNameTmp = new ImString(this.newGateName, 256);
+        ImString gateNameTmp = new ImString(this.newGateName, 32);
+        ImGui.setNextItemWidth(357.0f);
         if (ImGui.inputText("##GateName", gateNameTmp))
             this.newGateName = gateNameTmp.get();
 
@@ -607,11 +620,15 @@ public class Gates_NodeEditor {
                 isInputNodeSelected = true;
                 isNumberGroup = false;
             }
+            ImGui.sameLine();
+            ImGui.textDisabled("Ctrl+G");
             if (ImGui.menuItem("Group selected pins to number")) {
                 showGroupNameDialog = true;
                 isInputNodeSelected = true;
                 isNumberGroup = true;
             }
+            ImGui.sameLine();
+            ImGui.textDisabled("Ctrl+Shift+G");
 
         } else if (currentGraph.getOutputNode().getId() == targetNode) {
             if (ImGui.menuItem("Group selected pins")) {
@@ -619,11 +636,15 @@ public class Gates_NodeEditor {
                 isInputNodeSelected = false;
                 isNumberGroup = false;
             }
+            ImGui.sameLine();
+            ImGui.textDisabled("Ctrl+G");
             if (ImGui.menuItem("Group selected pins to number")) {
                 showGroupNameDialog = true;
                 isInputNodeSelected = false;
                 isNumberGroup = true;
             }
+            ImGui.sameLine();
+            ImGui.textDisabled("Ctrl+Shift+G");
 
         } else if (ImGui.menuItem("Delete " + currentGraph.nodes.get(targetNode).getName())) {
             currentGraph.deleteNodeById(targetNode);
