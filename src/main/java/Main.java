@@ -150,17 +150,17 @@ public class Main extends Application {
         }
 
         if (ImGui.beginMenu("File")) {
-            if (ImGui.menuItem("Save")) {
+            if (ImGui.menuItem("Save", "Ctrl+S")) {
                 Gates_NodeEditor.getCurrentGraph().save();
             }
 
-            if (ImGui.menuItem("Open")) {
+            if (ImGui.menuItem("Open", "Ctrl+O")) {
                 File graph = FileUtil.openFile(FileTypeFilter.gateAndGraphFilter, true);
                 if (graph != null)
                     Gates_NodeEditor.setCurrentGraph(Gates_NodeEditor.getCurrentGraph().load(graph.getPath()));
             }
 
-            if (ImGui.menuItem("Reload"))
+            if (ImGui.menuItem("Reload", "Ctrl+R"))
                 Gates_NodeEditor.setCurrentGraph(Gates_NodeEditor.getCurrentGraph().load(Gates_NodeEditor.getCurrentGraph().getFilepath()));
 
             ImGui.endMenu();

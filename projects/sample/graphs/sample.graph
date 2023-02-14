@@ -14,7 +14,7 @@
           {
             "id": 1000,
             "isInput": false,
-            "label": "In (1)",
+            "label": "In(1)",
             "value": false,
             "connectedPinsIds": []
           }
@@ -39,7 +39,7 @@
           {
             "id": 1001,
             "isInput": true,
-            "label": "Out (1)",
+            "label": "Out(1)",
             "value": false,
             "connectedPinsIds": []
           }

@@ -11,7 +11,7 @@ import imgui.type.ImString;
 
 public class GraphNode_Output extends GraphNode {
 
-    public GraphNode_Output() { this.inputPins.add(new GraphNodePin(true, "Out (1)")); }
+    public GraphNode_Output() { this.inputPins.add(new GraphNodePin(true, "Out(1)")); }
 
     @Override
     public void update() { }
@@ -25,7 +25,7 @@ public class GraphNode_Output extends GraphNode {
         ImGui.setCursorPos(ImGui.getCursorPosX() + 2.0f, ImGui.getCursorPosY() + 1.0f);
         ImGui.pushStyleVar(ImGuiStyleVar.FramePadding, ImGui.getStyle().getFramePaddingX() - 3.0f, ImGui.getStyle().getFramePaddingY() - 4.0f);
         if (ImGui.button("+")) {
-            GraphNodePin newPin = new GraphNodePin(true, "Out (" + (this.inputPins.size() + 1) + ")");
+            GraphNodePin newPin = new GraphNodePin(true, "Out(" + (this.inputPins.size() + 1) + ")");
             newPin.init(Gates_NodeEditor.getCurrentGraph().getNextPinId());
             this.inputPins.add(newPin);
         }

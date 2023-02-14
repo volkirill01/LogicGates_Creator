@@ -231,7 +231,7 @@ public class Gates_NodeEditor {
 
             if (NodeEditor.isBackgroundClicked()) {
                 selectedPins.clear();
-                Collections.fill(isGatesActiveList, false);
+//                Collections.fill(isGatesActiveList, false);
             }
 
             NodeEditor.end();
@@ -307,13 +307,13 @@ public class Gates_NodeEditor {
             File gatesFolder = new File("projects/sample/gates");
 
             List<File> gates = new ArrayList<>(List.of(Objects.requireNonNull(gatesFolder.listFiles())));
-            if (gates.equals(oldGates)) {
-                return;
-            }
+//            if (gates.equals(oldGates)) {
+//                return;
+//            }
             oldGates = gates;
 
             this.gates.clear();
-            this.isGatesActiveList.clear();
+//            this.isGatesActiveList.clear();
 
             for (File gate : gates) {
                 String inFile = "";
@@ -330,11 +330,11 @@ public class Gates_NodeEditor {
                         if (this.gates.size() > 0) {
                             if (!containsGate(graph.getFilepath())) {
                                 this.gates.add(graph);
-                                this.isGatesActiveList.add(false);
+//                                this.isGatesActiveList.add(false);
                             }
                         } else {
                             this.gates.add(graph);
-                            this.isGatesActiveList.add(false);
+//                            this.isGatesActiveList.add(false);
                         }
                 }
             }
@@ -443,7 +443,7 @@ public class Gates_NodeEditor {
                 selectedPins.clear();
 
                 this.gates.clear();
-                this.isGatesActiveList.clear();
+//                this.isGatesActiveList.clear();
 
                 for (GraphNodePin pin : currentGraph.getInputNode().outputPins)
                     pin.setValue(false);
@@ -535,15 +535,15 @@ public class Gates_NodeEditor {
             ImGui.pushStyleColor(ImGuiCol.ButtonActive, butActiveColor.x, butActiveColor.y, butActiveColor.z, butActiveColor.w);
             ImVec2 tmp = new ImVec2();
             ImGui.calcTextSize(tmp, this.gates.get(i).getGateName());
-            if (this.isGatesActiveList.get(i)) {
-                float buttonSelectionOutlineThickness = 2.0f;
-                ImGui.getWindowDrawList().addRectFilled(
-                        ImGui.getCursorScreenPosX() - buttonSelectionOutlineThickness, // X pos
-                        ImGui.getCursorScreenPosY() - buttonSelectionOutlineThickness, // Y pos
-                        ImGui.getCursorScreenPosX() + tmp.x + (ImGui.getStyle().getFramePaddingX() * 2.0f) + buttonSelectionOutlineThickness, // Size X
-                        ImGui.getCursorScreenPosY() + ImGui.getFontSize() + (ImGui.getStyle().getFramePaddingY() * 2.0f) + buttonSelectionOutlineThickness, // Size Y
-                        ImGui.getColorU32(0.1f, 0.629f, 0.873f, 0.827f), ImGui.getStyle().getFrameRounding() + 1.0f); // Color
-            }
+//            if (this.isGatesActiveList.get(i)) {
+//                float buttonSelectionOutlineThickness = 2.0f;
+//                ImGui.getWindowDrawList().addRectFilled(
+//                        ImGui.getCursorScreenPosX() - buttonSelectionOutlineThickness, // X pos
+//                        ImGui.getCursorScreenPosY() - buttonSelectionOutlineThickness, // Y pos
+//                        ImGui.getCursorScreenPosX() + tmp.x + (ImGui.getStyle().getFramePaddingX() * 2.0f) + buttonSelectionOutlineThickness, // Size X
+//                        ImGui.getCursorScreenPosY() + ImGui.getFontSize() + (ImGui.getStyle().getFramePaddingY() * 2.0f) + buttonSelectionOutlineThickness, // Size Y
+//                        ImGui.getColorU32(0.1f, 0.629f, 0.873f, 0.827f), ImGui.getStyle().getFrameRounding() + 1.0f); // Color
+//            }
             if (ImGui.button(this.gates.get(i).getGateName())) {
                 if (!showGroupNameDialog && !showGatesGroupNameDialog) {
                     if (!ImGui.isKeyDown(GLFW_KEY_LEFT_SHIFT) && !ImGui.isKeyDown(GLFW_KEY_LEFT_CONTROL))
@@ -721,71 +721,71 @@ public class Gates_NodeEditor {
     }
 
     private void showGatesGroupNameInputPopup() {
-        if (isGatesActiveList.contains(true)) {
-            ImGui.setNextWindowSize(438.0f, 130.0f);
-            ImGui.setNextWindowPos(ImGui.getWindowViewport().getWorkSizeX() / 2.0f - 438.0f / 2.0f + ImGui.getWindowViewport().getPosX(),
-                    ImGui.getWindowViewport().getWorkSizeY() / 2.0f - 130.0f / 2.0f + ImGui.getWindowViewport().getPosY());
-        } else {
-            ImGui.setNextWindowSize(438.0f, 100.0f);
-            ImGui.setNextWindowPos(ImGui.getWindowViewport().getWorkSizeX() / 2.0f - 438.0f / 2.0f + ImGui.getWindowViewport().getPosX(),
-                    ImGui.getWindowViewport().getWorkSizeY() / 2.0f - 100.0f / 2.0f + ImGui.getWindowViewport().getPosY());
-        }
+//        if (isGatesActiveList.contains(true)) {
+//            ImGui.setNextWindowSize(438.0f, 130.0f);
+//            ImGui.setNextWindowPos(ImGui.getWindowViewport().getWorkSizeX() / 2.0f - 438.0f / 2.0f + ImGui.getWindowViewport().getPosX(),
+//                    ImGui.getWindowViewport().getWorkSizeY() / 2.0f - 130.0f / 2.0f + ImGui.getWindowViewport().getPosY());
+//        } else {
+//            ImGui.setNextWindowSize(438.0f, 100.0f);
+//            ImGui.setNextWindowPos(ImGui.getWindowViewport().getWorkSizeX() / 2.0f - 438.0f / 2.0f + ImGui.getWindowViewport().getPosX(),
+//                    ImGui.getWindowViewport().getWorkSizeY() / 2.0f - 100.0f / 2.0f + ImGui.getWindowViewport().getPosY());
+//        }
 
         ImGui.openPopup("Enter group name##Gates");
-        if (ImGui.beginPopupModal("Enter group name##Gates", ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove)) {
-            ImVec2 tmp = new ImVec2();
-            if (isGatesActiveList.contains(true)) {
-                ImGui.calcTextSize(tmp, "Group Name");
-                ImGui.setCursorPos((ImGui.getContentRegionAvailX() / 2.0f) - (tmp.x / 2.0f), ImGui.getCursorPosY() + 5.0f);
-                ImGui.text("Group Name");
-
-                ImGui.setNextItemWidth(ImGui.getContentRegionAvailX());
-                ImGui.pushStyleVar(ImGuiStyleVar.FramePadding, 10.0f, ImGui.getStyle().getFramePaddingY());
-                ImGui.setCursorPosY(ImGui.getCursorPosY() + 5.0f);
-
-                ImString tmpStr = new ImString(gateGroupName, 14);
-                if (ImGui.inputText("##GroupName", tmpStr))
-                    gateGroupName = tmpStr.get();
-
-                if (setFocusOnInput) {
-                    ImGui.setKeyboardFocusHere(-1);
-                    setFocusOnInput = false;
-                }
-                ImGui.setWindowFocus();
-
-                ImGui.popStyleVar();
-            } else {
-                ImGui.calcTextSize(tmp, "No gates selected");
-                ImGui.setCursorPos((ImGui.getContentRegionAvailX() / 2.0f) - (tmp.x / 2.0f), ImGui.getCursorPosY() + 5.0f);
-                ImGui.text("No gates selected");
-            }
-            ImGui.setCursorPos(ImGui.getContentRegionAvailX() / 6.0f, ImGui.getCursorPosY() + 10.0f);
-            ImGui.pushStyleVar(ImGuiStyleVar.FramePadding, ImGui.getContentRegionAvailX() / 6.0f, ImGui.getStyle().getFramePaddingY());
-            if (ImGui.button("Close") || ImGui.isKeyPressed(GLFW_KEY_ESCAPE)) {
-                gateGroupName = "";
-                showGatesGroupNameDialog = false;
-                setFocusOnInput = true;
-            }
-
-            ImGui.sameLine();
-            if (ImGui.button("Ok") || ImGui.isKeyPressed(GLFW_KEY_ENTER)) {
-                if (!gateGroupName.equals("")) {
-                    if (isNumberGroup)
-                        gateGroupName = "##Number_" + gateGroupName;
-
-                    groupSelectedGates();
-
-                    gateGroupName = "";
-                    showGatesGroupNameDialog = false;
-                    setFocusOnInput = true;
-                } else if (!isGatesActiveList.contains(true)) {
-                    showGatesGroupNameDialog = false;
-                    setFocusOnInput = true;
-                }
-            }
-            ImGui.popStyleVar();
-            ImGui.endPopup();
-        }
+//        if (ImGui.beginPopupModal("Enter group name##Gates", ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove)) {
+//            ImVec2 tmp = new ImVec2();
+//            if (isGatesActiveList.contains(true)) {
+//                ImGui.calcTextSize(tmp, "Group Name");
+//                ImGui.setCursorPos((ImGui.getContentRegionAvailX() / 2.0f) - (tmp.x / 2.0f), ImGui.getCursorPosY() + 5.0f);
+//                ImGui.text("Group Name");
+//
+//                ImGui.setNextItemWidth(ImGui.getContentRegionAvailX());
+//                ImGui.pushStyleVar(ImGuiStyleVar.FramePadding, 10.0f, ImGui.getStyle().getFramePaddingY());
+//                ImGui.setCursorPosY(ImGui.getCursorPosY() + 5.0f);
+//
+//                ImString tmpStr = new ImString(gateGroupName, 14);
+//                if (ImGui.inputText("##GroupName", tmpStr))
+//                    gateGroupName = tmpStr.get();
+//
+//                if (setFocusOnInput) {
+//                    ImGui.setKeyboardFocusHere(-1);
+//                    setFocusOnInput = false;
+//                }
+//                ImGui.setWindowFocus();
+//
+//                ImGui.popStyleVar();
+//            } else {
+//                ImGui.calcTextSize(tmp, "No gates selected");
+//                ImGui.setCursorPos((ImGui.getContentRegionAvailX() / 2.0f) - (tmp.x / 2.0f), ImGui.getCursorPosY() + 5.0f);
+//                ImGui.text("No gates selected");
+//            }
+//            ImGui.setCursorPos(ImGui.getContentRegionAvailX() / 6.0f, ImGui.getCursorPosY() + 10.0f);
+//            ImGui.pushStyleVar(ImGuiStyleVar.FramePadding, ImGui.getContentRegionAvailX() / 6.0f, ImGui.getStyle().getFramePaddingY());
+//            if (ImGui.button("Close") || ImGui.isKeyPressed(GLFW_KEY_ESCAPE)) {
+//                gateGroupName = "";
+//                showGatesGroupNameDialog = false;
+//                setFocusOnInput = true;
+//            }
+//
+//            ImGui.sameLine();
+//            if (ImGui.button("Ok") || ImGui.isKeyPressed(GLFW_KEY_ENTER)) {
+//                if (!gateGroupName.equals("")) {
+//                    if (isNumberGroup)
+//                        gateGroupName = "##Number_" + gateGroupName;
+//
+//                    groupSelectedGates();
+//
+//                    gateGroupName = "";
+//                    showGatesGroupNameDialog = false;
+//                    setFocusOnInput = true;
+//                } else if (!isGatesActiveList.contains(true)) {
+//                    showGatesGroupNameDialog = false;
+//                    setFocusOnInput = true;
+//                }
+//            }
+//            ImGui.popStyleVar();
+//            ImGui.endPopup();
+//        }
     }
 
     private void groupSelectedPins() {
@@ -803,15 +803,15 @@ public class Gates_NodeEditor {
     }
 
     private void groupSelectedGates() {
-        List<Graph> groupGates = new ArrayList<>();
-
-        for (int i = 0; i < this.gates.size(); i++)
-            if (this.isGatesActiveList.get(i))
-                groupGates.add(this.gates.get(i));
-
-        gateGroups.put(gateGroupName, groupGates);
-
-        Collections.fill(this.isGatesActiveList, false);
+//        List<Graph> groupGates = new ArrayList<>();
+//
+//        for (int i = 0; i < this.gates.size(); i++)
+//            if (this.isGatesActiveList.get(i))
+//                groupGates.add(this.gates.get(i));
+//
+//        gateGroups.put(gateGroupName, groupGates);
+//
+//        Collections.fill(this.isGatesActiveList, false);
     }
 
     private boolean isGateGrouped(Graph gate) {

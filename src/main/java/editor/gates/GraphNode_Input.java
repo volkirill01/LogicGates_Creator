@@ -12,7 +12,7 @@ import imgui.type.ImString;
 
 public class GraphNode_Input extends GraphNode {
 
-    public GraphNode_Input() { this.outputPins.add(new GraphNodePin(false, "In (1)")); }
+    public GraphNode_Input() { this.outputPins.add(new GraphNodePin(false, "In(1)")); }
 
     @Override
     public void update() { }
@@ -23,7 +23,7 @@ public class GraphNode_Input extends GraphNode {
         ImGui.setCursorPosY(ImGui.getCursorPosY() + 3.0f);
         ImGui.pushStyleVar(ImGuiStyleVar.FramePadding, ImGui.getStyle().getFramePaddingX() - 3.0f, ImGui.getStyle().getFramePaddingY() - 4.0f);
         if (ImGui.button("+")) {
-            GraphNodePin newPin = new GraphNodePin(false, "In (" + (this.outputPins.size() + 1) + ")");
+            GraphNodePin newPin = new GraphNodePin(false, "In(" + (this.outputPins.size() + 1) + ")");
             newPin.init(Gates_NodeEditor.getCurrentGraph().getNextPinId());
             this.outputPins.add(newPin);
         }
