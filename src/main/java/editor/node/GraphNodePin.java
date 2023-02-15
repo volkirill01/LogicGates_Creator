@@ -40,15 +40,32 @@ public class GraphNodePin {
         if (this.connectedPins == null)
             this.connectedPins = new ArrayList<>();
 
-        if (!this.connectedPins.contains(pin)) {
+        if (!hasConnectedPinId(pin.getId())) {
             this.connectedPins.add(pin);
             this.connectedPinsIds.add(pin.getId());
         }
     }
 
+    private boolean hasConnectedPinId(int id) {
+        for (GraphNodePin connectedPin : this.connectedPins)
+            if (connectedPin.getId() == id)
+                return true;
+        return false;
+    }
+
     public GraphNodePin getConnectedPin(int index) { return this.connectedPins.get(index); }
 
-    public void removeConnectedPin(GraphNodePin pin) { this.connectedPins.remove(pin); }
+    public void removeConnectedPin(GraphNodePin pin) {
+        if (this.connectedPins == null)
+            this.connectedPins = new ArrayList<>();
+
+        this.connectedPins.remove(pin);
+        for (int i = 0; i < this.connectedPinsIds.size(); i++)
+            if (this.connectedPinsIds.get(i) == pin.getId()) {
+                this.connectedPinsIds.remove(i);
+                break;
+            }
+    }
 
     public void setConnectedPin(GraphNodePin pin) {
         if (this.hasConnections()) {

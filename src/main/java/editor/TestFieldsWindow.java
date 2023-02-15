@@ -11,7 +11,7 @@ import org.joml.Vector4f;
 
 public class TestFieldsWindow {
 
-    public static float[] getFloats = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
+    public static float[] getFloats = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
     public static int[] getInts = { 0, 0, 0, 0 };
     public static String[] getStrings = { "", "", "" };
     public static boolean[] getBooleans = { false, false, false, false, false, false };

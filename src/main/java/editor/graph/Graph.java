@@ -2,6 +2,7 @@ package editor.graph;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import editor.gates.Gate_7SegmentDisplay;
 import editor.node.GraphNode;
 import editor.node.GraphNodeDeserializer;
 import editor.node.GraphNodePin;
@@ -27,10 +28,12 @@ public final class Graph {
     public int nextNodeId = 1;
     public int nextPinId = 1000;
 
-    public final Map<Integer, GraphNode> nodes = new HashMap<>();
+    public Map<Integer, GraphNode> nodes = new HashMap<>();
 
     private GraphNode_Input inputNode;
     private GraphNode_Output outputNode;
+
+    private Gate_7SegmentDisplay display = null;
 
     public Graph(String filepath, String gateName) {
         this.filepath = filepath;
@@ -104,6 +107,8 @@ public final class Graph {
 
     public GraphNode_Graph loadCreateGate(Graph gate, ImVec2 position) {
         GraphNode_Graph node = new GraphNode_Graph();
+        if (gate.hasDisplay())
+            node.setDisplay(gate.getDisplay());
         node.init(nextNodeId++, gate, position);
         this.nextPinId = node.initPins(nextPinId++);
         this.nodes.put(node.getId(), node);
@@ -205,4 +210,10 @@ public final class Graph {
     public GraphNode getOutputNode() { return this.outputNode; }
 
     public void setOutputNode(GraphNode_Output node) { this.outputNode = node; }
+
+    public boolean hasDisplay() { return this.display != null; }
+
+    public void setDisplay(Gate_7SegmentDisplay display) { this.display = display; }
+
+    public Gate_7SegmentDisplay getDisplay() { return this.display; }
 }

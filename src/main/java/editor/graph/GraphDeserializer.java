@@ -1,6 +1,7 @@
 package editor.graph;
 
 import com.google.gson.*;
+import editor.gates.Gate_7SegmentDisplay;
 import editor.node.GraphNode;
 import editor.node.GraphNodePin;
 import editor.gates.GraphNode_Input;
@@ -11,6 +12,7 @@ import org.joml.Vector3f;
 
 import java.lang.reflect.Type;
 import java.text.NumberFormat;
+import java.util.HashMap;
 
 public class GraphDeserializer implements JsonSerializer<Graph>, JsonDeserializer<Graph> {
 
@@ -19,6 +21,12 @@ public class GraphDeserializer implements JsonSerializer<Graph>, JsonDeserialize
         JsonObject jsonObject = json.getAsJsonObject();
         String filepath = jsonObject.get("filepath").getAsString();
         String gateName = jsonObject.get("gateName").getAsString();
+        int displayId = -1;
+        try {
+            displayId = jsonObject.get("displayId").getAsInt();
+        } catch (Exception e) {
+//            System.out.println(e);
+        }
         String gateColorStr = jsonObject.get("gateColor").getAsString().replace(",", ".").replace("(", "").replace(")", "");
         Vector3f gateColor = new Vector3f(
                 Float.parseFloat(gateColorStr.split(" ")[0]),
@@ -30,6 +38,7 @@ public class GraphDeserializer implements JsonSerializer<Graph>, JsonDeserialize
         JsonArray nodes = jsonObject.getAsJsonArray("nodes");
 
         Graph graph = new Graph(filepath, gateName);
+        graph.nodes = new HashMap<>();
         graph.getGateColor().set(gateColor);
         graph.nextNodeId = nextNodeId;
         graph.nextPinId = nextPinId;
@@ -44,6 +53,7 @@ public class GraphDeserializer implements JsonSerializer<Graph>, JsonDeserialize
             if (!filepath.endsWith(".gate"))
                 NodeEditor.setNodePosition(node.getId(), node.getPosition().x, node.getPosition().y);
         }
+        graph.setDisplay((Gate_7SegmentDisplay) graph.findById(displayId));
 
         for (GraphNode node : graph.nodes.values()) {
             for (GraphNodePin inputPin : node.inputPins)
@@ -80,7 +90,13 @@ public class GraphDeserializer implements JsonSerializer<Graph>, JsonDeserialize
         for (int i = 0; i < src.nodes.size(); i++) {
             nodes[i] = (GraphNode) src.nodes.values().toArray()[i];
             nodes[i].setPosition(new ImVec2(NodeEditor.getNodePositionX(nodes[i].getId()), NodeEditor.getNodePositionY(nodes[i].getId())));
+            if (nodes[i].getClass() == Gate_7SegmentDisplay.class)
+                src.setDisplay((Gate_7SegmentDisplay) nodes[i]);
         }
+        if (src.getDisplay() != null)
+            result.add("displayId", new JsonPrimitive(src.getDisplay().getId()));
+        else
+            result.add("displayId", new JsonPrimitive(-1));
 
         result.add("nodes", context.serialize(nodes, GraphNode[].class));
         return result;

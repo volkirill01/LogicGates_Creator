@@ -15,7 +15,6 @@ import imgui.extension.nodeditor.NodeEditorContext;
 import imgui.extension.nodeditor.flag.NodeEditorStyleColor;
 import imgui.extension.nodeditor.flag.NodeEditorStyleVar;
 import imgui.flag.*;
-import imgui.internal.flag.ImGuiAxis;
 import imgui.type.ImInt;
 import imgui.type.ImLong;
 import imgui.type.ImString;
@@ -33,7 +32,7 @@ public class Gates_NodeEditor {
     private static final NodeEditorContext CONTEXT;
     private static Graph currentGraph = new Graph("projects/sample/graphs/sample.graph", "Demo");
 
-    public static float pinTouchExtraPadding = 2.0f;
+    public static float pinTouchExtraPadding = 3.0f;
 
     private List<Graph> gates = new ArrayList<>();
     private boolean isStart;
@@ -42,6 +41,8 @@ public class Gates_NodeEditor {
     private String newGateName = "";
 
     public static boolean showPinTitles = true;
+    public static boolean showPins = true;
+    public static boolean showConnections = true;
 
     private static List<GraphNodePin> selectedPins = new ArrayList<>();
 
@@ -51,12 +52,14 @@ public class Gates_NodeEditor {
     private final int groupNumbersDisplay_DecimalBinary = 2;
     private final int groupNumbersDisplay_BinaryDecimal = 3;
 
-    private String[] numbersDisplayFormatsList = new String[]{
+    private final String[] numbersDisplayFormatsList = new String[]{
             "Decimal",
             "Binary",
             "Decimal | Binary",
             "Binary | Decimal"
     };
+
+    private Map<Integer, Integer> links = new HashMap<>();
 
     public static boolean showGroupNameDialog = false;
     private boolean isInputNodeSelected = false;
@@ -111,6 +114,34 @@ public class Gates_NodeEditor {
                 currentGraph = currentGraph.load(currentGraph.getFilepath());
             }
 
+            long[] selectedNodes = new long[NodeEditor.getSelectedObjectCount()];
+            NodeEditor.getSelectedNodes(selectedNodes, NodeEditor.getSelectedObjectCount());
+            long[] selectedLinks = new long[NodeEditor.getSelectedObjectCount()];
+            NodeEditor.getSelectedLinks(selectedLinks, NodeEditor.getSelectedObjectCount());
+
+            if (ImGui.isKeyPressed(GLFW_KEY_DELETE)) {
+                for (long nodeId : selectedNodes) {
+                    if (nodeId != 0)
+                        if (nodeId != 1 && nodeId != 2)
+                            currentGraph.deleteNodeById((int) nodeId);
+                }
+
+                for (long linkId : selectedLinks) {
+                    if (linkId >= 5000) {
+                        GraphNodePin inputPin = currentGraph.findInputPin(links.get((int) linkId));
+                        inputPin.setValue(false);
+                        if (inputPin.hasConnections()) {
+                            inputPin.getConnectedPin(0).removeConnectedPin(inputPin);
+//                            inputPin.getConnectedPin(0).getConnectedPinsIds().remove(inputPin.getId());
+                            inputPin.removeConnectedPin(inputPin.getConnectedPin(0));
+//                            inputPin.getConnectedPinsIds().remove(inputPin.getConnectedPin(0).getId());
+                        }
+                    }
+                }
+
+                NodeEditor.clearSelection();
+            }
+
             for (GraphNode node : currentGraph.nodes.values()) {
                 NodeEditor.pushStyleColor(NodeEditorStyleColor.NodeBg, node.getNodeColor().x / 255.0f, node.getNodeColor().y / 255.0f, node.getNodeColor().z / 255.0f, 1.0f);
                 NodeEditor.beginNode(node.getId());
@@ -126,7 +157,7 @@ public class Gates_NodeEditor {
                 NodeEditor.endNode();
                 NodeEditor.popStyleColor(1);
 
-                if (showPinTitles) { // TODO MOVE THIS IN GraphNode CLASS
+                if (showPinTitles && showPins) { // TODO MOVE THIS IN GraphNode CLASS
                     //<editor-fold desc="Draw Pin Group Names">
                     ImVec2 nodePosition = new ImVec2(NodeEditor.getNodePositionX(node.getId()), NodeEditor.getNodePositionY(node.getId()));
 
@@ -171,15 +202,20 @@ public class Gates_NodeEditor {
             }
             NodeEditor.endCreate();
 
-            int uniqueLinkId = 1;
-            for (GraphNode node : currentGraph.nodes.values()) {
-                for (GraphNodePin inputPin : node.inputPins)
-                    if (inputPin.hasConnections())
-                        for (GraphNodePin connectedPin : inputPin.getConnectedPins()) {
-                            GraphNode tmpNode = currentGraph.findByOutput(connectedPin.getId());
-                            if (tmpNode != null && currentGraph.nodes.containsKey(tmpNode.getId()))
-                                NodeEditor.link(uniqueLinkId++, connectedPin.getId(), inputPin.getId());
-                        }
+            if (showConnections) {
+                links.clear();
+                int uniqueLinkId = 5000;
+                for (GraphNode node : currentGraph.nodes.values()) {
+                    for (GraphNodePin inputPin : node.inputPins)
+                        if (inputPin.hasConnections())
+                            for (GraphNodePin connectedPin : inputPin.getConnectedPins()) {
+                                GraphNode tmpNode = currentGraph.findByOutput(connectedPin.getId());
+                                if (tmpNode != null && currentGraph.nodes.containsKey(tmpNode.getId())) {
+                                    NodeEditor.link(uniqueLinkId++, connectedPin.getId(), inputPin.getId());
+                                    links.put(uniqueLinkId - 1, inputPin.getId());
+                                }
+                            }
+                }
             }
 
             NodeEditor.suspend();
@@ -414,8 +450,28 @@ public class Gates_NodeEditor {
         ImGui.setCursorPosX(ImGui.getCursorPosX() + 10.0f);
         ImGui.textDisabled("Alt+H");
         ImGui.sameLine();
-        if (ImGui.checkbox("##ShowPinTitles", showPinTitles) || ImGui.isKeyPressed(GLFW_KEY_H))
+        if (ImGui.checkbox("##ShowPinTitles", showPinTitles) || (ImGui.isKeyDown(GLFW_KEY_LEFT_ALT) && ImGui.isKeyPressed(GLFW_KEY_H)))
             showPinTitles = !showPinTitles;
+
+        ImGui.sameLine();
+        ImGui.setCursorPosX(ImGui.getCursorPosX() + 3.0f);
+        ImGui.text("Show Pins");
+        ImGui.sameLine();
+        ImGui.setCursorPosX(ImGui.getCursorPosX() + 10.0f);
+        ImGui.textDisabled("Alt+P");
+        ImGui.sameLine();
+        if (ImGui.checkbox("##ShowPins", showPins) || (ImGui.isKeyDown(GLFW_KEY_LEFT_ALT) && ImGui.isKeyPressed(GLFW_KEY_P)))
+            showPins = !showPins;
+
+        ImGui.sameLine();
+        ImGui.setCursorPosX(ImGui.getCursorPosX() + 3.0f);
+        ImGui.text("Show Connections");
+        ImGui.sameLine();
+        ImGui.setCursorPosX(ImGui.getCursorPosX() + 10.0f);
+        ImGui.textDisabled("Alt+L");
+        ImGui.sameLine();
+        if (ImGui.checkbox("##ShowConnections", showConnections) || (ImGui.isKeyDown(GLFW_KEY_LEFT_ALT) && ImGui.isKeyPressed(GLFW_KEY_L)))
+            showConnections = !showConnections;
 
         ImGui.setCursorPosY(ImGui.getCursorPosY() + 3.0f);
         ImGui.text("Gate Name");
@@ -468,6 +524,9 @@ public class Gates_NodeEditor {
         ImGui.sameLine();
         if (ImGui.button("Not"))
             positionNode(currentGraph.copyCreateGraphNode(new Gate_Not(), new ImVec2()));
+        ImGui.sameLine();
+        if (ImGui.button("7-Segment Display"))
+            positionNode(currentGraph.copyCreateGraphNode(new Gate_7SegmentDisplay(), new ImVec2()));
 
         ImGui.separator();
         for (int i = 0; i < this.gateGroups.size(); i++) {
@@ -506,7 +565,7 @@ public class Gates_NodeEditor {
 
             ImVec2 lastButtonPos = new ImVec2();
             ImGui.getItemRectMax(lastButtonPos);
-            float nextButtonX2 = lastButtonPos.x + ImGui.getStyle().getItemSpacingX() + tmp.x;
+            float nextButtonX2 = lastButtonPos.x + (ImGui.getStyle().getItemSpacingX() * 2.0f) + (ImGui.getStyle().getFramePaddingX() * 2.0f) + tmp.x;
 
             if (i < this.gateGroups.size() - 1 && nextButtonX2 < ImGui.getContentRegionAvailX())
                 ImGui.sameLine();
@@ -560,7 +619,7 @@ public class Gates_NodeEditor {
 
             ImVec2 lastButtonPos = new ImVec2();
             ImGui.getItemRectMax(lastButtonPos);
-            float nextButtonX2 = lastButtonPos.x + ImGui.getStyle().getItemSpacingX() + tmp.x;
+            float nextButtonX2 = lastButtonPos.x + ImGui.getStyle().getItemSpacingX() + (ImGui.getStyle().getFramePaddingX() * 2.0f) + tmp.x;
 
             notSameLine = ImGui.getCursorPos();
             if (i < this.gates.size() - 1 && nextButtonX2 < ImGui.getContentRegionAvailX())

@@ -1,6 +1,6 @@
 package editor.node;
 
-import editor.TestFieldsWindow;
+import editor.gates.Gate_7SegmentDisplay;
 import editor.utils.ImFonts;
 import imgui.ImGui;
 import imgui.ImVec2;
@@ -26,11 +26,14 @@ public abstract class GraphNode {
 
     private ImVec2 position;
 
-    private transient float inputHeight = 0.0f;
-    private transient float outputHeight = 0.0f;
-    private transient float contentWidth = 1.0f;
+    protected transient float inputHeight = 0.0f;
+    protected transient float outputHeight = 0.0f;
+    protected transient float contentWidth = 1.0f;
+    protected transient float contentHeight = 0.0f;
 
     protected Map<String, List<Integer>> pinGroups = new HashMap<>();
+
+    private Gate_7SegmentDisplay display = null;
 
     public void init(final int nodeId, ImVec2 position) {
         this.nodeId = nodeId;
@@ -60,42 +63,63 @@ public abstract class GraphNode {
 
         ImVec2 startCursorPos = ImGui.getCursorPos();
 
-        if (outputHeight > inputHeight)
-            ImGui.setCursorPosY(startCursorPos.y + outputHeight / 2.0f - inputHeight / 2.0f);
-        ImGui.beginGroup();
-        for (GraphNodePin pin : this.inputPins)
-            drawPin(pin);
-        ImGui.endGroup();
-        inputHeight = ImGui.getItemRectSizeY();
-
-        ImGui.setCursorPos(ImGui.getItemRectMaxX() + spacing, startCursorPos.y);
-
-        if (this.contentWidth > 0) {
+        if (Gates_NodeEditor.showPins) {
+            if (this.contentHeight > this.inputHeight)
+                ImGui.setCursorPosY(startCursorPos.y + this.contentHeight / 2.0f - inputHeight / 2.0f - 4.0f);
+            else if (outputHeight > inputHeight)
+                ImGui.setCursorPosY(startCursorPos.y + outputHeight / 2.0f - inputHeight / 2.0f);
             ImGui.beginGroup();
-            drawNode();
+            for (GraphNodePin pin : this.inputPins)
+                drawPin(pin);
             ImGui.endGroup();
-            ImGui.setCursorPos(ImGui.getItemRectMaxX() + spacing, startCursorPos.y);
-            this.contentWidth = ImGui.getItemRectSizeX();
-        } else {
-            float lineHeight = ImGui.getFontSize();
-            if (this.inputHeight > this.outputHeight)
-                ImGui.setCursorPosY(startCursorPos.y + this.inputHeight / 2.0f - lineHeight / 2.0f - 4.0f);
-            else
-                ImGui.setCursorPosY(startCursorPos.y + this.outputHeight / 2.0f - lineHeight / 2.0f - 4.0f);
+            inputHeight = ImGui.getItemRectSizeY();
 
-            ImGui.pushFont(ImFonts.regular150);
-            ImGui.text(getName());
-            ImGui.popFont();
+            ImGui.setCursorPos(ImGui.getItemRectMaxX() + spacing, startCursorPos.y);
+        } else
+            inputHeight = 22.0f;
+
+        if (!hasDisplay()) {
+            if (this.contentWidth > 0) {
+                ImGui.beginGroup();
+                drawNode();
+                ImGui.endGroup();
+                ImGui.setCursorPos(ImGui.getItemRectMaxX() + spacing, startCursorPos.y);
+                this.contentWidth = ImGui.getItemRectSizeX();
+                this.contentHeight = ImGui.getItemRectSizeY();
+            } else {
+                float lineHeight = ImGui.getFontSize();
+
+                if (this.inputHeight > this.outputHeight)
+                    ImGui.setCursorPosY(startCursorPos.y + this.inputHeight / 2.0f - lineHeight / 2.0f - 4.0f);
+                else
+                    ImGui.setCursorPosY(startCursorPos.y + this.outputHeight / 2.0f - lineHeight / 2.0f - 4.0f);
+
+                ImGui.pushFont(ImFonts.regular150);
+                ImGui.text(getName());
+                ImGui.popFont();
+                ImGui.setCursorPos(ImGui.getItemRectMaxX() + spacing, startCursorPos.y);
+            }
+        } else {
+            ImGui.beginGroup();
+            drawDisplay();
+            ImGui.endGroup();
+            this.contentHeight = ImGui.getItemRectSizeY();
             ImGui.setCursorPos(ImGui.getItemRectMaxX() + spacing, startCursorPos.y);
         }
 
-        if (inputHeight > outputHeight)
-            ImGui.setCursorPosY(startCursorPos.y + inputHeight / 2.0f - outputHeight / 2.0f);
-        ImGui.beginGroup();
-        for (GraphNodePin pin : this.outputPins)
-            drawPin(pin);
-        ImGui.endGroup();
-        outputHeight = ImGui.getItemRectSizeY();
+        if (Gates_NodeEditor.showPins) {
+            if (this.contentHeight > this.outputHeight)
+                ImGui.setCursorPosY(startCursorPos.y + this.contentHeight / 2.0f - this.outputHeight / 2.0f);
+            else if (this.inputHeight > this.outputHeight)
+                ImGui.setCursorPosY(startCursorPos.y + this.inputHeight / 2.0f - this.outputHeight / 2.0f);
+            ImGui.beginGroup();
+            for (GraphNodePin pin : this.outputPins)
+                drawPin(pin);
+            ImGui.endGroup();
+            outputHeight = ImGui.getItemRectSizeY();
+        } else {
+            outputHeight = 0.0f;
+        }
         ImGui.popStyleVar();
     }
 
@@ -137,10 +161,10 @@ public abstract class GraphNode {
                 color, // Color
                 20); // Circle segments
 
-//        ImGui.text((pin.isInput() ? "<-" : "->") + "/" + pin.getId() + "/" + pin.getValue());
+//        ImGui.text("" + pin.getId());
 //        if (pin.hasConnections())
 //            for (int i = 0; i < pin.getConnectedPins().size(); i++)
-//                ImGui.text("" + pin.getConnectedPin(i).getId() + " " + pin.getConnectedPin(i).getValue());
+//                ImGui.text("  Con-" + pin.getConnectedPin(i).getId());
 
         if (!Gates_NodeEditor.showPinTitles) {
             NodeEditor.endPin();
@@ -313,4 +337,87 @@ public abstract class GraphNode {
     }
 
     public Map<String, List<Integer>> getGroups() { return this.pinGroups; }
+
+    public boolean hasDisplay() { return this.display != null; }
+
+    public void setDisplay(Gate_7SegmentDisplay display) { this.display = display; }
+
+    private void drawDisplay() {
+        ImGui.dummy(Gates_NodeEditor.showPins ? 108.0f : 114.0f, 196.0f);
+
+        float size = 74.0f;
+        float thickness = 13.0f;
+        float spacing = 2.0f;
+        ImVec2 offset = new ImVec2(15.0f, -186.0f);
+        if (!Gates_NodeEditor.showPins)
+            offset.x += 7.0f;
+
+        int[] segmentColors = new int[7];
+        for (int i = 0; i < segmentColors.length; i++) {
+            if (display.inputPins.get(i).getValue())
+                segmentColors[i] = ImGui.getColorU32(0.831f, 0.163f, 0.088f, 1.0f); // On
+            else
+                segmentColors[i] = ImGui.getColorU32(0.070f, 0.072f, 0.076f, 1.0f); // Off
+        }
+
+        ImGui.getWindowDrawList().addConvexPolyFilled(new ImVec2[]{
+                new ImVec2(ImGui.getCursorScreenPosX() + offset.x, ImGui.getCursorScreenPosY() + thickness + offset.y - (spacing * 2.0f)),
+                new ImVec2(ImGui.getCursorScreenPosX() + offset.x + thickness, ImGui.getCursorScreenPosY() + offset.y - (spacing * 2.0f)),
+                new ImVec2(ImGui.getCursorScreenPosX() + offset.x + size - thickness, ImGui.getCursorScreenPosY() + offset.y - (spacing * 2.0f)),
+                new ImVec2(ImGui.getCursorScreenPosX() + offset.x + size, ImGui.getCursorScreenPosY() + thickness + offset.y - (spacing * 2.0f)),
+                new ImVec2(ImGui.getCursorScreenPosX() + offset.x + size - thickness, ImGui.getCursorScreenPosY() + (thickness * 2.0f) + offset.y - (spacing * 2.0f)),
+                new ImVec2(ImGui.getCursorScreenPosX() + offset.x + thickness, ImGui.getCursorScreenPosY() + (thickness * 2.0f) + offset.y - (spacing * 2.0f)),
+        }, 6, segmentColors[0]);
+        ImGui.getWindowDrawList().addConvexPolyFilled(new ImVec2[]{
+                new ImVec2(ImGui.getCursorScreenPosX() + offset.x, ImGui.getCursorScreenPosY() + thickness + size + offset.y),
+                new ImVec2(ImGui.getCursorScreenPosX() + offset.x + thickness, ImGui.getCursorScreenPosY() + size + offset.y),
+                new ImVec2(ImGui.getCursorScreenPosX() + offset.x + size - thickness, ImGui.getCursorScreenPosY() + size + offset.y),
+                new ImVec2(ImGui.getCursorScreenPosX() + offset.x + size, ImGui.getCursorScreenPosY() + thickness + size + offset.y),
+                new ImVec2(ImGui.getCursorScreenPosX() + offset.x + size - thickness, ImGui.getCursorScreenPosY() + (thickness * 2.0f) + size + offset.y),
+                new ImVec2(ImGui.getCursorScreenPosX() + offset.x + thickness, ImGui.getCursorScreenPosY() + (thickness * 2.0f) + size + offset.y),
+        }, 6, segmentColors[6]);
+        ImGui.getWindowDrawList().addConvexPolyFilled(new ImVec2[]{
+                new ImVec2(ImGui.getCursorScreenPosX() + offset.x, ImGui.getCursorScreenPosY() + thickness + (size * 2.0f) + offset.y + (spacing * 2.0f)),
+                new ImVec2(ImGui.getCursorScreenPosX() + offset.x + thickness, ImGui.getCursorScreenPosY() + (size * 2.0f) + offset.y + (spacing * 2.0f)),
+                new ImVec2(ImGui.getCursorScreenPosX() + offset.x + size - thickness, ImGui.getCursorScreenPosY() + (size * 2.0f) + offset.y + (spacing * 2.0f)),
+                new ImVec2(ImGui.getCursorScreenPosX() + offset.x + size, ImGui.getCursorScreenPosY() + thickness + (size * 2.0f) + offset.y + (spacing * 2.0f)),
+                new ImVec2(ImGui.getCursorScreenPosX() + offset.x + size - thickness, ImGui.getCursorScreenPosY() + (thickness * 2.0f) + (size * 2.0f) + offset.y + (spacing * 2.0f)),
+                new ImVec2(ImGui.getCursorScreenPosX() + offset.x + thickness, ImGui.getCursorScreenPosY() + (thickness * 2.0f) + (size * 2.0f) + offset.y + (spacing * 2.0f)),
+        }, 6, segmentColors[3]);
+
+        ImGui.getWindowDrawList().addConvexPolyFilled(new ImVec2[]{
+                new ImVec2(ImGui.getCursorScreenPosX() - spacing + offset.x, ImGui.getCursorScreenPosY() + thickness + offset.y - spacing),
+                new ImVec2(ImGui.getCursorScreenPosX() - spacing + offset.x + thickness, ImGui.getCursorScreenPosY() + (thickness * 2.0f) + offset.y - spacing),
+                new ImVec2(ImGui.getCursorScreenPosX() - spacing + offset.x + thickness, ImGui.getCursorScreenPosY() + size + offset.y - spacing),
+                new ImVec2(ImGui.getCursorScreenPosX() - spacing + offset.x, ImGui.getCursorScreenPosY() + size + thickness + offset.y - spacing),
+                new ImVec2(ImGui.getCursorScreenPosX() - spacing + offset.x - thickness, ImGui.getCursorScreenPosY() + size + offset.y - spacing),
+                new ImVec2(ImGui.getCursorScreenPosX() - spacing + offset.x - thickness, ImGui.getCursorScreenPosY() + (thickness * 2.0f) + offset.y - spacing),
+        }, 6, segmentColors[5]);
+        ImGui.getWindowDrawList().addConvexPolyFilled(new ImVec2[]{
+                new ImVec2(ImGui.getCursorScreenPosX() + spacing + offset.x + size, ImGui.getCursorScreenPosY() + thickness + offset.y - spacing),
+                new ImVec2(ImGui.getCursorScreenPosX() + spacing + offset.x + size + thickness, ImGui.getCursorScreenPosY() + (thickness * 2.0f) + offset.y - spacing),
+                new ImVec2(ImGui.getCursorScreenPosX() + spacing + offset.x + size + thickness, ImGui.getCursorScreenPosY() + size + offset.y - spacing),
+                new ImVec2(ImGui.getCursorScreenPosX() + spacing + offset.x + size, ImGui.getCursorScreenPosY() + size + thickness + offset.y - spacing),
+                new ImVec2(ImGui.getCursorScreenPosX() + spacing + offset.x + size - thickness, ImGui.getCursorScreenPosY() + size + offset.y - spacing),
+                new ImVec2(ImGui.getCursorScreenPosX() + spacing + offset.x + size - thickness, ImGui.getCursorScreenPosY() + (thickness * 2.0f) + offset.y - spacing),
+        }, 6, segmentColors[1]);
+
+
+        ImGui.getWindowDrawList().addConvexPolyFilled(new ImVec2[]{
+                new ImVec2(ImGui.getCursorScreenPosX() - spacing + offset.x, ImGui.getCursorScreenPosY() + thickness + size + offset.y + spacing),
+                new ImVec2(ImGui.getCursorScreenPosX() - spacing + offset.x + thickness, ImGui.getCursorScreenPosY() + (thickness * 2.0f) + size + offset.y + spacing),
+                new ImVec2(ImGui.getCursorScreenPosX() - spacing + offset.x + thickness, ImGui.getCursorScreenPosY() + (size * 2.0f) + offset.y + spacing),
+                new ImVec2(ImGui.getCursorScreenPosX() - spacing + offset.x, ImGui.getCursorScreenPosY() + thickness + (size * 2.0f) + offset.y + spacing),
+                new ImVec2(ImGui.getCursorScreenPosX() - spacing + offset.x - thickness, ImGui.getCursorScreenPosY() + (size * 2.0f) + offset.y + spacing),
+                new ImVec2(ImGui.getCursorScreenPosX() - spacing + offset.x - thickness, ImGui.getCursorScreenPosY() + (thickness * 2.0f) + size + offset.y + spacing),
+        }, 6, segmentColors[4]);
+        ImGui.getWindowDrawList().addConvexPolyFilled(new ImVec2[]{
+                new ImVec2(ImGui.getCursorScreenPosX() + spacing + offset.x + size, ImGui.getCursorScreenPosY() + thickness + size + offset.y + spacing),
+                new ImVec2(ImGui.getCursorScreenPosX() + spacing + offset.x + size + thickness, ImGui.getCursorScreenPosY() + (thickness * 2.0f) + size + offset.y + spacing),
+                new ImVec2(ImGui.getCursorScreenPosX() + spacing + offset.x + size + thickness, ImGui.getCursorScreenPosY() + (size * 2.0f) + offset.y + spacing),
+                new ImVec2(ImGui.getCursorScreenPosX() + spacing + offset.x + size, ImGui.getCursorScreenPosY() + thickness + (size * 2.0f) + offset.y + spacing),
+                new ImVec2(ImGui.getCursorScreenPosX() + spacing + offset.x + size - thickness, ImGui.getCursorScreenPosY() + (size * 2.0f) + offset.y + spacing),
+                new ImVec2(ImGui.getCursorScreenPosX() + spacing + offset.x + size - thickness, ImGui.getCursorScreenPosY() + (thickness * 2.0f) + size + offset.y + spacing),
+        }, 6, segmentColors[2]);
+    }
 }
