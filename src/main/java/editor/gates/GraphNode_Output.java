@@ -34,20 +34,18 @@ public class GraphNode_Output extends GraphNode {
 
     @Override
     protected void drawPin(GraphNodePin pin) {
-        ImGui.pushID(pin.getId());
-        super.drawPin(pin);
-        if (Gates_NodeEditor.showPinTitles) {
+        if (Gates_NodeEditor.showPins) {
+            ImGui.pushID(pin.getId());
+            super.drawPin(pin);
             ImGui.sameLine();
             ImGui.setCursorPosY(ImGui.getCursorPosY() + Gates_NodeEditor.pinTouchExtraPadding);
-            if (Gates_NodeEditor.showPinTitles) {
-                ImGui.setNextItemWidth(70.0f);
-                ImString pinLabelTmp = new ImString(pin.getLabel(), 20);
-                if (ImGui.inputText("##PinLabel", pinLabelTmp))
-                    pin.setLabel(pinLabelTmp.get());
-            }
+            ImGui.setNextItemWidth(70.0f);
+            ImString pinLabelTmp = new ImString(pin.getLabel(), 20);
+            if (ImGui.inputText("##PinLabel", pinLabelTmp))
+                pin.setLabel(pinLabelTmp.get());
             ImGui.setCursorPosY(ImGui.getCursorPosY() - Gates_NodeEditor.pinTouchExtraPadding);
+            ImGui.popID();
         }
-        ImGui.popID();
     }
 
     @Override

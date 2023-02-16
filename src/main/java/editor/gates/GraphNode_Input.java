@@ -38,12 +38,15 @@ public class GraphNode_Input extends GraphNode {
     protected void drawPin(GraphNodePin pin) {
         ImGui.pushID(pin.getId());
         ImGui.setCursorPosY(ImGui.getCursorPosY() + Gates_NodeEditor.pinTouchExtraPadding);
-        if (Gates_NodeEditor.showPinTitles) {
-            ImGui.setNextItemWidth(70.0f);
-            ImString pinLabelTmp = new ImString(pin.getLabel(), 20);
-            if (ImGui.inputText("##PinLabel", pinLabelTmp))
-                pin.setLabel(pinLabelTmp.get());
-            ImGui.sameLine();
+
+        if (Gates_NodeEditor.showPins) {
+            if (Gates_NodeEditor.showPinTitles) {
+                ImGui.setNextItemWidth(70.0f);
+                ImString pinLabelTmp = new ImString(pin.getLabel(), 20);
+                if (ImGui.inputText("##PinLabel", pinLabelTmp))
+                    pin.setLabel(pinLabelTmp.get());
+                ImGui.sameLine();
+            }
         }
 
         if (pin.getValue()) {
@@ -55,6 +58,7 @@ public class GraphNode_Input extends GraphNode {
             ImGui.pushStyleColor(ImGuiCol.FrameBgHovered, 0.935f, 0.186f, 0.086f, 1.0f);
             ImGui.pushStyleColor(ImGuiCol.FrameBgActive, 1.0f, 0.260f, 0.106f, 1.0f);
         }
+
         ImGui.pushStyleColor(ImGuiCol.CheckMark, 0.0f, 0.0f, 0.0f, 0.0f);
         ImGui.pushStyleVar(ImGuiStyleVar.FrameRounding, 7.0f);
         if (ImGui.checkbox("##isActive" + pin.getId(), pin.getValue()))
@@ -62,9 +66,13 @@ public class GraphNode_Input extends GraphNode {
         ImGui.popStyleVar();
         ImGui.popStyleColor(4);
 
-        ImGui.sameLine();
-        ImGui.setCursorPosY(ImGui.getCursorPosY() - Gates_NodeEditor.pinTouchExtraPadding);
-        super.drawPin(pin);
+        if (Gates_NodeEditor.showPins) {
+            ImGui.sameLine();
+            ImGui.setCursorPosY(ImGui.getCursorPosY() - Gates_NodeEditor.pinTouchExtraPadding);
+            super.drawPin(pin);
+        } else
+            ImGui.setCursorPosY(ImGui.getCursorPosY() + Gates_NodeEditor.pinTouchExtraPadding);
+
         ImGui.popID();
     }
 

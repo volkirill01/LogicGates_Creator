@@ -1,9 +1,9 @@
 {
-  "filepath": "projects/sample/gates/4Bit To 7-Segment.gate",
-  "gateName": "4Bit To 7-Segment",
-  "gateColor": "(36,157 34,757 62,405)",
-  "nextNodeId": 115,
-  "nextPinId": 1311,
+  "filepath": "projects/sample/gates/Dabble.gate",
+  "gateName": "Dabble",
+  "gateColor": "(40,151 144,177 40,151)",
+  "nextNodeId": 43,
+  "nextPinId": 1103,
   "displayId": -1,
   "nodes": [
     {
@@ -18,9 +18,10 @@
             "label": "In(1)",
             "value": false,
             "connectedPinsIds": [
-              1251,
-              1243,
-              1297
+              1017,
+              1024,
+              1092,
+              1084
             ]
           },
           {
@@ -29,9 +30,9 @@
             "label": "In(2)",
             "value": false,
             "connectedPinsIds": [
-              1203,
-              1198,
-              1188
+              1032,
+              1041,
+              1074
             ]
           },
           {
@@ -40,12 +41,7 @@
             "label": "In(3)",
             "value": false,
             "connectedPinsIds": [
-              1269,
-              1307,
-              1231,
-              1235,
-              1215,
-              1210
+              1008
             ]
           },
           {
@@ -54,8 +50,11 @@
             "label": "In(4)",
             "value": false,
             "connectedPinsIds": [
-              1202,
-              1196
+              1025,
+              1015,
+              1010,
+              1042,
+              1034
             ]
           }
         ],
@@ -65,8 +64,8 @@
           "z": 52.0
         },
         "position": {
-          "x": -338.0,
-          "y": 335.0
+          "x": -162.0,
+          "y": 199.0
         },
         "pinGroups": {
           "##Number_In": [
@@ -86,64 +85,37 @@
           {
             "id": 1001,
             "isInput": true,
-            "label": "Up",
-            "value": true,
+            "label": "Out(1)",
+            "value": false,
             "connectedPinsIds": [
-              1266
+              1098
             ]
           },
           {
             "id": 1005,
             "isInput": true,
-            "label": "Right-Up",
-            "value": true,
+            "label": "Out(2)",
+            "value": false,
             "connectedPinsIds": [
-              1310
+              1081
             ]
           },
           {
             "id": 1006,
             "isInput": true,
-            "label": "Right-Down",
-            "value": true,
+            "label": "Out(3)",
+            "value": false,
             "connectedPinsIds": [
-              1305
+              1078
             ]
           },
           {
             "id": 1007,
             "isInput": true,
-            "label": "Down",
-            "value": true,
-            "connectedPinsIds": [
-              1296
-            ]
-          },
-          {
-            "id": 1008,
-            "isInput": true,
-            "label": "Left-Down",
-            "value": true,
-            "connectedPinsIds": [
-              1287
-            ]
-          },
-          {
-            "id": 1009,
-            "isInput": true,
-            "label": "Left-Up",
-            "value": true,
-            "connectedPinsIds": [
-              1293
-            ]
-          },
-          {
-            "id": 1010,
-            "isInput": true,
-            "label": "Middle",
+            "label": "Out(4)",
             "value": false,
             "connectedPinsIds": [
-              1290
+              1062
             ]
           }
         ],
@@ -154,36 +126,42 @@
           "z": 52.0
         },
         "position": {
-          "x": 2269.0,
-          "y": 255.0
+          "x": 1997.0,
+          "y": 211.0
         },
-        "pinGroups": {}
+        "pinGroups": {
+          "##Number_Out": [
+            1001,
+            1005,
+            1006,
+            1007
+          ]
+        }
       }
     },
     {
       "type": "editor.gates.Gate_Not",
       "properties": {
-        "nodeId": 64,
+        "nodeId": 3,
         "inputPins": [
           {
-            "id": 1188,
+            "id": 1008,
             "isInput": true,
             "label": "In",
             "value": false,
             "connectedPinsIds": [
-              1002
+              1003
             ]
           }
         ],
         "outputPins": [
           {
-            "id": 1189,
+            "id": 1009,
             "isInput": false,
             "label": "Out",
             "value": true,
             "connectedPinsIds": [
-              1211,
-              1267
+              1012
             ]
           }
         ],
@@ -193,55 +171,8 @@
           "z": 52.0
         },
         "position": {
-          "x": 237.0,
-          "y": 495.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_And",
-      "properties": {
-        "nodeId": 66,
-        "inputPins": [
-          {
-            "id": 1193,
-            "isInput": true,
-            "label": "A",
-            "value": true,
-            "connectedPinsIds": [
-              1197
-            ]
-          },
-          {
-            "id": 1194,
-            "isInput": true,
-            "label": "B",
-            "value": true,
-            "connectedPinsIds": [
-              1199
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1195,
-            "isInput": false,
-            "label": "Out",
-            "value": true,
-            "connectedPinsIds": [
-              1200
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 341.0,
-          "y": 255.0
+          "x": 397.0,
+          "y": 35.0
         },
         "pinGroups": {}
       }
@@ -249,10 +180,10 @@
     {
       "type": "editor.gates.Gate_Not",
       "properties": {
-        "nodeId": 67,
+        "nodeId": 4,
         "inputPins": [
           {
-            "id": 1196,
+            "id": 1010,
             "isInput": true,
             "label": "In",
             "value": false,
@@ -263,12 +194,12 @@
         ],
         "outputPins": [
           {
-            "id": 1197,
+            "id": 1011,
             "isInput": false,
             "label": "Out",
             "value": true,
             "connectedPinsIds": [
-              1193
+              1013
             ]
           }
         ],
@@ -278,84 +209,8 @@
           "z": 52.0
         },
         "position": {
-          "x": 229.0,
-          "y": 255.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_Not",
-      "properties": {
-        "nodeId": 68,
-        "inputPins": [
-          {
-            "id": 1198,
-            "isInput": true,
-            "label": "In",
-            "value": false,
-            "connectedPinsIds": [
-              1002
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1199,
-            "isInput": false,
-            "label": "Out",
-            "value": true,
-            "connectedPinsIds": [
-              1194
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 229.0,
-          "y": 287.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_Not",
-      "properties": {
-        "nodeId": 69,
-        "inputPins": [
-          {
-            "id": 1200,
-            "isInput": true,
-            "label": "In",
-            "value": true,
-            "connectedPinsIds": [
-              1195
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1201,
-            "isInput": false,
-            "label": "Out",
-            "value": false,
-            "connectedPinsIds": [
-              1205
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 453.0,
-          "y": 271.0
+          "x": 397.0,
+          "y": 67.0
         },
         "pinGroups": {}
       }
@@ -363,85 +218,74 @@
     {
       "type": "editor.gates.Gate_And",
       "properties": {
-        "nodeId": 70,
+        "nodeId": 5,
         "inputPins": [
           {
-            "id": 1202,
+            "id": 1012,
             "isInput": true,
             "label": "A",
+            "value": true,
+            "connectedPinsIds": [
+              1009
+            ]
+          },
+          {
+            "id": 1013,
+            "isInput": true,
+            "label": "B",
+            "value": true,
+            "connectedPinsIds": [
+              1011
+            ]
+          }
+        ],
+        "outputPins": [
+          {
+            "id": 1014,
+            "isInput": false,
+            "label": "Out",
+            "value": true,
+            "connectedPinsIds": [
+              1063,
+              1056
+            ]
+          }
+        ],
+        "nodeColor": {
+          "x": 43.0,
+          "y": 45.0,
+          "z": 52.0
+        },
+        "position": {
+          "x": 509.0,
+          "y": 35.0
+        },
+        "pinGroups": {}
+      }
+    },
+    {
+      "type": "editor.gates.Gate_Not",
+      "properties": {
+        "nodeId": 6,
+        "inputPins": [
+          {
+            "id": 1015,
+            "isInput": true,
+            "label": "In",
             "value": false,
             "connectedPinsIds": [
               1004
             ]
-          },
-          {
-            "id": 1203,
-            "isInput": true,
-            "label": "B",
-            "value": false,
-            "connectedPinsIds": [
-              1002
-            ]
           }
         ],
         "outputPins": [
           {
-            "id": 1204,
+            "id": 1016,
             "isInput": false,
             "label": "Out",
-            "value": false,
-            "connectedPinsIds": [
-              1208
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 229.0,
-          "y": 323.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_And",
-      "properties": {
-        "nodeId": 71,
-        "inputPins": [
-          {
-            "id": 1205,
-            "isInput": true,
-            "label": "A",
-            "value": false,
-            "connectedPinsIds": [
-              1201
-            ]
-          },
-          {
-            "id": 1206,
-            "isInput": true,
-            "label": "B",
             "value": true,
             "connectedPinsIds": [
-              1209
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1207,
-            "isInput": false,
-            "label": "Out",
-            "value": false,
-            "connectedPinsIds": [
-              1258,
-              1217,
-              1236,
-              1226
+              1020
             ]
           }
         ],
@@ -451,8 +295,8 @@
           "z": 52.0
         },
         "position": {
-          "x": 565.0,
-          "y": 291.0
+          "x": 357.0,
+          "y": 207.0
         },
         "pinGroups": {}
       }
@@ -460,627 +304,10 @@
     {
       "type": "editor.gates.Gate_Not",
       "properties": {
-        "nodeId": 72,
+        "nodeId": 7,
         "inputPins": [
           {
-            "id": 1208,
-            "isInput": true,
-            "label": "In",
-            "value": false,
-            "connectedPinsIds": [
-              1204
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1209,
-            "isInput": false,
-            "label": "Out",
-            "value": true,
-            "connectedPinsIds": [
-              1206
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 341.0,
-          "y": 339.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_And",
-      "properties": {
-        "nodeId": 73,
-        "inputPins": [
-          {
-            "id": 1210,
-            "isInput": true,
-            "label": "A",
-            "value": false,
-            "connectedPinsIds": [
-              1003
-            ]
-          },
-          {
-            "id": 1211,
-            "isInput": true,
-            "label": "B",
-            "value": true,
-            "connectedPinsIds": [
-              1189
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1212,
-            "isInput": false,
-            "label": "Out",
-            "value": false,
-            "connectedPinsIds": [
-              1213
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 501.0,
-          "y": 449.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_Not",
-      "properties": {
-        "nodeId": 74,
-        "inputPins": [
-          {
-            "id": 1213,
-            "isInput": true,
-            "label": "In",
-            "value": false,
-            "connectedPinsIds": [
-              1212
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1214,
-            "isInput": false,
-            "label": "Out",
-            "value": true,
-            "connectedPinsIds": [
-              1286,
-              1241,
-              1250
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 629.0,
-          "y": 463.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_Not",
-      "properties": {
-        "nodeId": 75,
-        "inputPins": [
-          {
-            "id": 1215,
-            "isInput": true,
-            "label": "In",
-            "value": false,
-            "connectedPinsIds": [
-              1003
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1216,
-            "isInput": false,
-            "label": "Out",
-            "value": true,
-            "connectedPinsIds": [
-              1221
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 821.0,
-          "y": 831.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_Not",
-      "properties": {
-        "nodeId": 76,
-        "inputPins": [
-          {
-            "id": 1217,
-            "isInput": true,
-            "label": "In",
-            "value": false,
-            "connectedPinsIds": [
-              1207
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1218,
-            "isInput": false,
-            "label": "Out",
-            "value": true,
-            "connectedPinsIds": [
-              1222
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 821.0,
-          "y": 863.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_Not",
-      "properties": {
-        "nodeId": 77,
-        "inputPins": [
-          {
-            "id": 1219,
-            "isInput": true,
-            "label": "In",
-            "value": true,
-            "connectedPinsIds": [
-              1223
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1220,
-            "isInput": false,
-            "label": "Out",
-            "value": false,
-            "connectedPinsIds": [
-              1289
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 1045.0,
-          "y": 847.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_And",
-      "properties": {
-        "nodeId": 78,
-        "inputPins": [
-          {
-            "id": 1221,
-            "isInput": true,
-            "label": "A",
-            "value": true,
-            "connectedPinsIds": [
-              1216
-            ]
-          },
-          {
-            "id": 1222,
-            "isInput": true,
-            "label": "B",
-            "value": true,
-            "connectedPinsIds": [
-              1218
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1223,
-            "isInput": false,
-            "label": "Out",
-            "value": true,
-            "connectedPinsIds": [
-              1219
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 933.0,
-          "y": 831.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_Not",
-      "properties": {
-        "nodeId": 79,
-        "inputPins": [
-          {
-            "id": 1224,
-            "isInput": true,
-            "label": "In",
-            "value": true,
-            "connectedPinsIds": [
-              1230
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1225,
-            "isInput": false,
-            "label": "Out",
-            "value": false,
-            "connectedPinsIds": [
-              1238
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 989.0,
-          "y": 639.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_Not",
-      "properties": {
-        "nodeId": 80,
-        "inputPins": [
-          {
-            "id": 1226,
-            "isInput": true,
-            "label": "In",
-            "value": false,
-            "connectedPinsIds": [
-              1207
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1227,
-            "isInput": false,
-            "label": "Out",
-            "value": true,
-            "connectedPinsIds": [
-              1229
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 749.0,
-          "y": 655.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_And",
-      "properties": {
-        "nodeId": 81,
-        "inputPins": [
-          {
-            "id": 1228,
-            "isInput": true,
-            "label": "A",
-            "value": true,
-            "connectedPinsIds": [
-              1232
-            ]
-          },
-          {
-            "id": 1229,
-            "isInput": true,
-            "label": "B",
-            "value": true,
-            "connectedPinsIds": [
-              1227
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1230,
-            "isInput": false,
-            "label": "Out",
-            "value": true,
-            "connectedPinsIds": [
-              1224
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 869.0,
-          "y": 623.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_Not",
-      "properties": {
-        "nodeId": 82,
-        "inputPins": [
-          {
-            "id": 1231,
-            "isInput": true,
-            "label": "In",
-            "value": false,
-            "connectedPinsIds": [
-              1003
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1232,
-            "isInput": false,
-            "label": "Out",
-            "value": true,
-            "connectedPinsIds": [
-              1228
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 749.0,
-          "y": 623.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_Not",
-      "properties": {
-        "nodeId": 83,
-        "inputPins": [
-          {
-            "id": 1233,
-            "isInput": true,
-            "label": "In",
-            "value": false,
-            "connectedPinsIds": [
-              1237
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1234,
-            "isInput": false,
-            "label": "Out",
-            "value": true,
-            "connectedPinsIds": [
-              1239
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 861.0,
-          "y": 703.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_And",
-      "properties": {
-        "nodeId": 84,
-        "inputPins": [
-          {
-            "id": 1235,
-            "isInput": true,
-            "label": "A",
-            "value": false,
-            "connectedPinsIds": [
-              1003
-            ]
-          },
-          {
-            "id": 1236,
-            "isInput": true,
-            "label": "B",
-            "value": false,
-            "connectedPinsIds": [
-              1207
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1237,
-            "isInput": false,
-            "label": "Out",
-            "value": false,
-            "connectedPinsIds": [
-              1233
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 749.0,
-          "y": 691.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_And",
-      "properties": {
-        "nodeId": 85,
-        "inputPins": [
-          {
-            "id": 1238,
-            "isInput": true,
-            "label": "A",
-            "value": false,
-            "connectedPinsIds": [
-              1225
-            ]
-          },
-          {
-            "id": 1239,
-            "isInput": true,
-            "label": "B",
-            "value": true,
-            "connectedPinsIds": [
-              1234
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1240,
-            "isInput": false,
-            "label": "Out",
-            "value": false,
-            "connectedPinsIds": [
-              1278
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 1101.0,
-          "y": 659.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_Not",
-      "properties": {
-        "nodeId": 86,
-        "inputPins": [
-          {
-            "id": 1241,
-            "isInput": true,
-            "label": "In",
-            "value": true,
-            "connectedPinsIds": [
-              1214
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1242,
-            "isInput": false,
-            "label": "Out",
-            "value": false,
-            "connectedPinsIds": [
-              1245
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 821.0,
-          "y": 95.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_Not",
-      "properties": {
-        "nodeId": 87,
-        "inputPins": [
-          {
-            "id": 1243,
+            "id": 1017,
             "isInput": true,
             "label": "In",
             "value": false,
@@ -1091,12 +318,12 @@
         ],
         "outputPins": [
           {
-            "id": 1244,
+            "id": 1018,
             "isInput": false,
             "label": "Out",
             "value": true,
             "connectedPinsIds": [
-              1246
+              1019
             ]
           }
         ],
@@ -1106,177 +333,7 @@
           "z": 52.0
         },
         "position": {
-          "x": 821.0,
-          "y": 127.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_And",
-      "properties": {
-        "nodeId": 88,
-        "inputPins": [
-          {
-            "id": 1245,
-            "isInput": true,
-            "label": "A",
-            "value": false,
-            "connectedPinsIds": [
-              1242
-            ]
-          },
-          {
-            "id": 1246,
-            "isInput": true,
-            "label": "B",
-            "value": true,
-            "connectedPinsIds": [
-              1244
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1247,
-            "isInput": false,
-            "label": "Out",
-            "value": false,
-            "connectedPinsIds": [
-              1248
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 933.0,
-          "y": 99.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_Not",
-      "properties": {
-        "nodeId": 89,
-        "inputPins": [
-          {
-            "id": 1248,
-            "isInput": true,
-            "label": "In",
-            "value": false,
-            "connectedPinsIds": [
-              1247
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1249,
-            "isInput": false,
-            "label": "Out",
-            "value": true,
-            "connectedPinsIds": [
-              1255
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 1045.0,
-          "y": 111.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_And",
-      "properties": {
-        "nodeId": 90,
-        "inputPins": [
-          {
-            "id": 1250,
-            "isInput": true,
-            "label": "A",
-            "value": true,
-            "connectedPinsIds": [
-              1214
-            ]
-          },
-          {
-            "id": 1251,
-            "isInput": true,
-            "label": "B",
-            "value": false,
-            "connectedPinsIds": [
-              1000
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1252,
-            "isInput": false,
-            "label": "Out",
-            "value": false,
-            "connectedPinsIds": [
-              1253
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 821.0,
-          "y": 163.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_Not",
-      "properties": {
-        "nodeId": 91,
-        "inputPins": [
-          {
-            "id": 1253,
-            "isInput": true,
-            "label": "In",
-            "value": false,
-            "connectedPinsIds": [
-              1252
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1254,
-            "isInput": false,
-            "label": "Out",
-            "value": true,
-            "connectedPinsIds": [
-              1256
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 933.0,
+          "x": 357.0,
           "y": 175.0
         },
         "pinGroups": {}
@@ -1285,38 +342,35 @@
     {
       "type": "editor.gates.Gate_And",
       "properties": {
-        "nodeId": 92,
+        "nodeId": 8,
         "inputPins": [
           {
-            "id": 1255,
+            "id": 1019,
             "isInput": true,
             "label": "A",
             "value": true,
             "connectedPinsIds": [
-              1249
+              1018
             ]
           },
           {
-            "id": 1256,
+            "id": 1020,
             "isInput": true,
             "label": "B",
             "value": true,
             "connectedPinsIds": [
-              1254
+              1016
             ]
           }
         ],
         "outputPins": [
           {
-            "id": 1257,
+            "id": 1021,
             "isInput": false,
             "label": "Out",
             "value": true,
             "connectedPinsIds": [
-              1306,
-              1260,
-              1276,
-              1285
+              1099
             ]
           }
         ],
@@ -1326,84 +380,8 @@
           "z": 52.0
         },
         "position": {
-          "x": 1157.0,
-          "y": 127.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_Not",
-      "properties": {
-        "nodeId": 93,
-        "inputPins": [
-          {
-            "id": 1258,
-            "isInput": true,
-            "label": "In",
-            "value": false,
-            "connectedPinsIds": [
-              1207
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1259,
-            "isInput": false,
-            "label": "Out",
-            "value": true,
-            "connectedPinsIds": [
-              1262
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 1357.0,
-          "y": 15.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_Not",
-      "properties": {
-        "nodeId": 94,
-        "inputPins": [
-          {
-            "id": 1260,
-            "isInput": true,
-            "label": "In",
-            "value": true,
-            "connectedPinsIds": [
-              1257
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1261,
-            "isInput": false,
-            "label": "Out",
-            "value": false,
-            "connectedPinsIds": [
-              1263
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 1357.0,
-          "y": 47.0
+          "x": 469.0,
+          "y": 175.0
         },
         "pinGroups": {}
       }
@@ -1411,35 +389,35 @@
     {
       "type": "editor.gates.Gate_And",
       "properties": {
-        "nodeId": 95,
+        "nodeId": 10,
         "inputPins": [
           {
-            "id": 1262,
+            "id": 1024,
             "isInput": true,
             "label": "A",
-            "value": true,
+            "value": false,
             "connectedPinsIds": [
-              1259
+              1000
             ]
           },
           {
-            "id": 1263,
+            "id": 1025,
             "isInput": true,
             "label": "B",
             "value": false,
             "connectedPinsIds": [
-              1261
+              1004
             ]
           }
         ],
         "outputPins": [
           {
-            "id": 1264,
+            "id": 1026,
             "isInput": false,
             "label": "Out",
             "value": false,
             "connectedPinsIds": [
-              1265
+              1101
             ]
           }
         ],
@@ -1449,36 +427,45 @@
           "z": 52.0
         },
         "position": {
-          "x": 1469.0,
-          "y": 17.0
+          "x": 357.0,
+          "y": 243.0
         },
         "pinGroups": {}
       }
     },
     {
-      "type": "editor.gates.Gate_Not",
+      "type": "editor.gates.Gate_And",
       "properties": {
-        "nodeId": 96,
+        "nodeId": 12,
         "inputPins": [
           {
-            "id": 1265,
+            "id": 1029,
             "isInput": true,
-            "label": "In",
+            "label": "A",
             "value": false,
             "connectedPinsIds": [
-              1264
+              1100
+            ]
+          },
+          {
+            "id": 1030,
+            "isInput": true,
+            "label": "B",
+            "value": true,
+            "connectedPinsIds": [
+              1102
             ]
           }
         ],
         "outputPins": [
           {
-            "id": 1266,
+            "id": 1031,
             "isInput": false,
             "label": "Out",
-            "value": true,
+            "value": false,
             "connectedPinsIds": [
-              1294,
-              1001
+              1065,
+              1049
             ]
           }
         ],
@@ -1488,120 +475,35 @@
           "z": 52.0
         },
         "position": {
-          "x": 1581.0,
-          "y": 31.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_Not",
-      "properties": {
-        "nodeId": 97,
-        "inputPins": [
-          {
-            "id": 1267,
-            "isInput": true,
-            "label": "In",
-            "value": true,
-            "connectedPinsIds": [
-              1189
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1268,
-            "isInput": false,
-            "label": "Out",
-            "value": false,
-            "connectedPinsIds": [
-              1272
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 1357.0,
-          "y": 255.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_Not",
-      "properties": {
-        "nodeId": 98,
-        "inputPins": [
-          {
-            "id": 1269,
-            "isInput": true,
-            "label": "In",
-            "value": false,
-            "connectedPinsIds": [
-              1003
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1270,
-            "isInput": false,
-            "label": "Out",
-            "value": true,
-            "connectedPinsIds": [
-              1271
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 1357.0,
+          "x": 693.0,
           "y": 223.0
         },
         "pinGroups": {}
       }
     },
     {
-      "type": "editor.gates.Gate_And",
+      "type": "editor.gates.Gate_Not",
       "properties": {
-        "nodeId": 99,
+        "nodeId": 13,
         "inputPins": [
           {
-            "id": 1271,
+            "id": 1032,
             "isInput": true,
-            "label": "A",
-            "value": true,
-            "connectedPinsIds": [
-              1270
-            ]
-          },
-          {
-            "id": 1272,
-            "isInput": true,
-            "label": "B",
+            "label": "In",
             "value": false,
             "connectedPinsIds": [
-              1268
+              1002
             ]
           }
         ],
         "outputPins": [
           {
-            "id": 1273,
+            "id": 1033,
             "isInput": false,
             "label": "Out",
-            "value": false,
+            "value": true,
             "connectedPinsIds": [
-              1274
+              1036
             ]
           }
         ],
@@ -1611,8 +513,8 @@
           "z": 52.0
         },
         "position": {
-          "x": 1469.0,
-          "y": 225.0
+          "x": 349.0,
+          "y": 415.0
         },
         "pinGroups": {}
       }
@@ -1620,27 +522,26 @@
     {
       "type": "editor.gates.Gate_Not",
       "properties": {
-        "nodeId": 100,
+        "nodeId": 14,
         "inputPins": [
           {
-            "id": 1274,
+            "id": 1034,
             "isInput": true,
             "label": "In",
             "value": false,
             "connectedPinsIds": [
-              1273
+              1004
             ]
           }
         ],
         "outputPins": [
           {
-            "id": 1275,
+            "id": 1035,
             "isInput": false,
             "label": "Out",
             "value": true,
             "connectedPinsIds": [
-              1299,
-              1291
+              1037
             ]
           }
         ],
@@ -1650,217 +551,7 @@
           "z": 52.0
         },
         "position": {
-          "x": 1573.0,
-          "y": 239.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_Not",
-      "properties": {
-        "nodeId": 101,
-        "inputPins": [
-          {
-            "id": 1276,
-            "isInput": true,
-            "label": "In",
-            "value": true,
-            "connectedPinsIds": [
-              1257
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1277,
-            "isInput": false,
-            "label": "Out",
-            "value": false,
-            "connectedPinsIds": [
-              1280
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 1293.0,
-          "y": 575.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_Not",
-      "properties": {
-        "nodeId": 102,
-        "inputPins": [
-          {
-            "id": 1278,
-            "isInput": true,
-            "label": "In",
-            "value": false,
-            "connectedPinsIds": [
-              1240
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1279,
-            "isInput": false,
-            "label": "Out",
-            "value": true,
-            "connectedPinsIds": [
-              1281
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 1293.0,
-          "y": 607.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_And",
-      "properties": {
-        "nodeId": 103,
-        "inputPins": [
-          {
-            "id": 1280,
-            "isInput": true,
-            "label": "A",
-            "value": false,
-            "connectedPinsIds": [
-              1277
-            ]
-          },
-          {
-            "id": 1281,
-            "isInput": true,
-            "label": "B",
-            "value": true,
-            "connectedPinsIds": [
-              1279
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1282,
-            "isInput": false,
-            "label": "Out",
-            "value": false,
-            "connectedPinsIds": [
-              1283
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 1405.0,
-          "y": 575.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_Not",
-      "properties": {
-        "nodeId": 104,
-        "inputPins": [
-          {
-            "id": 1283,
-            "isInput": true,
-            "label": "In",
-            "value": false,
-            "connectedPinsIds": [
-              1282
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1284,
-            "isInput": false,
-            "label": "Out",
-            "value": true,
-            "connectedPinsIds": [
-              1292,
-              1288,
-              1295
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 1517.0,
-          "y": 591.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_And",
-      "properties": {
-        "nodeId": 105,
-        "inputPins": [
-          {
-            "id": 1285,
-            "isInput": true,
-            "label": "A",
-            "value": true,
-            "connectedPinsIds": [
-              1257
-            ]
-          },
-          {
-            "id": 1286,
-            "isInput": true,
-            "label": "B",
-            "value": true,
-            "connectedPinsIds": [
-              1214
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1287,
-            "isInput": false,
-            "label": "Out",
-            "value": true,
-            "connectedPinsIds": [
-              1008
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 1797.0,
+          "x": 349.0,
           "y": 447.0
         },
         "pinGroups": {}
@@ -1869,35 +560,35 @@
     {
       "type": "editor.gates.Gate_And",
       "properties": {
-        "nodeId": 106,
+        "nodeId": 15,
         "inputPins": [
           {
-            "id": 1288,
+            "id": 1036,
             "isInput": true,
             "label": "A",
             "value": true,
             "connectedPinsIds": [
-              1284
+              1033
             ]
           },
           {
-            "id": 1289,
+            "id": 1037,
             "isInput": true,
             "label": "B",
-            "value": false,
+            "value": true,
             "connectedPinsIds": [
-              1220
+              1035
             ]
           }
         ],
         "outputPins": [
           {
-            "id": 1290,
+            "id": 1038,
             "isInput": false,
             "label": "Out",
-            "value": false,
+            "value": true,
             "connectedPinsIds": [
-              1010
+              1039
             ]
           }
         ],
@@ -1907,44 +598,35 @@
           "z": 52.0
         },
         "position": {
-          "x": 1797.0,
-          "y": 719.0
+          "x": 461.0,
+          "y": 415.0
         },
         "pinGroups": {}
       }
     },
     {
-      "type": "editor.gates.Gate_And",
+      "type": "editor.gates.Gate_Not",
       "properties": {
-        "nodeId": 107,
+        "nodeId": 16,
         "inputPins": [
           {
-            "id": 1291,
+            "id": 1039,
             "isInput": true,
-            "label": "A",
+            "label": "In",
             "value": true,
             "connectedPinsIds": [
-              1275
-            ]
-          },
-          {
-            "id": 1292,
-            "isInput": true,
-            "label": "B",
-            "value": true,
-            "connectedPinsIds": [
-              1284
+              1038
             ]
           }
         ],
         "outputPins": [
           {
-            "id": 1293,
+            "id": 1040,
             "isInput": false,
             "label": "Out",
-            "value": true,
+            "value": false,
             "connectedPinsIds": [
-              1009
+              1046
             ]
           }
         ],
@@ -1954,8 +636,8 @@
           "z": 52.0
         },
         "position": {
-          "x": 1797.0,
-          "y": 591.0
+          "x": 573.0,
+          "y": 431.0
         },
         "pinGroups": {}
       }
@@ -1963,34 +645,368 @@
     {
       "type": "editor.gates.Gate_And",
       "properties": {
-        "nodeId": 108,
+        "nodeId": 17,
         "inputPins": [
           {
-            "id": 1294,
+            "id": 1041,
             "isInput": true,
             "label": "A",
-            "value": true,
+            "value": false,
             "connectedPinsIds": [
-              1266
+              1002
             ]
           },
           {
-            "id": 1295,
+            "id": 1042,
             "isInput": true,
             "label": "B",
-            "value": true,
+            "value": false,
             "connectedPinsIds": [
-              1284
+              1004
             ]
           }
         ],
         "outputPins": [
           {
-            "id": 1296,
+            "id": 1043,
+            "isInput": false,
+            "label": "Out",
+            "value": false,
+            "connectedPinsIds": [
+              1044
+            ]
+          }
+        ],
+        "nodeColor": {
+          "x": 43.0,
+          "y": 45.0,
+          "z": 52.0
+        },
+        "position": {
+          "x": 349.0,
+          "y": 483.0
+        },
+        "pinGroups": {}
+      }
+    },
+    {
+      "type": "editor.gates.Gate_Not",
+      "properties": {
+        "nodeId": 18,
+        "inputPins": [
+          {
+            "id": 1044,
+            "isInput": true,
+            "label": "In",
+            "value": false,
+            "connectedPinsIds": [
+              1043
+            ]
+          }
+        ],
+        "outputPins": [
+          {
+            "id": 1045,
             "isInput": false,
             "label": "Out",
             "value": true,
             "connectedPinsIds": [
+              1047
+            ]
+          }
+        ],
+        "nodeColor": {
+          "x": 43.0,
+          "y": 45.0,
+          "z": 52.0
+        },
+        "position": {
+          "x": 461.0,
+          "y": 495.0
+        },
+        "pinGroups": {}
+      }
+    },
+    {
+      "type": "editor.gates.Gate_And",
+      "properties": {
+        "nodeId": 19,
+        "inputPins": [
+          {
+            "id": 1046,
+            "isInput": true,
+            "label": "A",
+            "value": false,
+            "connectedPinsIds": [
+              1040
+            ]
+          },
+          {
+            "id": 1047,
+            "isInput": true,
+            "label": "B",
+            "value": true,
+            "connectedPinsIds": [
+              1045
+            ]
+          }
+        ],
+        "outputPins": [
+          {
+            "id": 1048,
+            "isInput": false,
+            "label": "Out",
+            "value": false,
+            "connectedPinsIds": [
+              1051,
+              1080
+            ]
+          }
+        ],
+        "nodeColor": {
+          "x": 43.0,
+          "y": 45.0,
+          "z": 52.0
+        },
+        "position": {
+          "x": 685.0,
+          "y": 463.0
+        },
+        "pinGroups": {}
+      }
+    },
+    {
+      "type": "editor.gates.Gate_Not",
+      "properties": {
+        "nodeId": 20,
+        "inputPins": [
+          {
+            "id": 1049,
+            "isInput": true,
+            "label": "In",
+            "value": false,
+            "connectedPinsIds": [
+              1031
+            ]
+          }
+        ],
+        "outputPins": [
+          {
+            "id": 1050,
+            "isInput": false,
+            "label": "Out",
+            "value": true,
+            "connectedPinsIds": [
+              1053
+            ]
+          }
+        ],
+        "nodeColor": {
+          "x": 43.0,
+          "y": 45.0,
+          "z": 52.0
+        },
+        "position": {
+          "x": 885.0,
+          "y": 335.0
+        },
+        "pinGroups": {}
+      }
+    },
+    {
+      "type": "editor.gates.Gate_Not",
+      "properties": {
+        "nodeId": 21,
+        "inputPins": [
+          {
+            "id": 1051,
+            "isInput": true,
+            "label": "In",
+            "value": false,
+            "connectedPinsIds": [
+              1048
+            ]
+          }
+        ],
+        "outputPins": [
+          {
+            "id": 1052,
+            "isInput": false,
+            "label": "Out",
+            "value": true,
+            "connectedPinsIds": [
+              1054
+            ]
+          }
+        ],
+        "nodeColor": {
+          "x": 43.0,
+          "y": 45.0,
+          "z": 52.0
+        },
+        "position": {
+          "x": 885.0,
+          "y": 367.0
+        },
+        "pinGroups": {}
+      }
+    },
+    {
+      "type": "editor.gates.Gate_And",
+      "properties": {
+        "nodeId": 22,
+        "inputPins": [
+          {
+            "id": 1053,
+            "isInput": true,
+            "label": "A",
+            "value": true,
+            "connectedPinsIds": [
+              1050
+            ]
+          },
+          {
+            "id": 1054,
+            "isInput": true,
+            "label": "B",
+            "value": true,
+            "connectedPinsIds": [
+              1052
+            ]
+          }
+        ],
+        "outputPins": [
+          {
+            "id": 1055,
+            "isInput": false,
+            "label": "Out",
+            "value": true,
+            "connectedPinsIds": [
+              1058
+            ]
+          }
+        ],
+        "nodeColor": {
+          "x": 43.0,
+          "y": 45.0,
+          "z": 52.0
+        },
+        "position": {
+          "x": 997.0,
+          "y": 335.0
+        },
+        "pinGroups": {}
+      }
+    },
+    {
+      "type": "editor.gates.Gate_Not",
+      "properties": {
+        "nodeId": 23,
+        "inputPins": [
+          {
+            "id": 1056,
+            "isInput": true,
+            "label": "In",
+            "value": true,
+            "connectedPinsIds": [
+              1014
+            ]
+          }
+        ],
+        "outputPins": [
+          {
+            "id": 1057,
+            "isInput": false,
+            "label": "Out",
+            "value": false,
+            "connectedPinsIds": [
+              1060
+            ]
+          }
+        ],
+        "nodeColor": {
+          "x": 43.0,
+          "y": 45.0,
+          "z": 52.0
+        },
+        "position": {
+          "x": 1165.0,
+          "y": 207.0
+        },
+        "pinGroups": {}
+      }
+    },
+    {
+      "type": "editor.gates.Gate_Not",
+      "properties": {
+        "nodeId": 24,
+        "inputPins": [
+          {
+            "id": 1058,
+            "isInput": true,
+            "label": "In",
+            "value": true,
+            "connectedPinsIds": [
+              1055
+            ]
+          }
+        ],
+        "outputPins": [
+          {
+            "id": 1059,
+            "isInput": false,
+            "label": "Out",
+            "value": false,
+            "connectedPinsIds": [
+              1061
+            ]
+          }
+        ],
+        "nodeColor": {
+          "x": 43.0,
+          "y": 45.0,
+          "z": 52.0
+        },
+        "position": {
+          "x": 1165.0,
+          "y": 239.0
+        },
+        "pinGroups": {}
+      }
+    },
+    {
+      "type": "editor.gates.Gate_And",
+      "properties": {
+        "nodeId": 25,
+        "inputPins": [
+          {
+            "id": 1060,
+            "isInput": true,
+            "label": "A",
+            "value": false,
+            "connectedPinsIds": [
+              1057
+            ]
+          },
+          {
+            "id": 1061,
+            "isInput": true,
+            "label": "B",
+            "value": false,
+            "connectedPinsIds": [
+              1059
+            ]
+          }
+        ],
+        "outputPins": [
+          {
+            "id": 1062,
+            "isInput": false,
+            "label": "Out",
+            "value": false,
+            "connectedPinsIds": [
+              1082,
+              1091,
               1007
             ]
           }
@@ -2001,8 +1017,8 @@
           "z": 52.0
         },
         "position": {
-          "x": 1797.0,
-          "y": 307.0
+          "x": 1277.0,
+          "y": 207.0
         },
         "pinGroups": {}
       }
@@ -2010,26 +1026,26 @@
     {
       "type": "editor.gates.Gate_Not",
       "properties": {
-        "nodeId": 109,
+        "nodeId": 26,
         "inputPins": [
           {
-            "id": 1297,
+            "id": 1063,
             "isInput": true,
             "label": "In",
-            "value": false,
+            "value": true,
             "connectedPinsIds": [
-              1000
+              1014
             ]
           }
         ],
         "outputPins": [
           {
-            "id": 1298,
+            "id": 1064,
             "isInput": false,
             "label": "Out",
-            "value": true,
+            "value": false,
             "connectedPinsIds": [
-              1302
+              1067
             ]
           }
         ],
@@ -2039,8 +1055,8 @@
           "z": 52.0
         },
         "position": {
-          "x": 1805.0,
-          "y": 223.0
+          "x": 1109.0,
+          "y": 79.0
         },
         "pinGroups": {}
       }
@@ -2048,26 +1064,26 @@
     {
       "type": "editor.gates.Gate_Not",
       "properties": {
-        "nodeId": 110,
+        "nodeId": 27,
         "inputPins": [
           {
-            "id": 1299,
+            "id": 1065,
             "isInput": true,
             "label": "In",
-            "value": true,
+            "value": false,
             "connectedPinsIds": [
-              1275
+              1031
             ]
           }
         ],
         "outputPins": [
           {
-            "id": 1300,
+            "id": 1066,
             "isInput": false,
             "label": "Out",
-            "value": false,
+            "value": true,
             "connectedPinsIds": [
-              1301
+              1068
             ]
           }
         ],
@@ -2077,8 +1093,8 @@
           "z": 52.0
         },
         "position": {
-          "x": 1805.0,
-          "y": 191.0
+          "x": 1109.0,
+          "y": 111.0
         },
         "pinGroups": {}
       }
@@ -2086,35 +1102,35 @@
     {
       "type": "editor.gates.Gate_And",
       "properties": {
-        "nodeId": 111,
+        "nodeId": 28,
         "inputPins": [
           {
-            "id": 1301,
+            "id": 1067,
             "isInput": true,
             "label": "A",
             "value": false,
             "connectedPinsIds": [
-              1300
+              1064
             ]
           },
           {
-            "id": 1302,
+            "id": 1068,
             "isInput": true,
             "label": "B",
             "value": true,
             "connectedPinsIds": [
-              1298
+              1066
             ]
           }
         ],
         "outputPins": [
           {
-            "id": 1303,
+            "id": 1069,
             "isInput": false,
             "label": "Out",
             "value": false,
             "connectedPinsIds": [
-              1304
+              1070
             ]
           }
         ],
@@ -2124,8 +1140,8 @@
           "z": 52.0
         },
         "position": {
-          "x": 1917.0,
-          "y": 195.0
+          "x": 1221.0,
+          "y": 83.0
         },
         "pinGroups": {}
       }
@@ -2133,24 +1149,148 @@
     {
       "type": "editor.gates.Gate_Not",
       "properties": {
-        "nodeId": 112,
+        "nodeId": 29,
         "inputPins": [
           {
-            "id": 1304,
+            "id": 1070,
             "isInput": true,
             "label": "In",
             "value": false,
             "connectedPinsIds": [
-              1303
+              1069
             ]
           }
         ],
         "outputPins": [
           {
-            "id": 1305,
+            "id": 1071,
             "isInput": false,
             "label": "Out",
             "value": true,
+            "connectedPinsIds": [
+              1072,
+              1079
+            ]
+          }
+        ],
+        "nodeColor": {
+          "x": 43.0,
+          "y": 45.0,
+          "z": 52.0
+        },
+        "position": {
+          "x": 1333.0,
+          "y": 95.0
+        },
+        "pinGroups": {}
+      }
+    },
+    {
+      "type": "editor.gates.Gate_Not",
+      "properties": {
+        "nodeId": 30,
+        "inputPins": [
+          {
+            "id": 1072,
+            "isInput": true,
+            "label": "In",
+            "value": true,
+            "connectedPinsIds": [
+              1071
+            ]
+          }
+        ],
+        "outputPins": [
+          {
+            "id": 1073,
+            "isInput": false,
+            "label": "Out",
+            "value": false,
+            "connectedPinsIds": [
+              1076
+            ]
+          }
+        ],
+        "nodeColor": {
+          "x": 43.0,
+          "y": 45.0,
+          "z": 52.0
+        },
+        "position": {
+          "x": 1565.0,
+          "y": 143.0
+        },
+        "pinGroups": {}
+      }
+    },
+    {
+      "type": "editor.gates.Gate_Not",
+      "properties": {
+        "nodeId": 31,
+        "inputPins": [
+          {
+            "id": 1074,
+            "isInput": true,
+            "label": "In",
+            "value": false,
+            "connectedPinsIds": [
+              1002
+            ]
+          }
+        ],
+        "outputPins": [
+          {
+            "id": 1075,
+            "isInput": false,
+            "label": "Out",
+            "value": true,
+            "connectedPinsIds": [
+              1077
+            ]
+          }
+        ],
+        "nodeColor": {
+          "x": 43.0,
+          "y": 45.0,
+          "z": 52.0
+        },
+        "position": {
+          "x": 1565.0,
+          "y": 175.0
+        },
+        "pinGroups": {}
+      }
+    },
+    {
+      "type": "editor.gates.Gate_And",
+      "properties": {
+        "nodeId": 32,
+        "inputPins": [
+          {
+            "id": 1076,
+            "isInput": true,
+            "label": "A",
+            "value": false,
+            "connectedPinsIds": [
+              1073
+            ]
+          },
+          {
+            "id": 1077,
+            "isInput": true,
+            "label": "B",
+            "value": true,
+            "connectedPinsIds": [
+              1075
+            ]
+          }
+        ],
+        "outputPins": [
+          {
+            "id": 1078,
+            "isInput": false,
+            "label": "Out",
+            "value": false,
             "connectedPinsIds": [
               1006
             ]
@@ -2162,8 +1302,8 @@
           "z": 52.0
         },
         "position": {
-          "x": 2029.0,
-          "y": 207.0
+          "x": 1677.0,
+          "y": 145.0
         },
         "pinGroups": {}
       }
@@ -2171,71 +1311,33 @@
     {
       "type": "editor.gates.Gate_And",
       "properties": {
-        "nodeId": 113,
+        "nodeId": 33,
         "inputPins": [
           {
-            "id": 1306,
+            "id": 1079,
             "isInput": true,
             "label": "A",
             "value": true,
             "connectedPinsIds": [
-              1257
+              1071
             ]
           },
           {
-            "id": 1307,
+            "id": 1080,
             "isInput": true,
             "label": "B",
             "value": false,
             "connectedPinsIds": [
-              1003
+              1048
             ]
           }
         ],
         "outputPins": [
           {
-            "id": 1308,
+            "id": 1081,
             "isInput": false,
             "label": "Out",
             "value": false,
-            "connectedPinsIds": [
-              1309
-            ]
-          }
-        ],
-        "nodeColor": {
-          "x": 43.0,
-          "y": 45.0,
-          "z": 52.0
-        },
-        "position": {
-          "x": 1789.0,
-          "y": 63.0
-        },
-        "pinGroups": {}
-      }
-    },
-    {
-      "type": "editor.gates.Gate_Not",
-      "properties": {
-        "nodeId": 114,
-        "inputPins": [
-          {
-            "id": 1309,
-            "isInput": true,
-            "label": "In",
-            "value": false,
-            "connectedPinsIds": [
-              1308
-            ]
-          }
-        ],
-        "outputPins": [
-          {
-            "id": 1310,
-            "isInput": false,
-            "label": "Out",
-            "value": true,
             "connectedPinsIds": [
               1005
             ]
@@ -2247,8 +1349,377 @@
           "z": 52.0
         },
         "position": {
-          "x": 1901.0,
-          "y": 77.0
+          "x": 1621.0,
+          "y": 255.0
+        },
+        "pinGroups": {}
+      }
+    },
+    {
+      "type": "editor.gates.Gate_Not",
+      "properties": {
+        "nodeId": 34,
+        "inputPins": [
+          {
+            "id": 1082,
+            "isInput": true,
+            "label": "In",
+            "value": false,
+            "connectedPinsIds": [
+              1062
+            ]
+          }
+        ],
+        "outputPins": [
+          {
+            "id": 1083,
+            "isInput": false,
+            "label": "Out",
+            "value": true,
+            "connectedPinsIds": [
+              1086
+            ]
+          }
+        ],
+        "nodeColor": {
+          "x": 43.0,
+          "y": 45.0,
+          "z": 52.0
+        },
+        "position": {
+          "x": 1477.0,
+          "y": 399.0
+        },
+        "pinGroups": {}
+      }
+    },
+    {
+      "type": "editor.gates.Gate_Not",
+      "properties": {
+        "nodeId": 35,
+        "inputPins": [
+          {
+            "id": 1084,
+            "isInput": true,
+            "label": "In",
+            "value": false,
+            "connectedPinsIds": [
+              1000
+            ]
+          }
+        ],
+        "outputPins": [
+          {
+            "id": 1085,
+            "isInput": false,
+            "label": "Out",
+            "value": true,
+            "connectedPinsIds": [
+              1087
+            ]
+          }
+        ],
+        "nodeColor": {
+          "x": 43.0,
+          "y": 45.0,
+          "z": 52.0
+        },
+        "position": {
+          "x": 1477.0,
+          "y": 431.0
+        },
+        "pinGroups": {}
+      }
+    },
+    {
+      "type": "editor.gates.Gate_And",
+      "properties": {
+        "nodeId": 36,
+        "inputPins": [
+          {
+            "id": 1086,
+            "isInput": true,
+            "label": "A",
+            "value": true,
+            "connectedPinsIds": [
+              1083
+            ]
+          },
+          {
+            "id": 1087,
+            "isInput": true,
+            "label": "B",
+            "value": true,
+            "connectedPinsIds": [
+              1085
+            ]
+          }
+        ],
+        "outputPins": [
+          {
+            "id": 1088,
+            "isInput": false,
+            "label": "Out",
+            "value": true,
+            "connectedPinsIds": [
+              1089
+            ]
+          }
+        ],
+        "nodeColor": {
+          "x": 43.0,
+          "y": 45.0,
+          "z": 52.0
+        },
+        "position": {
+          "x": 1589.0,
+          "y": 403.0
+        },
+        "pinGroups": {}
+      }
+    },
+    {
+      "type": "editor.gates.Gate_Not",
+      "properties": {
+        "nodeId": 37,
+        "inputPins": [
+          {
+            "id": 1089,
+            "isInput": true,
+            "label": "In",
+            "value": true,
+            "connectedPinsIds": [
+              1088
+            ]
+          }
+        ],
+        "outputPins": [
+          {
+            "id": 1090,
+            "isInput": false,
+            "label": "Out",
+            "value": false,
+            "connectedPinsIds": [
+              1096
+            ]
+          }
+        ],
+        "nodeColor": {
+          "x": 43.0,
+          "y": 45.0,
+          "z": 52.0
+        },
+        "position": {
+          "x": 1701.0,
+          "y": 415.0
+        },
+        "pinGroups": {}
+      }
+    },
+    {
+      "type": "editor.gates.Gate_And",
+      "properties": {
+        "nodeId": 38,
+        "inputPins": [
+          {
+            "id": 1091,
+            "isInput": true,
+            "label": "A",
+            "value": false,
+            "connectedPinsIds": [
+              1062
+            ]
+          },
+          {
+            "id": 1092,
+            "isInput": true,
+            "label": "B",
+            "value": false,
+            "connectedPinsIds": [
+              1000
+            ]
+          }
+        ],
+        "outputPins": [
+          {
+            "id": 1093,
+            "isInput": false,
+            "label": "Out",
+            "value": false,
+            "connectedPinsIds": [
+              1094
+            ]
+          }
+        ],
+        "nodeColor": {
+          "x": 43.0,
+          "y": 45.0,
+          "z": 52.0
+        },
+        "position": {
+          "x": 1477.0,
+          "y": 465.0
+        },
+        "pinGroups": {}
+      }
+    },
+    {
+      "type": "editor.gates.Gate_Not",
+      "properties": {
+        "nodeId": 39,
+        "inputPins": [
+          {
+            "id": 1094,
+            "isInput": true,
+            "label": "In",
+            "value": false,
+            "connectedPinsIds": [
+              1093
+            ]
+          }
+        ],
+        "outputPins": [
+          {
+            "id": 1095,
+            "isInput": false,
+            "label": "Out",
+            "value": true,
+            "connectedPinsIds": [
+              1097
+            ]
+          }
+        ],
+        "nodeColor": {
+          "x": 43.0,
+          "y": 45.0,
+          "z": 52.0
+        },
+        "position": {
+          "x": 1589.0,
+          "y": 479.0
+        },
+        "pinGroups": {}
+      }
+    },
+    {
+      "type": "editor.gates.Gate_And",
+      "properties": {
+        "nodeId": 40,
+        "inputPins": [
+          {
+            "id": 1096,
+            "isInput": true,
+            "label": "A",
+            "value": false,
+            "connectedPinsIds": [
+              1090
+            ]
+          },
+          {
+            "id": 1097,
+            "isInput": true,
+            "label": "B",
+            "value": true,
+            "connectedPinsIds": [
+              1095
+            ]
+          }
+        ],
+        "outputPins": [
+          {
+            "id": 1098,
+            "isInput": false,
+            "label": "Out",
+            "value": false,
+            "connectedPinsIds": [
+              1001
+            ]
+          }
+        ],
+        "nodeColor": {
+          "x": 43.0,
+          "y": 45.0,
+          "z": 52.0
+        },
+        "position": {
+          "x": 1813.0,
+          "y": 447.0
+        },
+        "pinGroups": {}
+      }
+    },
+    {
+      "type": "editor.gates.Gate_Not",
+      "properties": {
+        "nodeId": 41,
+        "inputPins": [
+          {
+            "id": 1099,
+            "isInput": true,
+            "label": "In",
+            "value": true,
+            "connectedPinsIds": [
+              1021
+            ]
+          }
+        ],
+        "outputPins": [
+          {
+            "id": 1100,
+            "isInput": false,
+            "label": "Out",
+            "value": false,
+            "connectedPinsIds": [
+              1029
+            ]
+          }
+        ],
+        "nodeColor": {
+          "x": 43.0,
+          "y": 45.0,
+          "z": 52.0
+        },
+        "position": {
+          "x": 581.0,
+          "y": 191.0
+        },
+        "pinGroups": {}
+      }
+    },
+    {
+      "type": "editor.gates.Gate_Not",
+      "properties": {
+        "nodeId": 42,
+        "inputPins": [
+          {
+            "id": 1101,
+            "isInput": true,
+            "label": "In",
+            "value": false,
+            "connectedPinsIds": [
+              1026
+            ]
+          }
+        ],
+        "outputPins": [
+          {
+            "id": 1102,
+            "isInput": false,
+            "label": "Out",
+            "value": true,
+            "connectedPinsIds": [
+              1030
+            ]
+          }
+        ],
+        "nodeColor": {
+          "x": 43.0,
+          "y": 45.0,
+          "z": 52.0
+        },
+        "position": {
+          "x": 469.0,
+          "y": 255.0
         },
         "pinGroups": {}
       }
